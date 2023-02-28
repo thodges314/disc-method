@@ -68,4 +68,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
 # disc-method
+
+using:
+BetterMathJax https://www.npmjs.com/package/better-react-mathjax
+Material UI w/ Styled Components https://mui.com/material-ui/getting-started/overview/
+React Three Fiber https://docs.pmnd.rs/react-three-fiber/getting-started/introduction
+Three Js https://threejs.org
+Later pages will also include D3.js
