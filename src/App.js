@@ -124,6 +124,45 @@ function App() {
   // }
   //     ));
   //   });)
+
+  items.forEach((itm) =>
+    console.log(
+      `${itm.name}\n\n${itm.items.reduce(
+        (acc, cv) =>
+          `${acc}\n import ${toPascalCase(cv)} from './${toPascalCase(cv)}';`,
+        ""
+      )}`
+    )
+  );
+
+  items.forEach((itm) =>
+    console.log(
+      `${itm.name}\n\nexport {${itm.items.reduce(
+        (acc, cv) => `${acc}\n ${toPascalCase(cv)},`,
+        ""
+      )}}`
+    )
+  );
+
+  console.log(
+    items.reduce(
+      (acc2, itm) =>
+        `${acc2}\n\n import {${itm.items.reduce(
+          (acc, cv) => `${acc}\n ${toPascalCase(cv)},`,
+          ""
+        )}} from './${toPascalCase(itm.name)}';`
+    )
+  );
+  console.log(
+    items.reduce(
+      (acc2, itm) =>
+        `${acc2}\n\n ${itm.items.reduce(
+          (acc, cv) => `${acc}\n ${toPascalCase(cv)},`,
+          ""
+        )}`
+    )
+  );
+
   return (
     <MathJaxContext>
       <div className="App">
