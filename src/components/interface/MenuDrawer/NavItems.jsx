@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import {
   AppBar,
   Box,
@@ -28,9 +28,9 @@ const NavItems = () => {
     setOpenItems((openItems) => openItems.filter((i) => i !== item.name));
   const handleClick = (item) => () =>
     isOpen(item) ? handleClose(item) : setOpen(item);
-  const makeNested = (entry) => (
-    <>
-      <ListItemButton onClick={handleClick(entry)} key={entry.name}>
+  const makeNested = (entry, idx) => (
+    <Fragment key={idx}>
+      <ListItemButton onClick={handleClick(entry)}>
         <ListItemText
           primary={entry.name}
           primaryTypographyProps={{ fontSize: 16 }}
@@ -40,8 +40,8 @@ const NavItems = () => {
       <Collapse in={isOpen(entry)} timeout="auto" unmountOnExit>
         {
           <List component="div" disablePadding>
-            {entry.items.map((item) => (
-              <ListItemButton key={item} sx={{ pl: 4 }}>
+            {entry.items.map((item, idx2) => (
+              <ListItemButton key={100 * idx + idx2} sx={{ pl: 4 }}>
                 <ListItemText
                   primary={item}
                   primaryTypographyProps={{ fontSize: 14 }}
@@ -51,7 +51,7 @@ const NavItems = () => {
           </List>
         }
       </Collapse>
-    </>
+    </Fragment>
   );
 
   return <List>{items.map(makeNested)}</List>;

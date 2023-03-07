@@ -1,7 +1,6 @@
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const navItems = ["Home", "About", "Portfolio", "Contact"];
 const TopMenu = ({ toggleDrawer = () => {} }) => {
   return (
     <Box

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useMemo, lazy, Suspense } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 // import { makeStyles } from "@mui/material";
 import Container from "@mui/material/Container";
@@ -10,18 +10,16 @@ import items from "pages/pageDirectory";
 import { toPascalCase } from "utils/utils";
 import loadable from "@loadable/component";
 
-const drawerWidth = 240;
+const LoadablePage = loadable(
+  ({ itm1, itm2 }) =>
+    import(`pages/${toPascalCase(itm1.name)}/${toPascalCase(itm2)}`),
+  {
+    fallback: <div>Hello, This page is Loading...</div>,
+  }
+);
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const LoadablePage = loadable(
-    ({ itm1, itm2 }) =>
-      import(`pages/${toPascalCase(itm1.name)}/${toPascalCase(itm2)}`),
-    {
-      fallback: <div>Hello, This page is Loading...</div>,
-    }
-  );
 
   const pages = {};
   items.forEach((itm) => {
@@ -45,20 +43,18 @@ function App() {
 
   return (
     <MathJaxContext>
-      <Suspense fallback={<div>Loading...</div>}>
-        <div className="App">
-          <CssBaseline />
-          <GlobalStyles styles={{ body: { backgroundColor: "#e7ebf0" } }} />
-          <TopMenu toggleDrawer={() => setDrawerOpen(!drawerOpen)} />
-          <MenuDrawer
-            open={drawerOpen}
-            toggleDrawer={() => setDrawerOpen(!drawerOpen)}
-          />
-          <Container maxWidth="lg" className="PrimaryContainer">
-            <Routes>{routes}</Routes>
-          </Container>
-        </div>
-      </Suspense>
+      <div className="App">
+        <CssBaseline />
+        <GlobalStyles styles={{ body: { backgroundColor: "#e7ebf0" } }} />
+        <TopMenu toggleDrawer={() => setDrawerOpen(!drawerOpen)} />
+        <MenuDrawer
+          open={drawerOpen}
+          toggleDrawer={() => setDrawerOpen(!drawerOpen)}
+        />
+        <Container maxWidth="lg" className="PrimaryContainer">
+          <Routes>{routes}</Routes>
+        </Container>
+      </div>
     </MathJaxContext>
   );
 }
