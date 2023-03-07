@@ -12,7 +12,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-const navItems = ["Home", "About", "Portfolio", "Contact"];
+import NavItems from "./NavItems";
 const drawerWidth = 240;
 
 const MenuDrawer = ({ open = false, toggleDrawer = () => {} }) => {
@@ -28,20 +28,12 @@ const MenuDrawer = ({ open = false, toggleDrawer = () => {} }) => {
           "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
         }}
       >
-        <Box onClick={toggleDrawer} sx={{ textAlign: "center" }}>
+        <Box sx={{ textAlign: "center" }}>
           <Typography variant="h6" sx={{ my: 2 }}>
             MUI
           </Typography>
           <Divider />
-          <List>
-            {navItems.map((item) => (
-              <ListItem key={item} disablePadding>
-                <ListItemButton sx={{ textAlign: "center" }}>
-                  <ListItemText primary={item} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+          <NavItems />
         </Box>
       </Drawer>
     </Box>

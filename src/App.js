@@ -4,6 +4,8 @@ import { useState } from "react";
 import Container from "@mui/material/Container";
 import { CssBaseline, GlobalStyles } from "@mui/material";
 import { MenuDrawer, TopMenu } from "components";
+import { MathJaxContext, MathJax } from "better-react-mathjax";
+
 // import { shadows } from "@mui/system";
 
 // import Drawer from "@mui/material/Drawer";
@@ -38,99 +40,101 @@ const drawerWidth = 240;
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   return (
-    <div className="App">
-      <CssBaseline />
-      <GlobalStyles styles={{ body: { backgroundColor: "#e7ebf0" } }} />
-      <TopMenu toggleDrawer={() => setDrawerOpen(!drawerOpen)} />
-      <MenuDrawer
-        open={drawerOpen}
-        toggleDrawer={() => setDrawerOpen(!drawerOpen)}
-      />
-      <Container maxWidth="lg" className="PrimaryContainer">
-        Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-        <p /> Test
-      </Container>
-    </div>
+    <MathJaxContext>
+      <div className="App">
+        <CssBaseline />
+        <GlobalStyles styles={{ body: { backgroundColor: "#e7ebf0" } }} />
+        <TopMenu toggleDrawer={() => setDrawerOpen(!drawerOpen)} />
+        <MenuDrawer
+          open={drawerOpen}
+          toggleDrawer={() => setDrawerOpen(!drawerOpen)}
+        />
+        <Container maxWidth="lg" className="PrimaryContainer">
+          Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+          <p /> Test
+        </Container>
+      </div>
+    </MathJaxContext>
   );
 }
 
