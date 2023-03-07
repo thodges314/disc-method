@@ -20,10 +20,11 @@ body { */
 .PrimaryContainer {
   background-color: white;
   min-height: 100vh;
-  margin-top: 26px;
+  margin-top: 0;
   margin-bottom: 100px;
   border-radius: 0px 0px 16px 16px;
   padding-bottom: 16px;
+  padding-top: 70px;
   border: 0.5px solid gray;
 }
 

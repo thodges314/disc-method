@@ -1,0 +1,3 @@
+import TwoDimensionalVectorRepresentations from "./TwoDimensionalVectorRepresentations";
+
+export default TwoDimensionalVectorRepresentations;

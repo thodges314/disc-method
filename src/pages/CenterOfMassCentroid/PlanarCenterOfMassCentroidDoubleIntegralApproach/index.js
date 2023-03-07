@@ -1,0 +1,3 @@
+import PlanarCenterOfMassCentroidDoubleIntegralApproach from "./PlanarCenterOfMassCentroidDoubleIntegralApproach";
+
+export default PlanarCenterOfMassCentroidDoubleIntegralApproach;
