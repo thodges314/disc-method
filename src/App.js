@@ -33,7 +33,6 @@ function App() {
   const routes = [];
   items.forEach((itm, idx) => {
     itm.items.forEach((itm2, idx2) => {
-      console.log(100 * idx + idx2);
       routes.push(
         <Route
           key={100 * idx + idx2}

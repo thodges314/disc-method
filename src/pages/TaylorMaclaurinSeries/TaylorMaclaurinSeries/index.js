@@ -1,3 +1,3 @@
-import TaylorMaclaurinSeries from "./TaylorMaclaurinSeries.";
+import TaylorMaclaurinSeries from "./TaylorMaclaurinSeries";
 
 export default TaylorMaclaurinSeries;

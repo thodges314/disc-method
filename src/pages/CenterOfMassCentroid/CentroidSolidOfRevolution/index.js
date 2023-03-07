@@ -1,3 +1,3 @@
-import CentroidSolidOfRevolution from "./CentroidSolidOfRevolution.js";
+import CentroidSolidOfRevolution from "./CentroidSolidOfRevolution";
 
 export default CentroidSolidOfRevolution;

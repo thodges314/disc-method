@@ -80,6 +80,12 @@ import {
   CommonMaclaurinSeries,
 } from "./TaylorMaclaurinSeries";
 
+import {
+  ShiftingGraphsWithHAndK,
+  LogarithmProperties,
+  TrigonometricIdentities,
+} from "./PreCalculus";
+
 import { TwoDimensionalVectorRepresentations } from "./VectorCalculus";
 
 export {
@@ -142,4 +148,7 @@ export {
   VolumeDiskwasherMethod,
   VolumeShellMethod,
   Work,
+  ShiftingGraphsWithHAndK,
+  LogarithmProperties,
+  TrigonometricIdentities,
 };

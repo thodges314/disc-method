@@ -6,6 +6,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",
+    "@loadable/component": "^5.15.3",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.11",
     "@mui/styled-engine-sc": "^5.11.11",
@@ -45,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/loadable__component": "^5.13.4"
   }
 }

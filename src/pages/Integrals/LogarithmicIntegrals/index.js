@@ -1,2 +1,2 @@
-import LogarithmicIntegrals from "./LogarithmicIntegrals.js";
+import LogarithmicIntegrals from "./LogarithmicIntegrals";
 export default LogarithmicIntegrals;
