@@ -1,30 +1,136 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { MathJaxContext, MathJax } from "better-react-mathjax";
+import { useState } from "react";
+// import { makeStyles } from "@mui/material";
+import Container from "@mui/material/Container";
+import { CssBaseline, GlobalStyles } from "@mui/material";
+import { MenuDrawer, TopMenu } from "components";
+// import { shadows } from "@mui/system";
+
+// import Drawer from "@mui/material/Drawer";
+// import AppBar from "@mui/material/AppBar";
+// import Toolbar from "@mui/material/Toolbar";
+// import List from "@mui/material/List";
+// import ListItem from "@mui/material/ListItem";
+// import ListItemText from "@mui/material/ListItemText";
+
+const drawerWidth = 240;
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     display: "flex",
+//   },
+//   appBar: {
+//     zIndex: theme.zIndex.drawer + 1,
+//   },
+//   drawer: {
+//     width: drawerWidth,
+//     flexShrink: 0,
+//   },
+//   drawerPaper: {
+//     width: drawerWidth,
+//   },
+//   content: {
+//     flexGrow: 1,
+//     padding: theme.spacing(3),
+//   },
+// }));
 
 function App() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
   return (
-    <MathJaxContext>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <MathJax hideUntilTypeset={"first"}>
-            {`\\[\\sum_{n = 100}^{1000}\\left(\\frac{10\\sqrt{n}}{n}\\right)\\approx 433.11405\\]`}
-          </MathJax>
-        </header>
-      </div>
-    </MathJaxContext>
+    <div className="App">
+      <CssBaseline />
+      <GlobalStyles styles={{ body: { backgroundColor: "#e7ebf0" } }} />
+      <TopMenu toggleDrawer={() => setDrawerOpen(!drawerOpen)} />
+      <MenuDrawer
+        open={drawerOpen}
+        toggleDrawer={() => setDrawerOpen(!drawerOpen)}
+      />
+      <Container maxWidth="lg" className="PrimaryContainer">
+        Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+        <p /> Test
+      </Container>
+    </div>
   );
 }
 
