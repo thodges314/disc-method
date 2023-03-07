@@ -1,6 +1,6 @@
 import ConstantFunction from "./ConstantFunction";
 import ScalarMultiple from "./ScalarMultiple";
-import SumOrDifferenceRule from "./SumOrDifferenceRule";
+import SumAndDifferenceRule from "./SumAndDifferenceRule";
 import ProductRule from "./ProductRule";
 import QuotientRule from "./QuotientRule";
 import ChainRule from "./ChainRule";
@@ -13,7 +13,7 @@ import InverseFunctions from "./InverseFunctions";
 export {
   ConstantFunction,
   ScalarMultiple,
-  SumOrDifferenceRule,
+  SumAndDifferenceRule,
   ProductRule,
   QuotientRule,
   ChainRule,

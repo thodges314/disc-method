@@ -10,7 +10,7 @@ import {
 import {
   ConstantFunction,
   ScalarMultiple,
-  SumOrDifferenceRule,
+  SumAndDifferenceRule,
   ProductRule,
   QuotientRule,
   ChainRule,
@@ -131,7 +131,7 @@ export {
   ScalarMultiple,
   SecondFundamentalTheoremOfCalculus,
   SeriesTestBattery,
-  SumOrDifferenceRule,
+  SumAndDifferenceRule,
   SumOrDifferenceRule,
   TaylorMaclaurinSeries,
   TaylorsTheorem,
