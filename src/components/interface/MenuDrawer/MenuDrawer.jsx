@@ -17,7 +17,7 @@ const MenuDrawer = ({ open = false, toggleDrawer = () => {} }) => {
       >
         <Box sx={{ textAlign: "center" }}>
           <Typography variant="h6" sx={{ my: 2 }}>
-            MUI
+            Topics
           </Typography>
           <Divider />
           <NavItems />

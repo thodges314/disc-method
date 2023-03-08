@@ -1,7 +1,11 @@
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { location } from "utils/utils";
 
 const TopMenu = ({ toggleDrawer = () => {} }) => {
+  const headerArray = location();
+
   return (
     <Box
       sx={{
@@ -24,9 +28,22 @@ const TopMenu = ({ toggleDrawer = () => {} }) => {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "block" },
+              fontVariant: "small-caps",
+            }}
           >
-            MUI
+            {headerArray[0]}
+            {headerArray.length > 1 && headerArray[1] !== "" && (
+              <>
+                <ArrowForwardIosIcon
+                  fontSize="small"
+                  style={{ marginBottom: -2, marginLeft: 4, marginRight: 4 }}
+                />
+                {headerArray[1]}
+              </>
+            )}
           </Typography>
         </Toolbar>
       </AppBar>

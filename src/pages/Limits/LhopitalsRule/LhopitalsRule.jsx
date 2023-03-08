@@ -1,3 +1,3 @@
-const Component = () => <></>;
+const Component = () => <>dd</>;
 
 export default Component;

@@ -20,6 +20,7 @@ const NavItems = () => {
     navigate(`/${toPascalCase(entry.name)}/${toPascalCase(item)}`);
     navigate(0);
   };
+
   const makeNested = (entry, idx) => (
     <Fragment key={idx}>
       <ListItemButton onClick={handleClick(entry)}>
