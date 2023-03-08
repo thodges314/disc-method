@@ -1,5 +1,6 @@
 export const toPascalCase = (string) =>
   `${string}`
+    .normalize("NFD")
     .toLowerCase()
     .replace(new RegExp(/[-_]+/, "g"), " ")
     .replace(new RegExp(/[^\w\s]/, "g"), "")

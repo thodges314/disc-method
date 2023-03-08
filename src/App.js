@@ -4,11 +4,12 @@ import { Routes, Route } from "react-router-dom";
 // import { makeStyles } from "@mui/material";
 import Container from "@mui/material/Container";
 import { CssBaseline, GlobalStyles } from "@mui/material";
-import { MenuDrawer, TopMenu } from "components";
+import loadable from "@loadable/component";
 import { MathJaxContext, MathJax } from "better-react-mathjax";
+
+import { MenuDrawer, TopMenu } from "components";
 import items from "pages/pageDirectory";
 import { toPascalCase } from "utils/utils";
-import loadable from "@loadable/component";
 
 const LoadablePage = loadable(
   ({ itm1, itm2 }) =>

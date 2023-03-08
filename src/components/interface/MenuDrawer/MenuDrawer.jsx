@@ -1,17 +1,4 @@
-import {
-  AppBar,
-  Box,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListItemButton,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, Drawer, Typography } from "@mui/material";
 import NavItems from "./NavItems";
 const drawerWidth = 240;
 
