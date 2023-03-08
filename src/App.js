@@ -1,11 +1,10 @@
 import "./App.css";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-// import { makeStyles } from "@mui/material";
-import Container from "@mui/material/Container";
 import { CssBaseline, GlobalStyles } from "@mui/material";
 import loadable from "@loadable/component";
 import { MathJaxContext, MathJax } from "better-react-mathjax";
+import BackgroundPaper from "components/interface/BackgroundPaper";
 
 import { MenuDrawer, TopMenu } from "components";
 import items from "pages/pageDirectory";
@@ -52,9 +51,9 @@ function App() {
           open={drawerOpen}
           toggleDrawer={() => setDrawerOpen(!drawerOpen)}
         />
-        <Container maxWidth="lg" className="PrimaryContainer">
+        <BackgroundPaper>
           <Routes>{routes}</Routes>
-        </Container>
+        </BackgroundPaper>
       </div>
     </MathJaxContext>
   );
