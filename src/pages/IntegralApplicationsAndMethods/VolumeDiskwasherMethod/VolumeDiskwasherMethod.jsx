@@ -7,7 +7,10 @@ import SummaryCard from "components/interface/SummaryCard";
 import SideNoteCard from "components/interface/SideNoteCard";
 import SectionCard from "components/interface/SectionCard";
 
-import { DiskMethodDrums } from "interactivity/graphs/VolumeDiskwasherMethod";
+import {
+  DiskMethodDiscs,
+  DiskMethodDrums,
+} from "interactivity/graphs/VolumeDiskwasherMethod";
 
 const Component = () => (
   <>
@@ -58,11 +61,23 @@ const Component = () => (
           each with infantesimal width. Each slice would be a cylinder with a
           radius \\(R(x)\\) and thickness \\(dx\\). As above, we can find the
           volume of a cylinder by multiplying the area of one of it's faces by
-          it's height. The area of a slice is \\(\\pi R(x)^2\\) and the
+          it's thickness. The area of a slice is \\(\\pi R(x)^2\\) and the
           thickness is \\(dx\\), so the volume of each slice is \\(\\pi R(x)^2
-          dx\\). To find the volume of a solid of revolution, use integration to
+          dx\\).`}
+        </InlineEquation>
+      </Typography>
+      <DiskMethodDiscs />
+      <Typography>
+        <InlineEquation>
+          {`To find the volume of a solid of revolution, use integration to
           find the sum of the volumes of all the slices between the endpoints
           \\(x=1\\) and \\(x=4\\):`}
+          {`\\[ \\int_{1}^{4} \\pi R(x)^2 dx\\]`}
+          {`\\[ \\pi \\int_{1}^{4} R(x)^2 dx\\]`}
+          {`\\[ \\pi \\int_{1}^{4} \\left (  x^3 - 7x^2 + 14x -5\\right )^2 dx\\]`}
+          {`\\[ \\pi \\int_{1}^{4} x^6 - 14x^5 + 77x^4 -206x^3 + 266x^2 -140x + 25 \\: dx\\]`}
+          {`\\[ \\pi \\left ( \\frac{x^7}{7} - \\frac{7x^6}{3} + \\frac{77x^5}{5} -\\frac{103x^4}{2} + \\frac{266x^3}{3} - 70x^2 + 25x \\right ) \\biggr ]_1^4 \\]`}
+          {`\\[ \\frac{1269\\pi}{78} \\approx 56.953\\cdots\\]`}
         </InlineEquation>
       </Typography>
     </SectionCard>

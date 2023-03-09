@@ -7,11 +7,17 @@ const ThickCurveyLine = ({
   rotationY = 0,
   rotationZ = 0,
   color,
+  shift = null,
 }) => {
   const threepoints = points.map((point) => new Vector3(point.x, point.y, 0));
   const curve = new CatmullRomCurve3(threepoints);
   return (
-    <mesh rotation-x={rotationX} rotation-y={rotationY} rotation-z={rotationZ}>
+    <mesh
+      rotation-x={rotationX}
+      rotation-y={rotationY}
+      rotation-z={rotationZ}
+      position={shift}
+    >
       <tubeGeometry
         attach="geometry"
         args={[curve, threepoints.length * 2, width, 16, false]}

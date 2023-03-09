@@ -9,6 +9,7 @@ const RotationObject = ({
   solid: { domain = [0.1, 1], func = (x) => x, resolution = 10 },
   sides = 90,
   normalMaterial = true,
+  shift = null,
 }) => {
   const points = useMemo(() => {
     const pts = [];
@@ -21,7 +22,7 @@ const RotationObject = ({
   });
 
   return (
-    <mesh rotation-z={-Math.PI / 2} rotation-x={-Math.PI / 2}>
+    <mesh rotation-z={-Math.PI / 2} rotation-x={-Math.PI / 2} position={shift}>
       {normalMaterial ? translucentNormalMaterial : darkPhongMaterial}
       {points.length > 1 && <latheGeometry args={[points, sides]} />}
     </mesh>

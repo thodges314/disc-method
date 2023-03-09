@@ -1,5 +1,5 @@
 import { useMemo, Fragment } from "react";
-import { useControls } from "leva";
+// import { useControls } from "leva";
 import { ThickStraightLine } from "interactivity/components/Lines";
 import { CourierPrime } from "interactivity/components/Text";
 import {
@@ -16,21 +16,9 @@ const Drum = ({
   functionName = "f(x)",
   displayTopLabel = true,
   value = domain[0],
+  shift = null,
 }) => {
   const step = useMemo(() => 1 / resolution);
-
-  // const options = useMemo(
-  //   () => ({
-  //     x: {
-  //       value: domain[0],
-  //       min: domain[0],
-  //       max: domain[1] - step,
-  //       step: step,
-  //     },
-  //   }),
-  //   []
-  // );
-  // const controls = useControls(options);
 
   const drums = useMemo(() => {
     const drumArray = [];
@@ -73,44 +61,46 @@ const Drum = ({
 
   return (
     <>
-      {drums}
-      {threeDee ? (
-        <>
-          <ThickStraightLine
-            start={[domain[0], 0, 0]}
-            end={[domain[0], func(domain[0]), 0]}
+      <group position={shift}>
+        {drums}
+        {threeDee ? (
+          <>
+            <ThickStraightLine
+              start={[domain[0], 0, 0]}
+              end={[domain[0], func(domain[0]), 0]}
+              color={synthSunsetPink}
+            />
+            <ThickStraightLine
+              start={[value + step, 0, 0]}
+              end={[value + step, func(value), 0]}
+              label={functionName}
+              color={synthSunsetPink}
+              labelProportion={labelProportion}
+            />
+          </>
+        ) : (
+          <CourierPrime
+            text={functionName}
+            position={[value + step + 0.01, func(value) / 2, 0]}
+            size={labelProportion * 0.25}
             color={synthSunsetPink}
+            bold={true}
           />
-          <ThickStraightLine
-            start={[value + step, 0, 0]}
-            end={[value + step, func(value), 0]}
-            label={functionName}
+        )}
+        {displayTopLabel && (
+          <CourierPrime
+            text="Δx"
+            size={labelProportion * 0.25}
+            position={[
+              value - labelProportion * 0.03,
+              func(value) + labelProportion * (threeDee ? 0.4 : 0.2),
+              0,
+            ]}
             color={synthSunsetPink}
-            labelProportion={labelProportion}
+            bold={true}
           />
-        </>
-      ) : (
-        <CourierPrime
-          text={functionName}
-          position={[value + step + 0.01, func(value) / 2, 0]}
-          size={labelProportion * 0.25}
-          color={synthSunsetPink}
-          bold={true}
-        />
-      )}
-      {displayTopLabel && (
-        <CourierPrime
-          text="Δx"
-          size={labelProportion * 0.25}
-          position={[
-            value - labelProportion * 0.03,
-            func(value) + labelProportion * (threeDee ? 0.4 : 0.2),
-            0,
-          ]}
-          color={synthSunsetPink}
-          bold={true}
-        />
-      )}
+        )}
+      </group>
     </>
   );
 };

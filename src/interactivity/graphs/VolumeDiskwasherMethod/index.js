@@ -1,3 +1,4 @@
+import DiskMethodDiscs from "./DiskMethodDisks";
 import DiskMethodDrums from "./DiskMethodDrums";
 
-export { DiskMethodDrums };
+export { DiskMethodDiscs, DiskMethodDrums };
