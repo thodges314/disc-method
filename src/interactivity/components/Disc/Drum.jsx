@@ -15,25 +15,26 @@ const Drum = ({
   labelProportion = 1,
   functionName = "f(x)",
   displayTopLabel = true,
+  value = domain[0],
 }) => {
   const step = useMemo(() => 1 / resolution);
 
-  const options = useMemo(
-    () => ({
-      x: {
-        value: domain[0],
-        min: domain[0],
-        max: domain[1] - step,
-        step: step,
-      },
-    }),
-    []
-  );
-  const controls = useControls(options);
+  // const options = useMemo(
+  //   () => ({
+  //     x: {
+  //       value: domain[0],
+  //       min: domain[0],
+  //       max: domain[1] - step,
+  //       step: step,
+  //     },
+  //   }),
+  //   []
+  // );
+  // const controls = useControls(options);
 
   const drums = useMemo(() => {
     const drumArray = [];
-    for (let i = domain[0]; i <= controls.x + step / 2; i += step) {
+    for (let i = domain[0]; i <= value + step / 2; i += step) {
       drumArray.push(
         <Fragment key={i}>
           <mesh
@@ -68,7 +69,7 @@ const Drum = ({
       );
     }
     return drumArray;
-  }, [controls.x, threeDee]);
+  }, [value, threeDee]);
 
   return (
     <>
@@ -81,8 +82,8 @@ const Drum = ({
             color={synthSunsetPink}
           />
           <ThickStraightLine
-            start={[controls.x + step, 0, 0]}
-            end={[controls.x + step, func(controls.x), 0]}
+            start={[value + step, 0, 0]}
+            end={[value + step, func(value), 0]}
             label={functionName}
             color={synthSunsetPink}
             labelProportion={labelProportion}
@@ -91,7 +92,7 @@ const Drum = ({
       ) : (
         <CourierPrime
           text={functionName}
-          position={[controls.x + step + 0.01, func(controls.x) / 2, 0]}
+          position={[value + step + 0.01, func(value) / 2, 0]}
           size={labelProportion * 0.25}
           color={synthSunsetPink}
           bold={true}
@@ -102,8 +103,8 @@ const Drum = ({
           text="Δx"
           size={labelProportion * 0.25}
           position={[
-            controls.x - labelProportion * 0.03,
-            func(controls.x) + labelProportion * (threeDee ? 0.4 : 0.2),
+            value - labelProportion * 0.03,
+            func(value) + labelProportion * (threeDee ? 0.4 : 0.2),
             0,
           ]}
           color={synthSunsetPink}

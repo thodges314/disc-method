@@ -9,7 +9,7 @@ import {
   lightGrey,
 } from "interactivity/resources/constants/colors";
 
-const StyledSummaryCard = styled(Card)({
+const StyledSideNoteCard = styled(Card)({
   width: "700px",
   marginLeft: "auto",
   marginRight: "auto",
@@ -24,10 +24,10 @@ const StyledSummaryCard = styled(Card)({
   },
 });
 
-const SummaryCard = ({ children }) => (
-  <StyledSummaryCard>
+const SideNoteCard = ({ children }) => (
+  <StyledSideNoteCard>
     <CardContent>{children}</CardContent>
-  </StyledSummaryCard>
+  </StyledSideNoteCard>
 );
 
-export default SummaryCard;
+export default SideNoteCard;
