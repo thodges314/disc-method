@@ -5,8 +5,8 @@ import RotationObject, {
   FlatIntegral,
 } from "interactivity/components/RotationObject";
 import {
-  synthPink,
-  synthViolet,
+  synthSunsetPink,
+  synthSunsetViolet,
 } from "interactivity/resources/constants/colors";
 import { darkPhongMaterial } from "interactivity/resources/materials";
 
@@ -22,8 +22,8 @@ const Washer = ({
   labelProportion = 1,
   functionNameBig = "f(x)",
   functionNameLittle = "g(x)",
-  labelColorBig = synthPink,
-  labelColorLittle = synthViolet,
+  labelColorBig = synthSunsetPink,
+  labelColorLittle = synthSunsetViolet,
 }) => {
   const step = useMemo(() => 0.5 / resolution);
   const options = useMemo(
@@ -98,7 +98,7 @@ const Washer = ({
               yTransform * littleFunc(controls.x),
               zTransform * littleFunc(controls.x),
             ]}
-            color={synthViolet}
+            color={synthSunsetViolet}
             label={functionNameLittle}
             labelProportion={labelProportion}
           />
@@ -109,7 +109,7 @@ const Washer = ({
               yTransform * bigFunc(controls.x),
               -zTransform * bigFunc(controls.x),
             ]}
-            color={synthPink}
+            color={synthSunsetPink}
             label={functionNameBig}
             labelProportion={labelProportion}
           />

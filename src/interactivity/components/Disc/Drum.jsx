@@ -2,7 +2,10 @@ import { useMemo, Fragment } from "react";
 import { useControls } from "leva";
 import { ThickStraightLine } from "interactivity/components/Lines";
 import { CourierPrime } from "interactivity/components/Text";
-import { lightGrey, synthPink } from "interactivity/resources/constants/colors";
+import {
+  lightGrey,
+  synthSunsetPink,
+} from "interactivity/resources/constants/colors";
 import { darkPhongMaterial } from "interactivity/resources/materials";
 
 const Drum = ({
@@ -75,13 +78,13 @@ const Drum = ({
           <ThickStraightLine
             start={[domain[0], 0, 0]}
             end={[domain[0], func(domain[0]), 0]}
-            color={synthPink}
+            color={synthSunsetPink}
           />
           <ThickStraightLine
             start={[controls.x + step, 0, 0]}
             end={[controls.x + step, func(controls.x), 0]}
             label={functionName}
-            color={synthPink}
+            color={synthSunsetPink}
             labelProportion={labelProportion}
           />
         </>
@@ -90,7 +93,7 @@ const Drum = ({
           text={functionName}
           position={[controls.x + step + 0.01, func(controls.x) / 2, 0]}
           size={labelProportion * 0.25}
-          color={synthPink}
+          color={synthSunsetPink}
           bold={true}
         />
       )}
@@ -103,7 +106,7 @@ const Drum = ({
             func(controls.x) + labelProportion * (threeDee ? 0.4 : 0.2),
             0,
           ]}
-          color={synthPink}
+          color={synthSunsetPink}
           bold={true}
         />
       )}

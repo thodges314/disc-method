@@ -35,3 +35,12 @@ export const debounce = (callback, wait) => {
     timeout = setTimeout(() => callback.apply(context, args), wait);
   };
 };
+
+export const hexToRgba = (hex, opacity) => {
+  const hexString = hex.toString(16);
+  const r = parseInt(hexString.slice(0, 2), 16);
+  const g = parseInt(hexString.slice(2, 4), 16);
+  const b = parseInt(hexString.slice(4, 6), 16);
+
+  return `rgba(${r}, ${g}, ${b}, ${opacity || 1})`;
+};

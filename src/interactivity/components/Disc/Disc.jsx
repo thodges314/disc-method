@@ -5,7 +5,7 @@ import RotationObject, {
   FlatIntegral,
 } from "interactivity/components/RotationObject";
 import { CourierPrime } from "interactivity/components/Text";
-import { synthPink } from "interactivity/resources/constants/colors";
+import { synthSunsetPink } from "interactivity/resources/constants/colors";
 import { darkPhongMaterial } from "interactivity/resources/materials";
 
 const Disc = ({
@@ -15,7 +15,7 @@ const Disc = ({
   labelProportion = 1,
   functionName = "f(x)",
   displayTopLabel = true,
-  labelColor = synthPink,
+  labelColor = synthSunsetPink,
 }) => {
   const step = useMemo(() => 0.5 / resolution);
   const options = useMemo(
@@ -69,7 +69,7 @@ const Disc = ({
           <ThickStraightLine
             start={[domain[0], 0, 0]}
             end={[domain[0], func(domain[0]), 0]}
-            color={synthPink}
+            color={synthSunsetPink}
           />
         </>
       )}
@@ -90,7 +90,7 @@ const Disc = ({
             func(controls.x) + 0.4 * labelProportion,
             0,
           ]}
-          color={synthPink}
+          color={synthSunsetPink}
           bold={true}
         />
       )}
