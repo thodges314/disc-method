@@ -24,7 +24,7 @@ const Component = () => (
         Both of these methods are used for finding volumes of solids of
         revolution. A solid of revolution is made by taking a graph of a
         function and spinning it around an axis of revolution. The disc or
-        washer methods are used it's easiest to integrate along an exes{" "}
+        washer methods are used it's easiest to integrate along an exes
         <em>parallel</em> to the axes of revolution.
       </Typography>
       <Typography>
@@ -36,22 +36,13 @@ const Component = () => (
           ) dx\\)`}
         </InlineEquation>
       </Typography>
-      <Typography>
-        <InlineEquation>
-          Suppose that we cut this object into an infinite number of slices,
-          each with infantesimal width. Each slice would be a cylinder with a
-          radius \\(R(x)\\) and a thickness \\(dx\\). As above, we can find the
-          volume of the cylinder my multiplying the area of one of it's faces by
-          it's height. The radius of a slice is \\(\\piR(x))
-        </InlineEquation>
-      </Typography>
     </SectionCard>
     <SectionCard>
       <Typography variant="h6">Example of Disc Method</Typography>
       <Typography>
         <InlineEquation>
           {`Suppose that you started with the graph of the equation
-          \\(R(x)=x^3-7x^2+14x-5\\) from \\(x=1\\) to \\(x=3\\) and rotated it
+          \\(R(x)=x^3-7x^2+14x-5\\) from \\(x=1\\) to \\(x=4\\) and rotated it
           around the x-axis. To approximate the volume, we could cut this object
           into slices, as we did when we first learned concepts of integration,
           and for each slice multiply the area of one of the faces by the
