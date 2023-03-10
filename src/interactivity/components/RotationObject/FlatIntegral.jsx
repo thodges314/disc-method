@@ -10,6 +10,7 @@ const FlatIntegral = ({
   },
   rightBound = domain[1],
   shift = null,
+  light = false,
 }) => {
   const dx = useMemo(() => {
     return 0.1 / resolution;
@@ -17,6 +18,7 @@ const FlatIntegral = ({
   const shapes = useMemo(() => {
     const func = (x) => funcTop(x) - funcBottom(x);
     const shps = [];
+    const width = light ? dx / 2 : dx;
     for (let i = domain[0]; i < domain[1]; i += dx) {
       const smlr = Math.min(func(i), func(i + dx));
       shps.push(
@@ -27,7 +29,7 @@ const FlatIntegral = ({
           key={Math.round(i * 100)}
         >
           {darkPhongMaterial}
-          <planeGeometry args={[smlr, dx]} />
+          <planeGeometry args={[smlr, width]} />
         </mesh>
       );
     }

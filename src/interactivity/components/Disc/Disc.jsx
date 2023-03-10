@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-// import { useControls } from "leva";
 import { ThickStraightLine } from "interactivity/components/Lines";
 import RotationObject, {
   FlatIntegral,
@@ -32,7 +30,6 @@ const Disc = ({
               }}
               sides={sides}
               normalMaterial={false}
-              // shift={shift}
             />
           ) : (
             <FlatIntegral
@@ -42,7 +39,6 @@ const Disc = ({
                 resolution: resolution,
               }}
               rightBound={value}
-              // shift={shift}
             />
           ))}
 

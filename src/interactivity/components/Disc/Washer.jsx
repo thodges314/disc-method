@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-import { useControls } from "leva";
 import { ThickStraightLine } from "interactivity/components/Lines";
 import RotationObject, {
   FlatIntegral,
@@ -20,120 +18,122 @@ const Washer = ({
   sides = 90,
   threeDee = true,
   labelProportion = 1,
-  functionNameBig = "f(x)",
-  functionNameLittle = "g(x)",
+  functionNameBig = "R(x)",
+  functionNameLittle = "r(x)",
   labelColorBig = synthSunsetPink,
   labelColorLittle = synthSunsetViolet,
+  value = domain[0],
+  shift = null,
 }) => {
-  const step = useMemo(() => 0.5 / resolution);
-  const options = useMemo(
-    () => ({
-      x: {
-        value: domain[0],
-        min: domain[0],
-        max: domain[1],
-        step: step,
-      },
-      label: true,
-    }),
-    []
-  );
-  const controls = useControls(options);
   const zTransform = 1 / 2;
   const yTransform = 3 ** (1 / 2) / 2;
   return (
     <>
-      {controls.x >= domain[0] &&
+      {value >= domain[0] &&
         (threeDee ? (
           <>
             <RotationObject
               solid={{
-                domain: [domain[0], controls.x],
+                domain: [domain[0], value],
                 func: bigFunc,
                 resolution: resolution,
               }}
               sides={sides}
               normalMaterial={false}
+              shift={shift}
             />
             <RotationObject
               solid={{
-                domain: [domain[0], controls.x],
+                domain: [domain[0], value],
                 func: littleFunc,
                 resolution: resolution,
               }}
               sides={sides}
               normalMaterial={false}
+              shift={shift}
             />
           </>
         ) : (
-          <FlatIntegral
-            solid={{
-              domain: [domain[0], domain[1]],
-              funcTop: bigFunc,
-              funcBottom: littleFunc,
-              resolution: resolution,
-            }}
-            rightBound={controls.x}
-          />
+          <>
+            <FlatIntegral
+              solid={{
+                domain: [domain[0], domain[1]],
+                funcTop: bigFunc,
+                funcBottom: littleFunc,
+                resolution: resolution,
+              }}
+              rightBound={value}
+              shift={shift}
+            />
+            <FlatIntegral
+              solid={{
+                domain: [domain[0], domain[1]],
+                funcTop: littleFunc,
+                funcBottom: (_x) => 0,
+                resolution: resolution,
+              }}
+              rightBound={value}
+              shift={shift}
+              light
+            />
+          </>
         ))}
 
       {threeDee && (
-        <>
+        <group position={shift}>
           <mesh rotation-y={-Math.PI / 2} position-x={domain[0]}>
             {darkPhongMaterial}
             <ringGeometry
               args={[littleFunc(domain[0]), bigFunc(domain[0]), sides]}
             />
           </mesh>
-          <mesh rotation-y={-Math.PI / 2} position-x={controls.x}>
+          <mesh rotation-y={-Math.PI / 2} position-x={value}>
             {darkPhongMaterial}
-            <ringGeometry
-              args={[littleFunc(controls.x), bigFunc(controls.x), sides]}
-            />
+            <ringGeometry args={[littleFunc(value), bigFunc(value), sides]} />
           </mesh>
           <ThickStraightLine
-            start={[controls.x, 0, 0]}
+            start={[value, 0, 0]}
             end={[
-              controls.x,
-              yTransform * littleFunc(controls.x),
-              zTransform * littleFunc(controls.x),
+              value,
+              yTransform * littleFunc(value),
+              zTransform * littleFunc(value),
             ]}
             color={synthSunsetViolet}
             label={functionNameLittle}
             labelProportion={labelProportion}
           />
           <ThickStraightLine
-            start={[controls.x, 0, 0]}
+            start={[value, 0, 0]}
             end={[
-              controls.x,
-              yTransform * bigFunc(controls.x),
-              -zTransform * bigFunc(controls.x),
+              value,
+              yTransform * bigFunc(value),
+              -zTransform * bigFunc(value),
             ]}
             color={synthSunsetPink}
             label={functionNameBig}
             labelProportion={labelProportion}
           />
-        </>
+        </group>
       )}
 
       {!threeDee && (
-        <>
+        <group position={shift}>
           <ThickStraightLine
-            start={[controls.x + 0.01, 0, 0.01]}
-            end={[controls.x + 0 + 0.01, littleFunc(controls.x), 0.01]}
+            start={[value + 0.01, 0, 0.01]}
+            end={[value + 0 + 0.01, littleFunc(value), 0.01]}
             color={labelColorLittle}
             label={functionNameLittle}
             labelProportion={labelProportion}
           />
           <ThickStraightLine
-            start={[controls.x - 0.01, 0, 0.01]}
-            end={[controls.x - 0.01, bigFunc(controls.x), 0.01]}
+            start={[value - 0.01, 0, 0.01]}
+            end={[value - 0.01, bigFunc(value), 0.01]}
             color={labelColorBig}
             label={functionNameBig}
             labelProportion={labelProportion}
             labelRight={false}
           />
-        </>
+        </group>
       )}
     </>
   );

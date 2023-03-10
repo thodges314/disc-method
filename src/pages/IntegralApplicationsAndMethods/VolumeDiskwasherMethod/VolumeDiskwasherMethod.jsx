@@ -14,6 +14,7 @@ import {
   DiskMethodDiscs,
   DiskMethodDiscsShifted,
   DiskMethodDrums,
+  WasherMethod,
 } from "interactivity/graphs/VolumeDiskwasherMethod";
 
 const Component = () => (
@@ -121,29 +122,58 @@ const Component = () => (
       </Typography>
     </SectionCard>
     <SectionCard>
+      <Typography variant="h6">Example of Washer Method</Typography>
       <Typography>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
+        <InlineEquation>
+          The washer method is the same as the disk method, except we are
+          dealing with one function nested insode of another. For example,
+          rotate {`\\(y=x^2\\)`} and {`\\(y=\\sqrt{x}\\)`}, from {`\\(x=0\\)`}{" "}
+          to {`\\(x=1\\)`} around the x-axis.
+        </InlineEquation>
+      </Typography>
+      <WasherMethod />
+      <Typography>
+        If we were to take a slice through this, we would see two concentric
+        rings. Play with the model above to get an intuitive idea of this.
+      </Typography>
+      <Typography>
+        <InlineEquation>
+          The radii of the two rings for a slice taken at a given {`\\(x\\)`},
+          we will call {`\\(R(x)\\)`} and {`\\(r(x)\\)`}, where {`\\(R(x)\\)`}{" "}
+          is the greater radius and {`\\(r(x)\\)`} is the lesser radius. Here,{" "}
+          {`\\(R(x)=\\sqrt{x}\\)`}, and {`\\(r(x)=x^2\\)`}.
+        </InlineEquation>
+      </Typography>
+      <Typography>
+        <InlineEquation>
+          To calculate the volume, we are interested in the area between the two
+          concentric circles. To find this area, we subtract the area of the
+          smaller circle from the area of the larger circle.
+          {`\\[\\pi R(x)^2 - \\pi r(x)^2 \\]`}
+          {`\\[\\pi \\left ( R(x)^2 - r(x)^2 \\right ) \\]`}
+        </InlineEquation>
+      </Typography>
+      <Typography>
+        <InlineEquation>
+          As with the disc method, we can find the volume of a slice by
+          multiplying the area of the slice by it's thickness, {`\\(dx\\)`}.
+          Using integration, we can sum the volumes of all of the slices between
+          the endpoints, in this case, {`\\(x=0\\)`} and {`\\(x=1\\)`}:
+          {`\\[\\pi \\int_{0}^{1}\\left ( R(x)^2 - r(x)^2 \\right ) dx \\]`}
+          {`\\[\\pi \\int_{0}^{1}\\left ( (\\sqrt{x})^2 - (x^2)^2 \\right ) dx \\]`}
+          {`\\[\\pi \\int_{0}^{1}\\left ( x - x^4 \\right ) dx \\]`}
+          {`\\[ \\pi \\left ( \\frac{x^2}{2} - \\frac{x^5}{5}\\right ) \\biggr ]_0^1 \\]`}
+          {`\\[ \\frac{3\\pi}{10}\\approx 0.942\\cdots \\]`}
+        </InlineEquation>
       </Typography>
     </SectionCard>
     <SideNoteCard>
       <Typography>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
+        This is a sidenote card. It has no place on this particular page, but
+        I'm leaving it here until I use it to basically showcase that it exists.
+        In the future, I'll use it in places that I want to include additional
+        information to enhance understanding that is not critical to core
+        concepts.
       </Typography>
     </SideNoteCard>
   </>
