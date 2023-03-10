@@ -1,5 +1,4 @@
 import { useMemo, Fragment } from "react";
-// import { useControls } from "leva";
 import { ThickStraightLine } from "interactivity/components/Lines";
 import { CourierPrime } from "interactivity/components/Text";
 import {

@@ -9,6 +9,7 @@ const FlatIntegral = ({
     resolution = 10,
   },
   rightBound = domain[1],
+  shift = null,
 }) => {
   const dx = useMemo(() => {
     return 0.1 / resolution;
@@ -33,7 +34,7 @@ const FlatIntegral = ({
     return shps;
   }, []);
   const idx = (rightBound - domain[0]) / dx;
-  return <mesh>{shapes.slice(0, idx)}</mesh>;
+  return <mesh position={shift}>{shapes.slice(0, idx)}</mesh>;
 };
 
 export default FlatIntegral;

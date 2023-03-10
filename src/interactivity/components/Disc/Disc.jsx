@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useControls } from "leva";
+// import { useControls } from "leva";
 import { ThickStraightLine } from "interactivity/components/Lines";
 import RotationObject, {
   FlatIntegral,
@@ -16,84 +16,75 @@ const Disc = ({
   functionName = "f(x)",
   displayTopLabel = true,
   labelColor = synthSunsetPink,
+  value = domain[0],
+  shift = null,
 }) => {
-  const step = useMemo(() => 0.5 / resolution);
-  const options = useMemo(
-    () => ({
-      x: {
-        value: domain[0],
-        min: domain[0],
-        max: domain[1],
-        step: step,
-      },
-      label: true,
-    }),
-    []
-  );
-  const controls = useControls(options);
-
   return (
     <>
-      {controls.x >= domain[0] &&
-        (threeDee ? (
-          <RotationObject
-            solid={{
-              domain: [domain[0], controls.x],
-              func: func,
-              resolution: resolution,
-            }}
-            sides={sides}
-            normalMaterial={false}
-          />
-        ) : (
-          <FlatIntegral
-            solid={{
-              domain: [domain[0], domain[1]],
-              funcTop: func,
-              resolution: resolution,
-            }}
-            rightBound={controls.x}
-          />
-        ))}
+      <group position={shift}>
+        {value >= domain[0] &&
+          (threeDee ? (
+            <RotationObject
+              solid={{
+                domain: [domain[0], value],
+                func: func,
+                resolution: resolution,
+              }}
+              sides={sides}
+              normalMaterial={false}
+              // shift={shift}
+            />
+          ) : (
+            <FlatIntegral
+              solid={{
+                domain: [domain[0], domain[1]],
+                funcTop: func,
+                resolution: resolution,
+              }}
+              rightBound={value}
+              // shift={shift}
+            />
+          ))}
 
-      {threeDee && (
-        <>
-          <mesh rotation-y={-Math.PI / 2} position-x={domain[0]}>
-            {darkPhongMaterial}
-            <circleGeometry args={[func(domain[0]), sides]} />
-          </mesh>
-          <mesh rotation-y={Math.PI / 2} position-x={controls.x}>
-            {darkPhongMaterial}
-            <circleGeometry args={[func(controls.x), sides]} />
-          </mesh>
-          <ThickStraightLine
-            start={[domain[0], 0, 0]}
-            end={[domain[0], func(domain[0]), 0]}
-            color={synthSunsetPink}
-          />
-        </>
-      )}
+        {threeDee && (
+          <>
+            <mesh rotation-y={-Math.PI / 2} position-x={domain[0]}>
+              {darkPhongMaterial}
+              <circleGeometry args={[func(domain[0]), sides]} />
+            </mesh>
+            <mesh rotation-y={Math.PI / 2} position-x={value}>
+              {darkPhongMaterial}
+              <circleGeometry args={[func(value), sides]} />
+            </mesh>
+            <ThickStraightLine
+              start={[domain[0], 0, 0]}
+              end={[domain[0], func(domain[0]), 0]}
+              color={synthSunsetPink}
+            />
+          </>
+        )}
 
-      <ThickStraightLine
-        start={[controls.x, 0, 0]}
-        end={[controls.x, func(controls.x), 0]}
-        color={labelColor}
-        label={functionName}
-        labelProportion={labelProportion}
-      />
-      {displayTopLabel && (
-        <CourierPrime
-          text="dx"
-          size={0.25 * labelProportion}
-          position={[
-            controls.x - 0.2 * labelProportion,
-            func(controls.x) + 0.4 * labelProportion,
-            0,
-          ]}
-          color={synthSunsetPink}
-          bold={true}
+        <ThickStraightLine
+          start={[value, 0, 0]}
+          end={[value, func(value), 0]}
+          color={labelColor}
+          label={functionName}
+          labelProportion={labelProportion}
         />
-      )}
+        {displayTopLabel && (
+          <CourierPrime
+            text="dx"
+            size={0.25 * labelProportion}
+            position={[
+              value - 0.2 * labelProportion,
+              func(value) + 0.4 * labelProportion,
+              0,
+            ]}
+            color={synthSunsetPink}
+            bold={true}
+          />
+        )}
+      </group>
     </>
   );
 };

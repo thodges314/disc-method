@@ -13,6 +13,7 @@ const ThickStraightLine = ({
   labelRight = true,
   labelProportion = 1,
   color,
+  shift = null,
 }) => {
   const points = [
     new Vector3(start[0], start[1], start[2]),
@@ -30,6 +31,7 @@ const ThickStraightLine = ({
         rotation-x={rotationX}
         rotation-y={rotationY}
         rotation-z={rotationZ}
+        position={shift}
       >
         <tubeGeometry attach="geometry" args={[curve, 1, width, 16, false]} />
         {color ? (

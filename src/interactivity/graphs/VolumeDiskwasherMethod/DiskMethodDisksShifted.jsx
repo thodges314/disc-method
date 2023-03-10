@@ -4,10 +4,15 @@ import Card from "@mui/material/Card";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls, Environment } from "@react-three/drei";
 import Slider from "@mui/material/Slider";
-import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import { FormGroup } from "@mui/material";
 import ControlsCard from "components/interface/ControlsCard";
 
-import { Axes, Disc, RotationObjectLine } from "interactivity/components";
+import {
+  Axes,
+  Disc,
+  RotationObjectLine,
+  ThickStraightLine,
+} from "interactivity/components";
 
 const height = 400;
 const width = height * 1.61803398875;
@@ -25,7 +30,14 @@ const discMethod1 = {
   resolution: 5,
 };
 
-const DiskMethodDiscsShifted = () => {
+const discMethodRaise = {
+  domain: [1, 4],
+  func: (_x) => -1,
+  intFunc: (_x) => 0,
+  resolution: 5,
+};
+
+const DiskMethodDiscs = () => {
   const { domain, resolution } = discMethod1;
   const step = useMemo(() => 0.5 / resolution);
   const cameraRef1 = useRef();
@@ -53,13 +65,27 @@ const DiskMethodDiscsShifted = () => {
             background
           />
           <RotationObjectLine solid={discMethod1} shift={twoDView} />
+          <ThickStraightLine
+            start={[-44, -1, 0]}
+            end={[49, -1, 0]}
+            shift={twoDView}
+          />
           <Disc
             solid={discMethod1}
             threeDee={threeDee}
             labelProportion={labelProportion}
-            functionName={"R(x)"}
+            functionName={"f(x)"}
             value={value}
             shift={twoDView}
+          />
+          <Disc
+            solid={discMethodRaise}
+            threeDee={threeDee}
+            labelProportion={labelProportion}
+            functionName={"1"}
+            value={value}
+            shift={twoDView}
+            displayTopLabel={false}
           />
           <CameraControls ref={cameraRef1} />
           <Axes
@@ -71,16 +97,6 @@ const DiskMethodDiscsShifted = () => {
       </Card>
       <FormGroup>
         <ControlsCard>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={threeDee}
-                onChange={(evt) => setThreeDee(evt.target.checked)}
-              />
-            }
-            label="Rotate Graph"
-          />
-
           <Slider
             onChange={(_evt, newValue) => setValue(newValue)}
             value={value}
@@ -96,4 +112,4 @@ const DiskMethodDiscsShifted = () => {
   );
 };
 
-export default DiskMethodDiscsShifted;
+export default DiskMethodDiscs;
