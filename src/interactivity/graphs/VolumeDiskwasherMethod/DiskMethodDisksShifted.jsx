@@ -4,12 +4,13 @@ import Card from "@mui/material/Card";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls, Environment } from "@react-three/drei";
 import Slider from "@mui/material/Slider";
-import { FormGroup } from "@mui/material";
+import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 import ControlsCard from "components/interface/ControlsCard";
 
 import {
   Axes,
   Disc,
+  RotationObject,
   RotationObjectLine,
   ThickStraightLine,
 } from "interactivity/components";
@@ -19,6 +20,7 @@ const width = height * 1.61803398875;
 
 // const twoDView = [2, 1.5, 0];
 const twoDView = new Vector3(-2, -1.5, 0);
+const twoDView2 = new Vector3(-2, -2.5, 0);
 const cameraPosition = [1.25, 0, 5];
 const axesLength = 5;
 const labelProportion = 1;
@@ -34,6 +36,12 @@ const discMethodRaise = {
   domain: [1, 4],
   func: (_x) => -1,
   intFunc: (_x) => 0,
+  resolution: 5,
+};
+
+const discMethodsCombined = {
+  domain: [1, 4],
+  func: (x) => x ** 3 - 7 * x ** 2 + 14 * x - 4,
   resolution: 5,
 };
 
@@ -70,23 +78,44 @@ const DiskMethodDiscs = () => {
             end={[49, -1, 0]}
             shift={twoDView}
           />
-          <Disc
-            solid={discMethod1}
-            threeDee={threeDee}
-            labelProportion={labelProportion}
-            functionName={"f(x)"}
-            value={value}
-            shift={twoDView}
-          />
-          <Disc
-            solid={discMethodRaise}
-            threeDee={threeDee}
-            labelProportion={labelProportion}
-            functionName={"1"}
-            value={value}
-            shift={twoDView}
-            displayTopLabel={false}
-          />
+
+          {threeDee ? (
+            <>
+              <RotationObject
+                solid={discMethodsCombined}
+                threeDee={true}
+                shift={twoDView2}
+              />
+              <Disc
+                solid={discMethodsCombined}
+                threeDee={true}
+                labelProportion={labelProportion}
+                functionName={"R(x) = f(x) + 1"}
+                value={value}
+                shift={twoDView2}
+              />
+            </>
+          ) : (
+            <>
+              <Disc
+                solid={discMethod1}
+                threeDee={false}
+                labelProportion={labelProportion}
+                functionName={"f(x)"}
+                value={value}
+                shift={twoDView}
+              />
+              <Disc
+                solid={discMethodRaise}
+                threeDee={false}
+                labelProportion={labelProportion}
+                functionName={"1"}
+                value={value}
+                shift={twoDView}
+                displayTopLabel={false}
+              />
+            </>
+          )}
           <CameraControls ref={cameraRef1} />
           <Axes
             length={axesLength}
@@ -97,6 +126,15 @@ const DiskMethodDiscs = () => {
       </Card>
       <FormGroup>
         <ControlsCard>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={threeDee}
+                onChange={(evt) => setThreeDee(evt.target.checked)}
+              />
+            }
+            label="Rotate Graph"
+          />
           <Slider
             onChange={(_evt, newValue) => setValue(newValue)}
             value={value}
