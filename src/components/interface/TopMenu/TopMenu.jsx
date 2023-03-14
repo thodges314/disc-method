@@ -1,7 +1,15 @@
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { location } from "utils/utils";
+import { location, hexToRgba } from "utils/utils";
+import {
+  synthSunsetMagenta,
+  themeBackground,
+} from "interactivity/resources/constants/colors";
+
+const backgroundColor = hexToRgba(themeBackground, 1);
+const magentaHeavy = hexToRgba(synthSunsetMagenta, 1);
+// const magentaLight = hexToRgba(synthSunsetMagenta, 0.1);
 
 const TopMenu = ({ toggleDrawer = () => {} }) => {
   const headerArray = location();
@@ -14,7 +22,14 @@ const TopMenu = ({ toggleDrawer = () => {} }) => {
         position: "static",
       }}
     >
-      <AppBar component="nav">
+      <AppBar
+        component="nav"
+        sx={{
+          bgcolor: backgroundColor,
+          color: magentaHeavy,
+          boxShadow: `2px 2px 2px 2px ${magentaHeavy}`,
+        }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
