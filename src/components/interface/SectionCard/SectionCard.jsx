@@ -4,19 +4,20 @@ import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
 import { hexToRgba } from "utils/utils";
 import {
-  synthCyberBlack,
   synthCyberPaleBlue,
+  themeBackground,
 } from "interactivity/resources/constants/colors";
 
-const backgroundColor = hexToRgba(synthCyberBlack, 0);
+const backgroundColor = hexToRgba(themeBackground, 1);
 const paleBlueHeavy = hexToRgba(synthCyberPaleBlue, 1);
 const paleBlueLight = hexToRgba(synthCyberPaleBlue, 0.1);
 
 const StyledSectionCard = styled(Card)({
-  width: "100%",
-  marginTop: "20px",
+  marginTop: "40px",
+  marginLeft: "20px",
+  marginRight: "20px",
   color: paleBlueHeavy,
-  backgroundColor: backgroundColor, //hexToRgba(synthCyberBlack, 0),
+  backgroundColor: backgroundColor,
   borderLeft: `1px solid ${paleBlueLight}`,
   borderRight: `1px solid ${paleBlueLight}`,
   borderBottom: `1px solid ${paleBlueHeavy}`,
@@ -30,7 +31,7 @@ const StyledSectionCard = styled(Card)({
 });
 
 const SectionCard = ({ children }) => (
-  <StyledSectionCard>
+  <StyledSectionCard sx={{ boxShadow: `4px 4px 4px 4px ${paleBlueHeavy}` }}>
     <CardContent>{children}</CardContent>
   </StyledSectionCard>
 );

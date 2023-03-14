@@ -4,19 +4,25 @@ import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
 import { hexToRgba } from "utils/utils";
 import {
-  synthCyberDarkBlue,
-  synthCyberLightBlue,
-  lightGrey,
+  synthSunsetPink,
+  themeBackground,
 } from "interactivity/resources/constants/colors";
+
+const backgroundColor = hexToRgba(themeBackground, 1);
+const sunsetPinkHeavy = hexToRgba(synthSunsetPink, 1);
+const sunsetPinkLight = hexToRgba(synthSunsetPink, 0.1);
 
 const StyledSideNoteCard = styled(Card)({
   width: "700px",
   marginLeft: "auto",
   marginRight: "auto",
-  marginTop: "20px",
-  color: hexToRgba(lightGrey, 0.8),
-  backgroundColor: hexToRgba(synthCyberDarkBlue, 1),
-  boxShadow: `4px 4px ${hexToRgba(synthCyberLightBlue, 0.2)}`,
+  marginTop: "40px",
+  color: sunsetPinkHeavy,
+  backgroundColor: backgroundColor,
+  borderLeft: `1px solid ${sunsetPinkLight}`,
+  borderRight: `1px solid ${sunsetPinkLight}`,
+  borderBottom: `1px solid ${sunsetPinkHeavy}`,
+  borderTop: `1px solid ${sunsetPinkHeavy}`,
   "& > div": {
     display: "flex",
     alignItems: "center",
@@ -25,7 +31,7 @@ const StyledSideNoteCard = styled(Card)({
 });
 
 const SideNoteCard = ({ children }) => (
-  <StyledSideNoteCard>
+  <StyledSideNoteCard sx={{ boxShadow: `4px 4px 4px 4px ${sunsetPinkHeavy}` }}>
     <CardContent>{children}</CardContent>
   </StyledSideNoteCard>
 );

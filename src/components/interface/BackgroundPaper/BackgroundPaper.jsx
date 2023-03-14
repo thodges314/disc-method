@@ -8,7 +8,7 @@ const BackgroundPaper = styled(Paper)({
   minHeight: `calc(100vh - 100px)`,
   margin: "0 auto 100px auto",
   borderRadius: "0px 0px 16px 16px",
-  padding: "70px 16px 16px 16px",
+  padding: "76px 16px 46px 16px",
   backgroundColor: hexToRgba(synthCyberBlack),
 });
 

@@ -22,6 +22,8 @@ const [
 // --color-5:	#831187;
 // --color-6:	#0c0c0c;
 
+const [themePurple, themeBackground] = [0xcf7bc1, 0x262335];
+
 export {
   darkGrey,
   lightGrey,
@@ -37,4 +39,6 @@ export {
   synthSunsetPink,
   synthSunsetViolet,
   synthSynsetYellow,
+  themeBackground,
+  themePurple,
 };

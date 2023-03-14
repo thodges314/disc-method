@@ -20,10 +20,14 @@ import {
 const Component = () => (
   <>
     <SummaryCard>
-      <DisplayEquation>{"\\[\\pi \\int_{a}^{b}R(x)^2 dx\\]"}</DisplayEquation>
+      <DisplayEquation>
+        {"\\[\\pi \\int_{a}^{b}R(x)^2 dx\\;\\;\\]"}
+      </DisplayEquation>
       <Typography>or</Typography>
       <DisplayEquation>
-        {"\\[\\pi \\int_{a}^{b} \\left (  R(x)^2 - r(x)^2 \\right ) dx\\]"}
+        {
+          "\\[\\;\\;\\pi \\int_{a}^{b} \\left (  R(x)^2 - r(x)^2 \\right ) dx\\]"
+        }
       </DisplayEquation>
     </SummaryCard>
     <SectionCard>
@@ -32,8 +36,8 @@ const Component = () => (
         Both of these methods are used for finding volumes of solids of
         revolution. A solid of revolution is made by taking a graph of a
         function and spinning it around an axis of revolution. The disc or
-        washer methods are used when it's easiest to integrate along an exes
-        <em>parallel</em> to the axes of revolution.
+        washer methods are used when it's easiest to integrate along an axis{" "}
+        <em>parallel</em> to the axis of revolution.
       </Typography>
       <Typography>
         <InlineEquation>
@@ -53,14 +57,16 @@ const Component = () => (
       <Typography variant="h6">Example of Disc Method</Typography>
       <Typography>
         <InlineEquation>
-          Suppose that you started with the graph of the equation
+          Suppose that you started with the graph of the equation{" "}
           {`\\(R(x)=x^3-7x^2+14x-5\\)`} from {`\\(x=1\\)`} to {`\\(x=4\\)`} and
           rotated it around the x-axis. To approximate the volume, we could cut
           this object into slices, as we did when we first learned concepts of
           integration, and for each slice multiply the area of one of the faces
           by the thickness of the slice, {`\\(\\Delta x\\)`}, to get it's
           approximate volume. The sum of these volumes would be an approximation
-          of the volume of the solid.
+          of the volume of the solid. In this demo, I'm using the left-hand side
+          to find the {`\\(R(x)\\)`} values, but as you may recall, that's more
+          or less arbitrary.
         </InlineEquation>
       </Typography>
       <DiskMethodDrums />
@@ -112,11 +118,11 @@ const Component = () => (
       <DiskMethodDiscsShifted />
       <Typography>
         <InlineEquation>
-          {`\\[R(x)=f(x)\\;{\\color{Orange} +1}\\]`}
-          {`\\[R(x)=x^3-7x^2+14x-5\\;{\\color{Orange} +1}\\]`}
+          {`\\[R(x)=f(x)\\;\\textbf{+1}\\]`}
+          {`\\[R(x)=x^3-7x^2+14x-5\\;\\textbf{+1}\\]`}
           The rest of the process would be the same.
           {`\\[\\pi \\int_{1}^{4}  R(x)^2 dx\\]`}
-          {`\\[ \\pi \\int_{1}^{4} \\left (  x^3 - 7x^2 + 14x -5 \\;{\\color{Orange} +1}\\right )^2 dx\\]`}
+          {`\\[ \\pi \\int_{1}^{4} \\left (  x^3 - 7x^2 + 14x -5 \\;\\textbf{+1}\\right )^2 dx\\]`}
           {`\\[ \\frac{39\\pi}{4} \\]`}
         </InlineEquation>
       </Typography>
