@@ -41,7 +41,9 @@ function App() {
   const pages = {};
   items.forEach((itm) => {
     itm.items.forEach(async (itm2) => {
-      pages[toPascalCase(itm2)] = <LoadablePage itm1={itm} itm2={itm2} />;
+      pages[`${toPascalCase(itm.name)}_${toPascalCase(itm2)}`] = (
+        <LoadablePage itm1={itm} itm2={itm2} />
+      );
     });
   });
 
@@ -52,7 +54,7 @@ function App() {
         <Route
           key={100 * idx + idx2}
           path={`/${toPascalCase(itm.name)}/${toPascalCase(itm2)}`}
-          element={pages[toPascalCase(itm2)]}
+          element={pages[`${toPascalCase(itm.name)}_${toPascalCase(itm2)}`]}
         />
       );
     });

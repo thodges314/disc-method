@@ -18,19 +18,17 @@ const Component = () => (
     <SummaryCard>
       <DisplayEquation>
         {
-          "$$\\frac{\\mathrm{d} }{\\mathrm{d} x} \\alpha u = \\alpha \\frac{\\mathrm{d} u}{\\mathrm{d} x}$$"
+          "$$\\frac{\\mathrm{d} }{\\mathrm{d} x} (u \\pm v) = \\frac{\\mathrm{d} u}{\\mathrm{d} x}\\pm\\frac{\\mathrm{d} v}{\\mathrm{d} x}$$"
         }
       </DisplayEquation>
-      <CustomTypography>where {"$\\alpha$"} is any constant.</CustomTypography>
     </SummaryCard>
     <SectionCard>
       <Typography variant="h6" width="100%">
         Explanation
       </Typography>
       <CustomTypography>
-        Whenever a differentiable function is multiplied by a scalar (constant),
-        the derivative will by that scalar multiplied by the derivative of the
-        differentiable function.
+        If multiple differentiable functions are added together, take the
+        derivative of each function separately and sum them.
       </CustomTypography>
     </SectionCard>
     <SectionCard>
@@ -39,12 +37,12 @@ const Component = () => (
       </Typography>
       <CustomTypography>
         <DisplayEquation>
-          {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x}{\\color{${sunsetMagenta}}{2}}{\\color{${sunsetYellow}}{x^2}}={\\color{${sunsetMagenta}}{2}}\\left ({\\color{${sunsetYellow}}{\\frac{\\mathrm{d} }{\\mathrm{d} x}x^2}}\\right )={\\color{${sunsetMagenta}}{2}}*{\\color{${sunsetYellow}}{2x}}=4x$$`}
-        </DisplayEquation>
-        <DisplayEquation>
-          {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x}{\\color{${sunsetMagenta}}{2}}{\\color{${sunsetYellow}}{\\sin(x)}}={\\color{${sunsetMagenta}}{2}}\\left ({\\color{${sunsetYellow}}{\\frac{\\mathrm{d} }{\\mathrm{d} x}\\sin(x)}}\\right )={\\color{${sunsetMagenta}}{2}}{\\color{${sunsetYellow}}{\\cos(x)}}$$`}
-        </DisplayEquation>
+          {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x} ({\\color{${sunsetMagenta}}{x^2}} + {\\color{${sunsetYellow}}{x^3}}) = {\\color{${sunsetMagenta}}{\\frac{\\mathrm{d} }{\\mathrm{d} x} x^2}} + {\\color{${sunsetYellow}}{\\frac{\\mathrm{d} }{\\mathrm{d} x} x^3}} = {\\color{${sunsetMagenta}}{2x}} + {\\color{${sunsetYellow}}{3x^2}}$$`}
+        </DisplayEquation>{" "}
       </CustomTypography>
+      <DisplayEquation>
+        {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x} \\left ( {\\color{${sunsetMagenta}}{2\\sin(x)}}-{\\color{${sunsetYellow}}{\\ln|x|}} \\right )={\\color{${sunsetMagenta}}{\\frac{\\mathrm{d} }{\\mathrm{d} x}  2\\sin(x)}}-{\\color{${sunsetYellow}}{\\frac{\\mathrm{d} }{\\mathrm{d} x} \\ln|x|}}  = {\\color{${sunsetMagenta}}{2\\cos(x)}} - {\\color{${sunsetYellow}}{\\frac{1}{x}}}$$`}
+      </DisplayEquation>
     </SectionCard>
   </>
 );

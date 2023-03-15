@@ -21,8 +21,9 @@
     "name": "Derivatives",
     "items": [
       "Constant Function",
-      "Scalar Multiple",
-      "Sum and Difference Rule",
+      "Constant Multiple",
+      "Sum or Difference Rule",
+      "Power Rule",
       "Product Rule",
       "Quotient Rule",
       "Chain Rule",
