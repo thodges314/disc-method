@@ -18,6 +18,23 @@ const LoadablePage = loadable(
   }
 );
 
+const config = {
+  "fast-preview": {
+    disabled: true,
+  },
+  tex2jax: {
+    inlineMath: [
+      ["$", "$"],
+      ["\\(", "\\)"],
+    ],
+    displayMath: [
+      ["$$", "$$"],
+      ["\\[", "\\]"],
+    ],
+  },
+  messageStyle: "none",
+};
+
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -42,7 +59,11 @@ function App() {
   });
 
   return (
-    <MathJaxContext>
+    <MathJaxContext
+      version={2}
+      config={config}
+      onStartup={(mathJax) => (mathJax.Hub.processSectionDelay = 0)}
+    >
       <div className="App">
         <CssBaseline />
         <GlobalStyles styles={{ body: { backgroundColor: "#e7ebf0" } }} />

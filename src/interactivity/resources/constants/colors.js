@@ -1,6 +1,6 @@
 const [medGrey, lightGrey, darkGrey] = [0x5a5a5a, 0xd3d3d3, 0x242424];
 const [
-  synthSynsetYellow,
+  synthSunsetYellow,
   synthSunsetOrange,
   synthSunsetMagenta,
   synthSunsetPink,
@@ -38,7 +38,7 @@ export {
   synthSunsetOrange,
   synthSunsetPink,
   synthSunsetViolet,
-  synthSynsetYellow,
+  synthSunsetYellow,
   themeBackground,
   themePurple,
 };
