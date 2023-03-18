@@ -31,38 +31,37 @@ const Component = () => (
         You will see the power rule quite a lot. If some differentiable function{" "}
         {"$u$"} is raised to a power {"$n$"}, then to take the derivative, bring
         the {"$n$"} value down in front of the function, and decreate the
-        exponent value by {"$1$"}. Then, multiply rhe result bu the derivative
+        exponent value by {"$1$"}. Then, multiply the result by the derivative
         of the differentiable function, as per the{" "}
         <CustomLink href="/Derivatives/ChainRule">Chain Rule</CustomLink>.
       </CustomTypography>
       <CustomTypography>
         In the cases where your differentiable function {"$u$"} is your variable
-        of differentiation ({"$x$"}) then you can skip the chain rule step
-        because {"$\\frac{\\mathrm{d} }{\\mathrm{d} x}=1$"}
+        of differentiation ({"$x$"}) then you can skip the{" "}
+        <CustomLink href="/Derivatives/ChainRule">Chain Rule</CustomLink> step
+        because {"$\\frac{\\mathrm{d} x}{\\mathrm{d} x}=1$"}
       </CustomTypography>
     </SectionCard>
     <SectionCard>
       <Typography variant="h6" width="100%">
-        Two Examples
+        Example
+      </Typography>
+      <DisplayEquation>
+        {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x} {\\color{${sunsetMagenta}}{x}}^{\\color{${sunsetYellow}}{3}} = {\\color{${sunsetYellow}}{3}}{\\color{${sunsetMagenta}}{x}}^{\\color{${sunsetYellow}}{3-1}} = 3x^2$$`}
+      </DisplayEquation>
+    </SectionCard>
+    <SectionCard>
+      <Typography variant="h6" width="100%">
+        Example
       </Typography>
       <CustomTypography>
-        {/* <DisplayEquation> */}
-        {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x} {\\color{${sunsetMagenta}}{x}}^{\\color{${sunsetYellow}}{3}} = {\\color{${sunsetYellow}}{3}}{\\color{${sunsetMagenta}}{x}}^{\\color{${sunsetYellow}}{3-1}} = 3x^2$$`}
-        {/* </DisplayEquation> */}
-        {/* </CustomTypography>
-      <CustomTypography> */}
         <DisplayEquation>
           {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x} {\\color{${sunsetMagenta}}{\\sin}}^{\\color{${sunsetYellow}}{2}}{\\color{${sunsetMagenta}}{(x)}} = {\\color{${sunsetYellow}}{2}}{\\color{${sunsetMagenta}}{\\sin}}^{\\color{${sunsetYellow}}{2-1}}{\\color{${sunsetMagenta}}{(x)}}*{\\color{${sunsetMagenta}}{\\cos(x)}}=2\\sin(x)\\cos(x)$$`}
-          <CustomTypography>
-            where{" "}
-            {`$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{\\sin(x)}}$`}{" "}
-            and{" "}
-            {`$ {\\color{${sunsetMagenta}}{\\mathrm{d} u}} = {\\color{${sunsetMagenta}}{\\cos(x)}}$`}
-          </CustomTypography>
-          {/* where */}
+          where{" "}
+          {`$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{\\sin(x)}}$`}{" "}
+          and{" "}
+          {`$ {\\color{${sunsetMagenta}}{\\frac{\\mathrm{d} u}{\\mathrm{d} x}}} = {\\color{${sunsetMagenta}}{\\cos(x)}}$`}
         </DisplayEquation>
-        {/* <Typography>where</Typography> */}
-        {/* where */}
       </CustomTypography>
     </SectionCard>
   </>

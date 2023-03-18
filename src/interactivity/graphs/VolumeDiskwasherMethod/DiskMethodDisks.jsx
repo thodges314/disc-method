@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Vector3 } from "three";
-import Card from "@mui/material/Card";
+import CanvasCard from "components/interface/CanvasCard";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls, Environment } from "@react-three/drei";
 import Slider from "@mui/material/Slider";
@@ -34,14 +34,7 @@ const DiskMethodDiscsShifted = () => {
 
   return (
     <div style={{ width: width, marginLeft: "auto", marginRight: "auto" }}>
-      <Card
-        sx={{
-          height: height,
-          width: width,
-          mt: "20px",
-          mb: 0,
-        }}
-      >
+      <CanvasCard height={height} width={width}>
         <Canvas camera={{ position: cameraPosition }}>
           <ambientLight color={0x91b2cb} intensity={2} />
           <directionalLight position={[1123, 56, 79]} intensity={0.5} />
@@ -68,7 +61,7 @@ const DiskMethodDiscsShifted = () => {
             shift={twoDView}
           />
         </Canvas>
-      </Card>
+      </CanvasCard>
       <FormGroup>
         <ControlsCard>
           <FormControlLabel

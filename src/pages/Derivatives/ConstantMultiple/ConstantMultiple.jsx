@@ -35,16 +35,19 @@ const Component = () => (
     </SectionCard>
     <SectionCard>
       <Typography variant="h6" width="100%">
-        Two Examples
+        Example
       </Typography>
-      <CustomTypography>
-        <DisplayEquation>
-          {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x}{\\color{${sunsetMagenta}}{2}}{\\color{${sunsetYellow}}{x^2}}={\\color{${sunsetMagenta}}{2}}\\left ({\\color{${sunsetYellow}}{\\frac{\\mathrm{d} }{\\mathrm{d} x}x^2}}\\right )={\\color{${sunsetMagenta}}{2}}*{\\color{${sunsetYellow}}{2x}}=4x$$`}
-        </DisplayEquation>
-        <DisplayEquation>
-          {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x}{\\color{${sunsetMagenta}}{2}}{\\color{${sunsetYellow}}{\\sin(x)}}={\\color{${sunsetMagenta}}{2}}\\left ({\\color{${sunsetYellow}}{\\frac{\\mathrm{d} }{\\mathrm{d} x}\\sin(x)}}\\right )={\\color{${sunsetMagenta}}{2}}{\\color{${sunsetYellow}}{\\cos(x)}}$$`}
-        </DisplayEquation>
-      </CustomTypography>
+      <DisplayEquation>
+        {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x}{\\color{${sunsetMagenta}}{2}}{\\color{${sunsetYellow}}{x^2}}={\\color{${sunsetMagenta}}{2}}\\left ({\\color{${sunsetYellow}}{\\frac{\\mathrm{d} }{\\mathrm{d} x}x^2}}\\right )={\\color{${sunsetMagenta}}{2}}*{\\color{${sunsetYellow}}{2x}}=4x$$`}
+      </DisplayEquation>
+    </SectionCard>
+    <SectionCard>
+      <Typography variant="h6" width="100%">
+        Example
+      </Typography>
+      <DisplayEquation>
+        {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x}{\\color{${sunsetMagenta}}{2}}{\\color{${sunsetYellow}}{\\sin(x)}}={\\color{${sunsetMagenta}}{2}}\\left ({\\color{${sunsetYellow}}{\\frac{\\mathrm{d} }{\\mathrm{d} x}\\sin(x)}}\\right )={\\color{${sunsetMagenta}}{2}}{\\color{${sunsetYellow}}{\\cos(x)}}$$`}
+      </DisplayEquation>
     </SectionCard>
   </>
 );
