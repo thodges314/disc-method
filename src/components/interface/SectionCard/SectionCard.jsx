@@ -27,12 +27,15 @@ const StyledSectionCard = styled(Card)({
     display: "flex",
     alignItems: "center",
     flexWrap: "wrap",
+    // justifyContent: "space-between",
   },
 });
 
 const SectionCard = ({ children }) => (
   <StyledSectionCard sx={{ boxShadow: `4px 4px 4px 4px ${paleBlueHeavy}` }}>
-    <CardContent>{children}</CardContent>
+    <CardContent sx={{ p: "4em", "&:last-child": { pb: "4em" } }}>
+      {children}
+    </CardContent>
   </StyledSectionCard>
 );
 

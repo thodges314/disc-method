@@ -16,7 +16,7 @@ const StyledControlsCard = styled(Card)({
   width: "100%",
   marginTop: "20px",
   color: darkColour,
-  backgroundColor: backgroundColor, //hexToRgba(synthCyberBlack, 0),
+  backgroundColor: backgroundColor,
 
   "& > div": {
     display: "flex",
