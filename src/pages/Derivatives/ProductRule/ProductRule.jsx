@@ -73,7 +73,7 @@ const Component = () => (
           <DisplayEquation>
             {`$$ {\\color{${sunsetMagenta}}{x^3}} {\\color{${sunsetYellow}}{\\left ( -\\sin(x) \\right )}} + {\\color{${sunsetMagenta}}{3x^2}}{\\color{${sunsetYellow}}{\\cos(x)}}$$`}
           </DisplayEquation>
-          <DisplayEquation>{`$$3x^2\\cos(x) - x^2\\sin(x)$$`}</DisplayEquation>
+          <DisplayEquation>{`$$3x^2\\cos(x) - x^3\\sin(x)$$`}</DisplayEquation>
         </div>
         <CustomTable entries={entries} />
       </div>
