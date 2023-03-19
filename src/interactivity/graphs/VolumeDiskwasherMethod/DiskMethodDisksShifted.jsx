@@ -3,9 +3,10 @@ import { Vector3 } from "three";
 import CanvasCard from "components/interface/CanvasCard";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls, Environment } from "@react-three/drei";
-import Slider from "@mui/material/Slider";
-import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import CustomSlider from "components/interface/CustomSlider";
+import { FormGroup, FormControlLabel } from "@mui/material";
 import ControlsCard from "components/interface/ControlsCard";
+import CustomCheckbox from "components/interface/CustomCheckbox";
 
 import {
   Axes,
@@ -53,7 +54,14 @@ const DiskMethodDiscs = () => {
   const [value, setValue] = useState(domain[0]);
 
   return (
-    <div style={{ width: width, marginLeft: "auto", marginRight: "auto" }}>
+    <div
+      style={{
+        width: width,
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginBottom: "10px",
+      }}
+    >
       <CanvasCard height={height} width={width}>
         <Canvas camera={{ position: cameraPosition }}>
           <ambientLight color={0x91b2cb} intensity={2} />
@@ -121,14 +129,14 @@ const DiskMethodDiscs = () => {
         <ControlsCard>
           <FormControlLabel
             control={
-              <Checkbox
+              <CustomCheckbox
                 checked={threeDee}
                 onChange={(evt) => setThreeDee(evt.target.checked)}
               />
             }
             label="Rotate Graph"
           />
-          <Slider
+          <CustomSlider
             onChange={(_evt, newValue) => setValue(newValue)}
             value={value}
             min={domain[0]}
@@ -136,6 +144,10 @@ const DiskMethodDiscs = () => {
             step={step}
             size="small"
             valueLabelDisplay="auto"
+            sx={{
+              ml: 1,
+              mr: 1,
+            }}
           />
         </ControlsCard>
       </FormGroup>

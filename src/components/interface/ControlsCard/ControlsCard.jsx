@@ -5,18 +5,24 @@ import { styled } from "@mui/material/styles";
 import { hexToRgba } from "utils/utils";
 import {
   synthCyberBlack,
-  synthCyberPaleBlue,
-  lightGrey,
+  synthCyberPink,
+  synthSunsetPink,
 } from "interactivity/resources/constants/colors";
 
-const backgroundColor = hexToRgba(lightGrey, 0.8);
-const darkColour = hexToRgba(synthCyberBlack, 0.8);
+const darkColor = hexToRgba(synthCyberBlack, 0.8);
+const cyberPink = hexToRgba(synthCyberPink);
+const sunsetPink = hexToRgba(synthSunsetPink);
 
 const StyledControlsCard = styled(Card)({
   width: "100%",
   marginTop: "20px",
-  color: darkColour,
-  backgroundColor: backgroundColor,
+  color: cyberPink,
+  backgroundColor: darkColor,
+  boxShadow: `2px 2px 2px 2px ${cyberPink}`,
+  borderLeft: `1px solid ${sunsetPink}`,
+  borderRight: `1px solid ${sunsetPink}`,
+  borderBottom: `1px solid ${sunsetPink}`,
+  borderTop: `1px solid ${sunsetPink}`,
 
   "& > div": {
     display: "flex",

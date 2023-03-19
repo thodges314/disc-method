@@ -35,8 +35,12 @@
     ]
   },
   {
-    "name": "Differentiation Methods",
-    "items": ["Implicit Differentiation", "Logarithmic Differentiation"]
+    "name": "Differentiation Applications and Methods",
+    "items": [
+      "Finding a Tangent Line to a Graph at a Point",
+      "Implicit Differentiation",
+      "Logarithmic Differentiation"
+    ]
   },
   {
     "name": "Integrals",
@@ -57,7 +61,7 @@
     "items": [
       "Work",
       "Volume - Disk/Washer Method",
-      "Volume = Shell Method",
+      "Volume - Shell Method",
       "Arc Length Integration",
       "Products of Sine and Cosine",
       "Products of Secant and Tangent",

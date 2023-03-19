@@ -1,17 +1,9 @@
-import CanvasCard from "components/interface/CanvasCard";
 import SummaryCard from "components/interface/SummaryCard";
 import SectionCard from "components/interface/SectionCard";
 import CustomTypography from "components/interface/CustomTypography";
 import DisplayEquation from "components/interface/DisplayEquation";
 import Typography from "@mui/material/Typography";
-import CustomLink from "components/interface/CustomLink";
-import Table from "@mui/material/Table";
 import CustomTable from "components/interface/CustomTable";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 
 import {
   synthSunsetMagenta,
@@ -28,8 +20,8 @@ const entries = [
     `$$ {\\color{${sunsetYellow}}{v=\\cos(x)}} $$`,
   ],
   [
-    `$$ {\\color{${sunsetMagenta}}{u\\prime=3x^2}} $$`,
-    `$$ {\\color{${sunsetYellow}}{v\\prime=-\\sin(x)}} $$`,
+    `$$ {\\color{${sunsetMagenta}}{u^\\prime=3x^2}} $$`,
+    `$$ {\\color{${sunsetYellow}}{v^\\prime=-\\sin(x)}} $$`,
   ],
 ];
 
@@ -37,7 +29,7 @@ const Component = () => (
   <>
     <SummaryCard>
       <DisplayEquation>
-        {"$${\\left (uv  \\right )}\\prime = uv\\prime +vu\\prime\\;\\;$$"}
+        {"$$ {\\left (uv  \\right )}^\\prime = uv^\\prime +vu^\\prime\\;\\;$$"}
       </DisplayEquation>
       <Typography>or</Typography>
       <DisplayEquation>
