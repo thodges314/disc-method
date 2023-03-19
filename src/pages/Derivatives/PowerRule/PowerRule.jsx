@@ -39,7 +39,7 @@ const Component = () => (
         In the cases where your differentiable function {"$u$"} is your variable
         of differentiation ({"$x$"}) then you can skip the{" "}
         <CustomLink href="/Derivatives/ChainRule">Chain Rule</CustomLink> step
-        because {"$\\frac{\\mathrm{d} x}{\\mathrm{d} x}=1$"}
+        because {"$\\frac{\\mathrm{d} x}{\\mathrm{d} x}=1$"}.
       </CustomTypography>
     </SectionCard>
     <SectionCard>
