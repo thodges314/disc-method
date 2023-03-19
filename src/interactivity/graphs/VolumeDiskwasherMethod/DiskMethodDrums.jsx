@@ -32,7 +32,7 @@ const discMethod1 = {
 
 const DiskMethodDrums = () => {
   const { domain, resolution } = discMethod1;
-  const step = useMemo(() => 1 / resolution);
+  const step = useMemo(() => 1 / resolution, [resolution]);
   const cameraRef1 = useRef();
   const [threeDee, setThreeDee] = useState(false);
   const [value, setValue] = useState(domain[0]);
@@ -74,7 +74,6 @@ const DiskMethodDrums = () => {
             shift={twoDView}
           />
           <CameraControls ref={cameraRef1} />
-          {/* {cameraControls} */}
           <Axes
             length={axesLength}
             labelProportion={labelProportion}

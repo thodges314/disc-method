@@ -48,7 +48,7 @@ const washerMethod = {
 
 const WasherMethod = () => {
   const { domain, resolution } = washerMethod;
-  const step = useMemo(() => 0.5 / resolution);
+  const step = useMemo(() => 0.5 / resolution, [resolution]);
   const cameraRef1 = useRef();
   const [threeDee, setThreeDee] = useState(false);
   const [value, setValue] = useState(domain[0]);
