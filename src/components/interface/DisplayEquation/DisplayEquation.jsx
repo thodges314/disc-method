@@ -7,6 +7,7 @@ const DisplayEquation = ({ children }) => (
       marginLeft: "1rem",
     }}
     display
+    dynamic
   >
     {children}
   </MathJax>
