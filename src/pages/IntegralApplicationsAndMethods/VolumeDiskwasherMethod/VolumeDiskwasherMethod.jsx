@@ -4,7 +4,6 @@ import DisplayEquation from "components/interface/DisplayEquation";
 import CustomLink from "components/interface/CustomLink";
 
 import SummaryCard from "components/interface/SummaryCard";
-import SideNoteCard from "components/interface/SideNoteCard";
 import SectionCard from "components/interface/SectionCard";
 import CustomTypography from "components/interface/CustomTypography";
 
@@ -152,15 +151,6 @@ const Component = () => (
         {`$$ \\frac{3\\pi}{10}\\approx 0.942\\cdots $$`}
       </CustomTypography>
     </SectionCard>
-    <SideNoteCard>
-      <CustomTypography>
-        This is a sidenote card. It has no place on this particular page, but
-        I'm leaving it here until I use it to basically showcase that it exists.
-        In the future, I'll use it in places that I want to include additional
-        information to enhance understanding that is not critical to core
-        concepts.
-      </CustomTypography>
-    </SideNoteCard>
   </>
 );
 
