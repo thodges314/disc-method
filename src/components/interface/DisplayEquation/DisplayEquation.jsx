@@ -6,7 +6,7 @@ const DisplayEquation = ({ children }) => (
       marginRight: "1rem",
       marginLeft: "1rem",
     }}
-    display
+    // display
     dynamic
   >
     {children}

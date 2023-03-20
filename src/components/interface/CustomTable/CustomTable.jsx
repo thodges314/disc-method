@@ -1,6 +1,8 @@
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
 import Card from "@mui/material/Card";
 import { hexToRgba } from "utils/utils";
 
@@ -53,7 +55,9 @@ const WrapperCard = ({ children }) => (
 
 const CustomTable = ({ entries }) => (
   <TableContainer component={WrapperCard}>
-    {mapEntryRows(entries)}
+    <Table>
+      <TableBody>{mapEntryRows(entries)}</TableBody>
+    </Table>
   </TableContainer>
 );
 

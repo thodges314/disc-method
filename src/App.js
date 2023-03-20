@@ -1,7 +1,7 @@
 import "./App.css";
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import { CssBaseline, GlobalStyles } from "@mui/material";
+import { useState, useEffect, useMemo } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { CssBaseline, GlobalStyles, useMediaQuery } from "@mui/material";
 import loadable from "@loadable/component";
 import { MathJaxContext, MathJax } from "better-react-mathjax";
 import BackgroundPaper from "components/interface/BackgroundPaper";
@@ -36,29 +36,36 @@ const config = {
 };
 
 function App() {
+  const navigate = useNavigate();
+  window.addEventListener("popstate", (_event) => navigate(0));
+
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const pages = {};
-  items.forEach((itm) => {
-    itm.items.forEach(async (itm2) => {
-      pages[`${toPascalCase(itm.name)}_${toPascalCase(itm2)}`] = (
-        <LoadablePage itm1={itm} itm2={itm2} />
-      );
+  const routes = useMemo(() => {
+    const pages = {};
+    items.forEach((itm) => {
+      itm.items.forEach(async (itm2) => {
+        pages[`${toPascalCase(itm.name)}_${toPascalCase(itm2)}`] = (
+          <LoadablePage itm1={itm} itm2={itm2} />
+        );
+      });
     });
-  });
 
-  const routes = [];
-  items.forEach((itm, idx) => {
-    itm.items.forEach((itm2, idx2) => {
-      routes.push(
-        <Route
-          key={100 * idx + idx2}
-          path={`/${toPascalCase(itm.name)}/${toPascalCase(itm2)}`}
-          element={pages[`${toPascalCase(itm.name)}_${toPascalCase(itm2)}`]}
-        />
-      );
+    const routes = [];
+    items.forEach((itm, idx) => {
+      itm.items.forEach((itm2, idx2) => {
+        routes.push(
+          <Route
+            key={100 * idx + idx2}
+            path={`/${toPascalCase(itm.name)}/${toPascalCase(itm2)}`}
+            element={pages[`${toPascalCase(itm.name)}_${toPascalCase(itm2)}`]}
+          />
+        );
+      });
     });
-  });
+
+    return routes;
+  }, [items]);
 
   return (
     <MathJaxContext
