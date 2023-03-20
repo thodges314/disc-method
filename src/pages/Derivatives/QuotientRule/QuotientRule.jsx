@@ -17,12 +17,12 @@ const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 
 const entries = [
   [
-    `$$ {\\color{${sunsetMagenta}}{u=\\sin(x)}} $$`,
-    `$$ {\\color{${sunsetYellow}}{v=x^2}} $$`,
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u=\\sin(x)}} $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v=x^2}} $$`}</DisplayEquation>,
   ],
   [
-    `$$ {\\color{${sunsetMagenta}}{u^\\prime=\\cos(x)}} $$`,
-    `$$ {\\color{${sunsetYellow}}{v^\\prime=2x}} $$`,
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u^\\prime=\\cos(x)}} $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v^\\prime=2x}} $$`}</DisplayEquation>,
   ],
 ];
 
