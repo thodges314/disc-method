@@ -47,7 +47,7 @@ const Component = () => (
         Explanation
       </Typography>
       <CustomTypography>
-        It's easiest to use the Legrange notation ({"$f^\\prime(x)$"}) to
+        It's easiest to use the Lagrange notation ({"$f^\\prime(x)$"}) to
         remember the quotient rule. You just have to commit this pattern to
         memory.
       </CustomTypography>
