@@ -52,11 +52,11 @@ const Component = () => (
         Explanation
       </Typography>
       <CustomTypography>
-        It's easiest to use the prime notation to remember the product rule.
-        Just remember that if two differentiable functions are multiplied
-        together, the derivative is the first function times the derivative of
-        the second function plus the second function times the derivative of the
-        first function.
+        It's easiest to use the Lagrange notation ({"$f^\\prime(x)$"}) to
+        remember the product rule. Just remember that if two differentiable
+        functions are multiplied together, the derivative is the first function
+        times the derivative of the second function plus the second function
+        times the derivative of the first function.
       </CustomTypography>
       <CustomTypography>
         Because addition and multiplication are commutative, it doesn't matter
