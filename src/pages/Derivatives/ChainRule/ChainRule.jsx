@@ -108,7 +108,7 @@ const Component = () => (
         description.
       </CustomTypography>
       <CustomTypography>
-        In this example, we used{" "}
+        In this example, we also used{" "}
         <CustomLink href="/Derivatives/TrigonometricDerivatives">
           Trigonometric Derivatives
         </CustomLink>
@@ -120,7 +120,7 @@ const Component = () => (
     <SideNoteCard>
       <CustomTypography>
         Technically, it's bad form to mix Leibniz notation (
-        {"$\\frac{\\mathrm{d} }{\\mathrm{d} x}$"}) with Legrange notation (
+        {"$\\frac{\\mathrm{d} }{\\mathrm{d} x}$"}) with Lagrange notation (
         {"$f^\\prime(x)$"}), and I try to avoid that throughout this app when
         possible, but it's often done informally when working out solutions.
       </CustomTypography>

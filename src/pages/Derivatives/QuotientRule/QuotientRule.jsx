@@ -1,5 +1,6 @@
 import SummaryCard from "components/interface/SummaryCard";
 import SectionCard from "components/interface/SectionCard";
+import SideNoteCard from "components/interface/SideNoteCard";
 import CustomTypography from "components/interface/CustomTypography";
 import DisplayEquation from "components/interface/DisplayEquation";
 import Typography from "@mui/material/Typography";
@@ -46,8 +47,9 @@ const Component = () => (
         Explanation
       </Typography>
       <CustomTypography>
-        It's easiest to use the prime notation to remember the quotient rule.
-        You just have to commit this pattern to memory.
+        It's easiest to use the Legrange notation ({"$f^\\prime(x)$"}) to
+        remember the quotient rule. You just have to commit this pattern to
+        memory.
       </CustomTypography>
       <CustomTypography>
         Some people repeat little mnemonics to themselves like 'bottom dee-top
@@ -88,7 +90,23 @@ const Component = () => (
         <CustomLink href="/Derivatives/ProductRule">Product Rule</CustomLink>{" "}
         with {`$u=\\sin(x)$`} and {`$v=x^{-2}$`}.
       </CustomTypography>
+      <CustomTypography>
+        In this example, we also used{" "}
+        <CustomLink href="/Derivatives/TrigonometricDerivatives">
+          Trigonometric Derivatives
+        </CustomLink>{" "}
+        and the{" "}
+        <CustomLink href="/Derivatives/PowerRule">Power Rule</CustomLink>.
+      </CustomTypography>
     </SectionCard>
+    <SideNoteCard>
+      <CustomTypography>
+        Technically, it's bad form to mix Leibniz notation (
+        {"$\\frac{\\mathrm{d} }{\\mathrm{d} x}$"}) with Lagrange notation (
+        {"$f^\\prime(x)$"}), and I try to avoid that throughout this app when
+        possible, but it's often done informally when working out solutions.
+      </CustomTypography>
+    </SideNoteCard>
   </>
 );
 

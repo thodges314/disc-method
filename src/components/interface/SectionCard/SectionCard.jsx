@@ -22,13 +22,15 @@ const StyledSectionCard = styled(Card)({
   borderRight: `1px solid ${paleBlueLight}`,
   borderBottom: `1px solid ${paleBlueHeavy}`,
   borderTop: `1px solid ${paleBlueHeavy}`,
-
-  "& > div": {
-    display: "flex",
-    alignItems: "center",
-    flexWrap: "wrap",
-    // justifyContent: "space-between",
-  },
+  // display: "flex",
+  // alignItems: "center",
+  // flexWrap: "wrap",
+  // "& > div": {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   flexWrap: "wrap",
+  // justifyContent: "space-between",
+  // },
 });
 
 const SectionCard = ({ children }) => (

@@ -4,6 +4,7 @@ import CustomTypography from "components/interface/CustomTypography";
 import DisplayEquation from "components/interface/DisplayEquation";
 import Typography from "@mui/material/Typography";
 import CustomTable from "components/interface/CustomTable";
+import CustomLink from "components/interface/CustomLink";
 
 import {
   synthSunsetMagenta,
@@ -85,6 +86,14 @@ const Component = () => (
         </div>
         <CustomTable entries={entries} />
       </div>
+      <CustomTypography>
+        In this example, we also used{" "}
+        <CustomLink href="/Derivatives/TrigonometricDerivatives">
+          Trigonometric Derivatives
+        </CustomLink>{" "}
+        and the{" "}
+        <CustomLink href="/Derivatives/PowerRule">Power Rule</CustomLink>.
+      </CustomTypography>
     </SectionCard>
   </>
 );

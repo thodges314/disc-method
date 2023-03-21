@@ -78,39 +78,55 @@ const Component = () => (
         To find the volume of a solid of revolution, use integration to find the
         sum of the volumes of all the slices between the endpoints{" "}
         {`$x=1$ and $x=4$:`}
+      </CustomTypography>
+      <DisplayEquation>
         {`$$ \\int_{1}^{4} \\pi R(x)^2 dx$$`}
         {`$$ \\pi \\int_{1}^{4} R(x)^2 dx$$`}
         {`$$ \\pi \\int_{1}^{4} \\left (  x^3 - 7x^2 + 14x -5\\right )^2 dx$$`}
         {`$$ \\pi \\int_{1}^{4} x^6 - 14x^5 + 77x^4 -206x^3 + 266x^2 -140x + 25 \\: dx$$`}
         {`$$ \\pi \\left ( \\frac{x^7}{7} - \\frac{7x^6}{3} + \\frac{77x^5}{5} -\\frac{103x^4}{2} + \\frac{266x^3}{3} - 70x^2 + 25x \\right ) \\biggr ]_1^4 $$`}
         {`$$ \\frac{1269\\pi}{78} \\approx 56.953\\cdots$$`}
-      </CustomTypography>
+      </DisplayEquation>
       <CustomTypography>
-        To perform this integration, we used the{" "}
+        In this example, we also used the{" "}
         <CustomLink href="/Integrals/ConstantMultipleRule">
           Constant Multiple Rule
         </CustomLink>
-        , the <CustomLink href="/Integrals/PowerRule">Power Rule</CustomLink>,
-        the{" "}
+        , the <CustomLink href="/Integrals/PowerRule">Power Rule</CustomLink>{" "}
+        and the{" "}
         <CustomLink href="/Theorems/FirstFundamentalTheoremOfCalculus">
           First Fundamental Theorem of Calculus
-        </CustomLink>{" "}
-        and some algebra.
+        </CustomLink>
+        .
       </CustomTypography>
+    </SectionCard>
+    <SectionCard>
+      <Typography variant="h6">Example of Disc Method: Shifted</Typography>
       <CustomTypography>
-        If we wanted to revolve this around, for example, {`$y=-1$`} instead of
-        the x-axis, we would have to repeat this process, but adjust our{" "}
-        {`$R(x)$`} formula by adding the additional distance required to get to{" "}
-        {`$-1$`}.
+        If we wanted to revolve the above example around, for example,{" "}
+        {`$y=-1$`} instead of the x-axis, we would have to repeat this process,
+        but adjust our {`$R(x)$`} formula by adding the additional distance
+        required to get to {`$-1$`}.
       </CustomTypography>
       <DiskMethodDiscsShifted />
-      <CustomTypography>
+      <DisplayEquation>
         {`$$R(x)=f(x){\\color{${sunsetMagenta}}{+1}}$$`}
         {`$$R(x)=x^3-7x^2+14x-5{\\color{${sunsetMagenta}}{+1}}$$`}
-        The rest of the process would be the same.
         {`$$\\pi \\int_{1}^{4}  R(x)^2 dx$$`}
         {`$$ \\pi \\int_{1}^{4} \\left (  x^3 - 7x^2 + 14x -5 {\\color{${sunsetMagenta}}{+1}}\\right )^2 dx$$`}
         {`$$ \\frac{39\\pi}{4} $$`}
+      </DisplayEquation>
+      <CustomTypography>
+        In this example, we also used the{" "}
+        <CustomLink href="/Integrals/ConstantMultipleRule">
+          Constant Multiple Rule
+        </CustomLink>
+        , the <CustomLink href="/Integrals/PowerRule">Power Rule</CustomLink>{" "}
+        and the{" "}
+        <CustomLink href="/Theorems/FirstFundamentalTheoremOfCalculus">
+          First Fundamental Theorem of Calculus
+        </CustomLink>
+        .
       </CustomTypography>
     </SectionCard>
     <SectionCard>
@@ -144,11 +160,25 @@ const Component = () => (
         multiplying the area of the slice by it's thickness, {`$dx$`}. Using
         integration, we can sum the volumes of all of the slices between the
         endpoints, in this case, {`$x=0$`} and {`$x=1$`}:
+      </CustomTypography>
+      <DisplayEquation>
         {`$$\\pi \\int_{0}^{1}\\left ( R(x)^2 - r(x)^2 \\right ) dx $$`}
         {`$$\\pi \\int_{0}^{1}\\left ( (\\sqrt{x})^2 - (x^2)^2 \\right ) dx $$`}
         {`$$\\pi \\int_{0}^{1}\\left ( x - x^4 \\right ) dx $$`}
         {`$$ \\pi \\left ( \\frac{x^2}{2} - \\frac{x^5}{5}\\right ) \\biggr ]_0^1 $$`}
         {`$$ \\frac{3\\pi}{10}\\approx 0.942\\cdots $$`}
+      </DisplayEquation>
+      <CustomTypography>
+        In this example, we also used the{" "}
+        <CustomLink href="/Integrals/ConstantMultipleRule">
+          Constant Multiple Rule
+        </CustomLink>
+        , the <CustomLink href="/Integrals/PowerRule">Power Rule</CustomLink>{" "}
+        and the{" "}
+        <CustomLink href="/Theorems/FirstFundamentalTheoremOfCalculus">
+          First Fundamental Theorem of Calculus
+        </CustomLink>
+        .
       </CustomTypography>
     </SectionCard>
   </>

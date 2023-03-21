@@ -1,6 +1,8 @@
 import SummaryCard from "components/interface/SummaryCard";
 import SectionCard from "components/interface/SectionCard";
+import SideNoteCard from "components/interface/SideNoteCard";
 import CustomTypography from "components/interface/CustomTypography";
+import CustomTable from "components/interface/CustomTable";
 import DisplayEquation from "components/interface/DisplayEquation";
 import Typography from "@mui/material/Typography";
 import CustomLink from "components/interface/CustomLink";
@@ -13,6 +15,15 @@ import { hexToRgba } from "utils/utils";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
+
+const entries = [
+  [
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u = \\sin(x)}}$$`}</DisplayEquation>,
+  ],
+  [
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{\\frac{\\mathrm{d} u}{\\mathrm{d} x} = \\cos(x)}}$$`}</DisplayEquation>,
+  ],
+];
 
 const Component = () => (
   <>
@@ -50,18 +61,45 @@ const Component = () => (
         {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x} {\\color{${sunsetMagenta}}{x}}^{\\color{${sunsetYellow}}{3}} = {\\color{${sunsetYellow}}{3}}{\\color{${sunsetMagenta}}{x}}^{\\color{${sunsetYellow}}{3-1}} = 3x^2$$`}
       </DisplayEquation>
     </SectionCard>
+    <SideNoteCard>
+      <CustomTypography>
+        Technically, the equals sign is a binary operator, and it's not
+        mathematically correct to chain expressions with multiple equals signs.
+        However, most teachers/professors won't bother you about this as long as
+        you are doing everything else correctly. Generally, you'll be breaking
+        your steps onto separate lines, but for aesthetics and readability, I've
+        chosen to occasionally chain expressions with equals signs in this app.
+      </CustomTypography>
+    </SideNoteCard>
     <SectionCard>
       <Typography variant="h6" width="100%">
         Example
       </Typography>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          width: "100%",
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <DisplayEquation>
+            {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x} {\\color{${sunsetMagenta}}{\\sin}}^{\\color{${sunsetYellow}}{2}}{\\color{${sunsetMagenta}}{(x)}} $$`}
+          </DisplayEquation>
+          <DisplayEquation>
+            {`$$ {\\color{${sunsetYellow}}{2}}{\\color{${sunsetMagenta}}{\\sin}}^{\\color{${sunsetYellow}}{2-1}}{\\color{${sunsetMagenta}}{(x)}}*{\\color{${sunsetMagenta}}{\\cos(x)}} $$`}
+          </DisplayEquation>
+          <DisplayEquation>{`$$ 2\\sin(x)\\cos(x)$$`}</DisplayEquation>
+        </div>
+        <CustomTable entries={entries} />
+      </div>
       <CustomTypography>
-        <DisplayEquation>
-          {`$$\\frac{\\mathrm{d} }{\\mathrm{d} x} {\\color{${sunsetMagenta}}{\\sin}}^{\\color{${sunsetYellow}}{2}}{\\color{${sunsetMagenta}}{(x)}} = {\\color{${sunsetYellow}}{2}}{\\color{${sunsetMagenta}}{\\sin}}^{\\color{${sunsetYellow}}{2-1}}{\\color{${sunsetMagenta}}{(x)}}*{\\color{${sunsetMagenta}}{\\cos(x)}}=2\\sin(x)\\cos(x)$$`}
-          where{" "}
-          {`$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{\\sin(x)}}$`}{" "}
-          and{" "}
-          {`$ {\\color{${sunsetMagenta}}{\\frac{\\mathrm{d} u}{\\mathrm{d} x}}} = {\\color{${sunsetMagenta}}{\\cos(x)}}$`}
-        </DisplayEquation>
+        In this example, we also used{" "}
+        <CustomLink href="/Derivatives/TrigonometricDerivatives">
+          Trigonometric Derivatives
+        </CustomLink>
+        .
       </CustomTypography>
     </SectionCard>
   </>
