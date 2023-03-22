@@ -19,6 +19,7 @@ const StyledSummaryCard = styled(Card)({
   marginTop: "20px",
   color: sunsetOrangeHeavy,
   backgroundColor: backgroundColor, //hexToRgba(synthCyberBlack, 0),
+  boxShadow: `4px 4px 4px 4px ${sunsetOrangeHeavy}`,
   borderLeft: `1px solid ${sunsetOrangeLight}`,
   borderRight: `1px solid ${sunsetOrangeLight}`,
   borderBottom: `1px solid ${sunsetOrangeHeavy}`,
@@ -31,7 +32,7 @@ const StyledSummaryCard = styled(Card)({
 });
 
 const SummaryCard = ({ children }) => (
-  <StyledSummaryCard sx={{ boxShadow: `4px 4px 4px 4px ${sunsetOrangeHeavy}` }}>
+  <StyledSummaryCard>
     <CardContent>{children}</CardContent>
   </StyledSummaryCard>
 );

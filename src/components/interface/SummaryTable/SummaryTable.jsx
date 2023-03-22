@@ -8,22 +8,20 @@ import { hexToRgba } from "utils/utils";
 
 import {
   themeBackground,
-  synthCyberPink,
-  synthSunsetPink,
+  synthSunsetOrange,
 } from "interactivity/resources/constants/colors";
 
-const cyberPink = hexToRgba(synthCyberPink, 1);
 const backgroundColor = hexToRgba(themeBackground, 1);
-const sunsetPink = hexToRgba(synthSunsetPink, 1);
+const sunsetOrangeHeavy = hexToRgba(synthSunsetOrange, 1);
+const sunsetOrangeLight = hexToRgba(synthSunsetOrange, 0.1);
 
 const mapEntryColumns = (entries) =>
   entries.map((entry, i) => (
     <TableCell
       sx={{
-        borderLeft: `0.1px solid ${sunsetPink}`,
-        borderRight: `0.1px solid ${sunsetPink}`,
-        borderBottom: `0.1px solid ${sunsetPink}`,
-        color: sunsetPink,
+        borderLeft: `0.1px solid ${sunsetOrangeHeavy}`,
+        borderBottom: `0.1px solid ${sunsetOrangeHeavy}`,
+        color: sunsetOrangeHeavy,
       }}
       key={i}
     >
@@ -40,14 +38,16 @@ const mapEntryRows = (entries) =>
 const WrapperCard = ({ children }) => (
   <Card
     sx={{
-      mt: "20px",
-      mb: 0,
-      boxShadow: `2px 2px 2px 2px ${cyberPink}`,
-      borderLeft: `1px solid ${sunsetPink}`,
-      borderRight: `1px solid ${sunsetPink}`,
-      borderBottom: `1px solid ${sunsetPink}`,
-      borderTop: `1px solid ${sunsetPink}`,
-      color: sunsetPink,
+      width: "800px",
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: "20px",
+      color: sunsetOrangeHeavy,
+      boxShadow: `4px 4px 4px 4px ${sunsetOrangeHeavy}`,
+      borderLeft: `1px solid ${sunsetOrangeLight}`,
+      borderRight: `1px solid ${sunsetOrangeLight}`,
+      borderBottom: `1px solid ${sunsetOrangeHeavy}`,
+      borderTop: `1px solid ${sunsetOrangeHeavy}`,
       backgroundColor: backgroundColor,
     }}
   >
