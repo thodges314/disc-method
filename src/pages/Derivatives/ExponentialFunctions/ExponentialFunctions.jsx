@@ -1,6 +1,5 @@
 import SummaryCard from "components/interface/SummaryCard";
 import SectionCard from "components/interface/SectionCard";
-import SideNoteCard from "components/interface/SideNoteCard";
 import CustomTypography from "components/interface/CustomTypography";
 import DisplayEquation from "components/interface/DisplayEquation";
 import Typography from "@mui/material/Typography";

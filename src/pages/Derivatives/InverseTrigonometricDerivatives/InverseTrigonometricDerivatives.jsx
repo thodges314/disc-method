@@ -1,22 +1,11 @@
 // import SummaryCard from "components/interface/SummaryCard";
 import SummaryTable from "components/interface/SummaryTable";
 import SectionCard from "components/interface/SectionCard";
-import SideNoteCard from "components/interface/SideNoteCard";
 import CustomTypography from "components/interface/CustomTypography";
 import DisplayEquation from "components/interface/DisplayEquation";
 import CustomLink from "components/interface/CustomLink";
-import CustomTable from "components/interface/CustomTable";
 
 import Typography from "@mui/material/Typography";
-
-import {
-  synthSunsetMagenta,
-  synthSunsetYellow,
-} from "interactivity/resources/constants/colors";
-import { hexToRgba } from "utils/utils";
-
-const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
-const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 
 const entries = [
   [
