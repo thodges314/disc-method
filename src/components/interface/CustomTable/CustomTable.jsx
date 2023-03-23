@@ -55,7 +55,7 @@ const WrapperCard = ({ children }) => (
   </Card>
 );
 
-const CustomTable = ({ entries }) => (
+const CustomTable = ({ sx = {}, entries }) => (
   <TableContainer component={WrapperCard}>
     <Table>
       <TableBody>{mapEntryRows(entries)}</TableBody>

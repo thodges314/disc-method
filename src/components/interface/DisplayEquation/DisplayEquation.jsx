@@ -1,10 +1,11 @@
 import { MathJax } from "better-react-mathjax";
 
-const DisplayEquation = ({ children }) => (
+const DisplayEquation = ({ style, children }) => (
   <MathJax
     style={{
       marginRight: "1rem",
       marginLeft: "1rem",
+      ...style,
     }}
     // display
     dynamic
