@@ -154,7 +154,7 @@ const Component = () => (
       </CustomTypography>
       <DisplayEquation style={{ width: "100%" }}>
         {
-          "$$\\sum_{n=0}^{\\infty}(x-a)^n=f(a)+\\frac{f^\\prime(a)}{1!}(x-a)+\\frac{f^{\\prime\\prime}(a)}{2!}(x-a)^2+\\frac{f^{\\prime\\prime\\prime}(a)}{3!}(x-a)^3+\\ldots$$"
+          "$$\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(a)}{n!}(x-a)^n=f(a)+\\frac{f^\\prime(a)}{1!}(x-a)+\\frac{f^{\\prime\\prime}(a)}{2!}(x-a)^2+\\frac{f^{\\prime\\prime\\prime}(a)}{3!}(x-a)^3+\\ldots$$"
         }
       </DisplayEquation>
       <CustomTypography>
@@ -163,7 +163,7 @@ const Component = () => (
       </CustomTypography>
       <DisplayEquation style={{ width: "100%" }}>
         {
-          "$$\\sum_{n=0}^{\\infty}(x)^n=f(0)+\\frac{f^\\prime(0)}{1!}x+\\frac{f^{\\prime\\prime}(0)}{2!}x^2+\\frac{f^{\\prime\\prime\\prime}(0)}{3!}x^3+\\ldots$$"
+          "$$\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(0)}{n!}(x)^n=f(0)+\\frac{f^\\prime(0)}{1!}x+\\frac{f^{\\prime\\prime}(0)}{2!}x^2+\\frac{f^{\\prime\\prime\\prime}(0)}{3!}x^3+\\ldots$$"
         }
       </DisplayEquation>
     </SummaryCard>
@@ -232,7 +232,7 @@ const Component = () => (
       </div>
       <CustomTypography>
         Plugging these into the format of the Maclaurin Series above, we can see
-        that the even numbered terms make no contribution to this Maclaurin
+        that the terms where n is odd make no contribution to this Maclaurin
         Series, and furthermore, that the Maclaurin Series follows the following
         pattern:
       </CustomTypography>
