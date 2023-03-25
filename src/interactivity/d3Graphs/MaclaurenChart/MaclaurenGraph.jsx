@@ -1,6 +1,3 @@
-import DisplayEquation from "components/interface/DisplayEquation";
-import equationArray from "./equationArray";
-
 import CanvasCard from "components/interface/CanvasCard";
 import ControlsCard from "components/interface/ControlsCard";
 import CustomCheckbox from "components/interface/CustomCheckbox";
@@ -9,7 +6,7 @@ import { FormGroup, FormControlLabel } from "@mui/material";
 import { interpolatePath } from "d3-interpolate-path";
 
 import * as d3 from "d3";
-import { useRef, useEffect, useState, Fragment } from "react";
+import { useRef, useEffect, useState } from "react";
 import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
 import { hexToRgba } from "utils/utils";
@@ -20,7 +17,6 @@ import {
   synthSunsetYellow,
   synthSunsetViolet,
 } from "interactivity/resources/constants/colors";
-// import MaclaurinGraph from "./MaclaurenGraph";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
@@ -42,30 +38,21 @@ const y_scale = d3
   .domain([-y_distance / 2, y_distance / 2])
   .range([height, 0]);
 
-let dd = 0;
+const line = d3
+  .line()
+  .x((d) => x_scale(d[0]))
+  .y((d) => y_scale(d[1]));
+const allValues = allValuesArray();
+const cosValues = cosValuesArray();
 
-const MaclaurinChart = () => {
+const MaclaurinGraph = (n) => {
   const chartRef = useRef(null);
-  const fieldRef = useRef(null);
-  // const nValue = useRef(0);
-  const line = d3
-    .line()
-    .x((d) => x_scale(d[0]))
-    .y((d) => y_scale(d[1]));
-  const allValues = allValuesArray();
-  let movingGraph;
-  let formulaField;
 
   useEffect(() => {
     const svg = d3
       .select(chartRef.current)
       .attr("height", height)
-      .attr("width", width)
-      .attr("fill", "none")
-      .attr("fill-opacity", 0);
-
-    // const allValues = allValuesArray();
-    const cosValues = cosValuesArray();
+      .attr("width", width);
 
     //axis
     const xAxisGenerator = d3.axisBottom(x_scale);
@@ -80,7 +67,7 @@ const MaclaurinChart = () => {
         3 * Math.PI,
         4 * Math.PI,
       ])
-      .tickFormat((_d, i) => ["-2π", "-1π", "", "1π", "2π", "3π", "4π"][i]);
+      .tickFormat((d, i) => ["-2π", "-1π", "", "1π", "2π", "3π", "4π"][i]);
     yAxisGenerator.tickValues([-2, -1, 1, 2]);
     const xAxis = svg
       .append("g")
@@ -106,41 +93,36 @@ const MaclaurinChart = () => {
       .attr("stroke", sunsetYellow)
       .attr("stroke-width", 2)
       .attr("d", line)
-      .attr("fill", "none")
-      .attr("fill-opacity", 0);
+      .attr("fill", "none");
+    // .style("fill", "none")
+    // .style("fill-opacity", 0);
+    // .classed("cosline", true);
 
-    movingGraph = svg
+    const movingGraph = svg
+      // .append("g")
       .append("path")
+      .datum(allValues[n])
       .attr("stroke", sunsetMagenta)
       .attr("stroke-width", 1.5)
       .attr("fill-opacity", 0)
-      .attr("fill", "none")
-      .attr("d", line(allValues[0]));
+      .attr("fill", "none");
 
-    formulaField = svg.append("div");
-  }, [allValues]);
-
-  const switchGraphs = (n) => {
-    movingGraph.transition().duration(300).attr("d", line(allValues[n]));
-    // for (let i = 0; i <= 6; i++) {
-    //   // if (i === n) {
-    //   //   d3.select(`#display-equation-${n}`).style("visibility", "visible");
-    //   // } else {
-    //   d3.select(`#display-equation-${n}`).style("visibility", "hidden");
-    //   // }
-    // }
-    // d3.select(`#display-equation-${n}`).style("visibility", "visible");
-    dd = n;
-    console.log(n);
-    // console.log(chartRef.current);
-    console.log(fieldRef);
-  };
-
-  useEffect(() => console.log(dd), [dd]);
-
-  // useEffect(() => {
-  //   console.log(nValue);
-  // }, [nValue]);
+    movingGraph.enter().attr("d", line);
+    movingGraph.transition().duration(300).attr("d", line);
+    movingGraph.exit().remove();
+  }, [n, chartRef.current]);
+  // movingGraph.transition().duration(0).attr("d", line(allValues[0]));
+  // dummyGraph = svg
+  //   .append("path")
+  //   .attr("d", line(allValues[0]))
+  //   .attr("stroke", sunsetMagenta)
+  //   .attr("stroke-width", 1.5);
+  // const switchGraphs = (n) => {
+  //   dummyGraph.attr("stroke", themeBackground);
+  //   nValue.current = n;
+  //   movingGraph.transition().duration(300).attr("d", line(allValues[n]));
+  //   // setNValue(n);
+  // };
 
   return (
     <div
@@ -154,38 +136,8 @@ const MaclaurinChart = () => {
       <CanvasCard height={height} width={width}>
         <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
       </CanvasCard>
-      <ControlsCard>
-        <div id="display-equation-0">{equationArray[0]}</div>
-        <div id="display-equation-1">{equationArray[1]}</div>
-        <div id="display-equation-2">{equationArray[2]}</div>
-        <div id="display-equation-3">{equationArray[3]}</div>
-        <div id="display-equation-4" style={{ display: "none" }}>
-          {equationArray[4]}
-        </div>
-        <div id="display-equation-5" style={{ display: "none" }}>
-          {equationArray[5]}
-        </div>
-      </ControlsCard>
-      <FormGroup>
-        <ControlsCard>
-          <CustomSlider
-            onChange={(_evt, newValue) => switchGraphs(newValue)}
-            min={0}
-            max={12}
-            step={1}
-            size="small"
-            valueLabelDisplay="auto"
-            marks
-            sx={{
-              ml: 1,
-              mr: 1,
-              mt: 1,
-            }}
-          />
-        </ControlsCard>
-      </FormGroup>
     </div>
   );
 };
 
-export default MaclaurinChart;
+export default MaclaurinGraph;

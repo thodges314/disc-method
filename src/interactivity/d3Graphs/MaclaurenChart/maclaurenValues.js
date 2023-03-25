@@ -14,8 +14,8 @@ const allValuesArray = (min = -2 * Math.PI, max = 4 * Math.PI, freq = 0.1) => {
   }
   if (allValues[0][allValues[0].length - 1][0] < max)
     allValues[0].push([max, oneBig]);
-  allValues[0].push([100, oneHundredBig]);
-  allValues[0].push([-100, oneHundredBig]);
+  allValues[0].push([max, oneHundredBig]);
+  allValues[0].push([min, oneHundredBig]);
   for (let n = 1; n <= 12; n++) {
     allValues[n] = [];
     const sign = n % 2 === 0 ? 1 : -1;
@@ -42,8 +42,8 @@ const allValuesArray = (min = -2 * Math.PI, max = 4 * Math.PI, freq = 0.1) => {
       // allValues[n].push([max, value.plus(contribution)]);
       // allValues[n].push([max, value.plus(contribution)]);
     }
-    allValues[n].push([100, oneHundredBig]);
-    allValues[n].push([-100, oneHundredBig]);
+    allValues[n].push([max, oneHundredBig]);
+    allValues[n].push([min, oneHundredBig]);
   }
   const returnValues = allValues.map((row) =>
     row.map((val) => [val[0], val[1].toNumber()])
