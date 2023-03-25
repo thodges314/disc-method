@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import CustomTable from "components/interface/CustomTable";
 import CustomLink from "components/interface/CustomLink";
 import SideNoteCard from "components/interface/SideNoteCard";
+import MaclaurenChart from "interactivity/d3Graphs/MaclaurenChart";
 
 import {
   synthSunsetMagenta,
@@ -29,21 +30,15 @@ const entries = [
 
 const table1Entries = [
   [
-    <h7>
-      <DisplayEquation style={{ fontSize: "120%", margin: "0.2rem" }}>
-        {"$n$"}
-      </DisplayEquation>
-    </h7>,
-    <h7>
-      <DisplayEquation style={{ fontSize: "120%", margin: "0.2rem" }}>
-        {"$f^{(n)}(x)$"}
-      </DisplayEquation>
-    </h7>,
-    <h7>
-      <DisplayEquation style={{ fontSize: "120%", margin: "0.2rem" }}>
-        {"$f^{(n)}(0)$"}
-      </DisplayEquation>
-    </h7>,
+    <DisplayEquation style={{ fontSize: "120%", margin: "0.2rem" }}>
+      {"$n$"}
+    </DisplayEquation>,
+    <DisplayEquation style={{ fontSize: "120%", margin: "0.2rem" }}>
+      {"$f^{(n)}(x)$"}
+    </DisplayEquation>,
+    <DisplayEquation style={{ fontSize: "120%", margin: "0.2rem" }}>
+      {"$f^{(n)}(0)$"}
+    </DisplayEquation>,
   ],
   [
     <DisplayEquation style={{ fontSize: "120%", margin: "0.2rem" }}>
@@ -296,9 +291,10 @@ const Component = () => (
       <DisplayEquation>{`$$\\lim_{\\color{${sunsetViolet}}{n}\\rightarrow \\infty}\\left|\\frac{-x^2}{4\\color{${sunsetViolet}}{n}^2+6\\color{${sunsetViolet}}{n}+2}\\right|=\\left|\\frac{x^2}{\\infty}\\right|=0$$`}</DisplayEquation>
       <CustomTypography>
         Play with the interactive demo below to see how the graphs of the finite
-        expansions of this Maclaurin Series compare tothe graph of the Cosine
+        expansions of this Maclaurin Series compare to the graph of the Cosine
         function:
       </CustomTypography>
+      <MaclaurenChart />
       {/************** */}
       <CustomTypography>
         The more terms that we add to the series, the closer that we come to the

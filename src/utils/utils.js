@@ -45,3 +45,11 @@ export const hexToRgba = (hex, opacity) => {
 
   return `rgba(${r}, ${g}, ${b}, ${opacity || 1})`;
 };
+
+export const factorialArray = (n) => {
+  const array = [1];
+  for (let i = 1; i <= n; i++) {
+    array.push(array[i - 1] * i);
+  }
+  return array;
+};
