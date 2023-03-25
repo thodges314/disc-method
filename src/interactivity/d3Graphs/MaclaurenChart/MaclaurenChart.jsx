@@ -1,6 +1,12 @@
 import CanvasCard from "components/interface/CanvasCard";
+import ControlsCard from "components/interface/ControlsCard";
+import CustomCheckbox from "components/interface/CustomCheckbox";
+import CustomSlider from "components/interface/CustomSlider";
+import { FormGroup, FormControlLabel } from "@mui/material";
+import { interpolatePath } from "d3-interpolate-path";
+
 import * as d3 from "d3";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
 import { hexToRgba } from "utils/utils";
@@ -34,7 +40,16 @@ const y_scale = d3
 
 const MaclaurinChart = () => {
   const chartRef = useRef(null);
+  // const [nValue, setNValue] = useState(0);
+  const nValue = useRef(0);
+  const line = d3
+    .line()
+    .x((d) => x_scale(d[0]))
+    .y((d) => y_scale(d[1]));
+  const allValues = allValuesArray();
   let movingGraph;
+  let dummyGraph;
+
   useEffect(() => {
     const svg = d3
       .select(chartRef.current)
@@ -48,8 +63,10 @@ const MaclaurinChart = () => {
       .attr("y", 0)
       .attr("width", width)
       .attr("height", height);
+    // .style("fill", "none")
+    // .style("fill-opacity", 0);
 
-    const allValues = allValuesArray();
+    // const allValues = allValuesArray();
     const cosValues = cosValuesArray();
 
     //axis
@@ -85,34 +102,124 @@ const MaclaurinChart = () => {
     yAxis.selectAll("text").attr("fill", hexToRgba(synthCyberPaleBlue));
     yAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
 
-    const line = d3
-      .line()
-      .x((d) => x_scale(d[0]))
-      .y((d) => y_scale(d[1]));
+    // const line = d3
+    //   .line()
+    //   .x((d) => x_scale(d[0]))
+    //   .y((d) => y_scale(d[1]));
 
     svg
+      // .style("fill", "none")
+      // .style("fill-opacity", 0)
+      // .attr("fill", "none")
+      // .attr("fill-opacity", 0)
+      // .select("#cosine")
       .append("path")
       .datum(cosValues) //.attr("clip-path", "url(#chart-area)").attr("
       .attr("stroke", sunsetYellow)
       .attr("stroke-width", 2)
       .attr("d", line)
-      .style("fill", "none")
-      .style("fill-opacity", 0);
+      .attr("fill", "none");
+    // .style("fill", "none")
+    // .style("fill-opacity", 0);
+    // .classed("cosline", true);
 
     movingGraph = svg
       .append("path")
-      .datum(allValues[12]) //.attr("clip-path", "url(#chart-area)").attr("
-      .style("fill", "none")
+      // .class("movingpath")
+      // .datum(allValues[0]) //.attr("clip-path", "url(#chart-area)").attr("
+      // .style("fill", "none")
       .attr("stroke", sunsetMagenta)
       .attr("stroke-width", 1.5)
-      .attr("d", line);
+      .attr("fill-opacity", 0)
+      .attr("fill", "none");
+    // .attr("d", line(allValues[nValue.current]));
+    // movingGraph.classed("movingpath", true);
+    // movingGraph.classed("movingpath", true);
+    // movingGraph.classed("movingpath", true);
+    // movingGraph.transition().duration(0).attr("d", line(allValues[0]));
+    dummyGraph = svg
+      .append("path")
+      .attr("d", line(allValues[0]))
+      .attr("stroke", sunsetMagenta)
+      .attr("stroke-width", 1.5);
 
-    movingGraph.transition().duration(3000).attr("d", line(allValues[11]));
-  });
+    // movingGraph.transition().duration(3000).attr("d", line(allValues[11]));
+  }, [allValues]);
+  // movingGraph.transition().duration(0).attr("d", line(allValues[0]));
+  // dummyGraph = svg
+  //   .append("path")
+  //   .attr("d", line(allValues[0]))
+  //   .attr("stroke", sunsetMagenta)
+  //   .attr("stroke-width", 1.5);
+  const switchGraphs = (n) => {
+    dummyGraph.attr("stroke", themeBackground);
+    nValue.current = n;
+    movingGraph.transition().duration(300).attr("d", line(allValues[n]));
+    // setNValue(n);
+  };
+
+  // useEffect(() => {
+  //   movingGraph
+  //     .transition()
+  //     .duration(300)
+  //     .attr("d", line(allValues[nValue.current]));
+  // }, [nValue.current]);
+
+  // const switchGraphs = (n) =>
+  //   movingGraph
+  //     .transition()
+  //     .duration(500)
+  //     .attrTween("d", (d) => {
+  //       const prev = d3.select(this).attr("d");
+  //       const next = line(allValues[n]);
+  //       return interpolatePath(prev, next);
+  //     });
+
+  // switchGraphs = (n) => setNValue(n);
+  // const switchGraphs = (n) =>
+  //   movingGraph
+  //     .transition()
+  //     .duration(1500)
+  //     .datum(allValues[n], (d) => d[0])
+  //     .attr("d", line);
   return (
-    <CanvasCard height={height} width={width}>
-      <svg id="chart" ref={chartRef}></svg>
-    </CanvasCard>
+    <div
+      style={{
+        width: width,
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginBottom: "10px",
+      }}
+    >
+      <CanvasCard height={height} width={width}>
+        <svg id="chart" ref={chartRef} fillOpacity="0" fill="none">
+          {/* <path id="cosine" fill-opacity="0" fill="none" /> */}
+        </svg>
+      </CanvasCard>
+      <FormGroup>
+        <ControlsCard>
+          {/* <FormControlLabel
+            control={ */}
+          <CustomSlider
+            onChange={(_evt, newValue) => switchGraphs(newValue)}
+            // value={0}
+            min={0}
+            max={12}
+            step={1}
+            size="small"
+            valueLabelDisplay="auto"
+            sx={{
+              ml: 1,
+              mr: 1,
+              mt: 1,
+            }}
+          />
+          {/* } */}
+          {/* label="Rotate Graph"
+          /> */}
+        </ControlsCard>
+      </FormGroup>
+    </div>
   );
 };
 

@@ -19,6 +19,7 @@
     "better-react-mathjax": "^2.0.2",
     "big.js": "^6.2.1",
     "d3": "^7.8.2",
+    "d3-interpolate-path": "^2.3.0",
     "leva": "^0.9.34",
     "mathjax": "^3.2.2",
     "react": "^18.2.0",
