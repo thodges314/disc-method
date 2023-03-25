@@ -290,6 +290,11 @@ const Component = () => (
       <CustomTypography>This leaves us with:</CustomTypography>
       <DisplayEquation>{`$$\\lim_{\\color{${sunsetViolet}}{n}\\rightarrow \\infty}\\left|\\frac{-x^2}{4\\color{${sunsetViolet}}{n}^2+6\\color{${sunsetViolet}}{n}+2}\\right|=\\left|\\frac{x^2}{\\infty}\\right|=0$$`}</DisplayEquation>
       <CustomTypography>
+        Since there is no value of {"$x$"} that can make the limit be greater
+        than {"$1$"}, we know that this Maclaurin series converges for all
+        values of {"$x$"}.
+      </CustomTypography>
+      <CustomTypography>
         Play with the interactive demo below to see how the graphs of the finite
         expansions of this Maclaurin Series compare to the graph of the Cosine
         function:
