@@ -209,8 +209,8 @@ const Component = () => (
           cases where {"$x\\neq0$"} and that {"$0!=1$"}. Thus, it's the case
           that when {"$x\\neq0$"}, {"$\\frac{f^{(0)}(0)}{0!}(x)^0$"}
           {"$=\\frac{f(0)}{1}*1$"}
-          {"$=1$"}. In future examples, we will skip the representation of the
-          first term as {"$\\frac{f^{(0)}(0)}{0!}(x)^0$"} and just write{" "}
+          {"$=f(0)$"}. In future examples, we will skip the representation of
+          the first term as {"$\\frac{f^{(0)}(0)}{0!}(x)^0$"} and just write{" "}
           {"$f(0)$"}.
         </CustomTypography>
       </SideNoteCard>
@@ -255,7 +255,7 @@ const Component = () => (
         In order to manage the positive and negative signs, we can think of each
         term as being multiplied by {"$1, -1, 1, -1, 1, \\ldots$"}. This is
         represented by {`$\\color{${sunsetYellow}}{(-1)^n} $`} where {"$-1$"}{" "}
-        raised to an even power is {"$1$"} and {"$-1$"} raised to an even power
+        raised to an even power is {"$1$"} and {"$-1$"} raised to an odd power
         is {"$-1$"}.
       </CustomTypography>
       <CustomTypography>
