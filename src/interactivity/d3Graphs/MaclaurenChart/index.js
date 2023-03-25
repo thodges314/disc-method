@@ -1,3 +1,3 @@
-import MaclaurenChart from "./MaclaurenChart.jsx";
+import MaclaurenChart from "./MaclaurenChart";
 
 export default MaclaurenChart;

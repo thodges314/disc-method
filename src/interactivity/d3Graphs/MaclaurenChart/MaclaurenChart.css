@@ -7,3 +7,13 @@ import {
 axes line{
 
 } */
+/* .invisible {
+	visibility: hidden;
+} */
+
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}

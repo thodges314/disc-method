@@ -1,30 +1,21 @@
-import DisplayEquation from "components/interface/DisplayEquation";
-import equationArray from "./equationArray";
-
 import CanvasCard from "components/interface/CanvasCard";
 import ControlsCard from "components/interface/ControlsCard";
-import CustomCheckbox from "components/interface/CustomCheckbox";
 import CustomSlider from "components/interface/CustomSlider";
-import { FormGroup, FormControlLabel } from "@mui/material";
-import { interpolatePath } from "d3-interpolate-path";
+import { FormGroup } from "@mui/material";
 
 import * as d3 from "d3";
-import { useRef, useEffect, useState, Fragment } from "react";
+import { useRef, useEffect } from "react";
 import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
 import { hexToRgba } from "utils/utils";
 import {
-  synthCyberPaleBlue,
-  themeBackground,
   synthSunsetMagenta,
   synthSunsetYellow,
-  synthSunsetViolet,
+  synthCyberPaleBlue,
 } from "interactivity/resources/constants/colors";
-// import MaclaurinGraph from "./MaclaurenGraph";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
-const sunsetViolet = hexToRgba(synthSunsetViolet, 1);
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;
@@ -46,8 +37,6 @@ let dd = 0;
 
 const MaclaurinChart = () => {
   const chartRef = useRef(null);
-  const fieldRef = useRef(null);
-  // const nValue = useRef(0);
   const line = d3
     .line()
     .x((d) => x_scale(d[0]))
@@ -64,7 +53,6 @@ const MaclaurinChart = () => {
       .attr("fill", "none")
       .attr("fill-opacity", 0);
 
-    // const allValues = allValuesArray();
     const cosValues = cosValuesArray();
 
     //axis
@@ -120,27 +108,8 @@ const MaclaurinChart = () => {
     formulaField = svg.append("div");
   }, [allValues]);
 
-  const switchGraphs = (n) => {
+  const switchGraphs = (n) =>
     movingGraph.transition().duration(300).attr("d", line(allValues[n]));
-    // for (let i = 0; i <= 6; i++) {
-    //   // if (i === n) {
-    //   //   d3.select(`#display-equation-${n}`).style("visibility", "visible");
-    //   // } else {
-    //   d3.select(`#display-equation-${n}`).style("visibility", "hidden");
-    //   // }
-    // }
-    // d3.select(`#display-equation-${n}`).style("visibility", "visible");
-    dd = n;
-    console.log(n);
-    // console.log(chartRef.current);
-    console.log(fieldRef);
-  };
-
-  useEffect(() => console.log(dd), [dd]);
-
-  // useEffect(() => {
-  //   console.log(nValue);
-  // }, [nValue]);
 
   return (
     <div
@@ -154,18 +123,6 @@ const MaclaurinChart = () => {
       <CanvasCard height={height} width={width}>
         <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
       </CanvasCard>
-      <ControlsCard>
-        <div id="display-equation-0">{equationArray[0]}</div>
-        <div id="display-equation-1">{equationArray[1]}</div>
-        <div id="display-equation-2">{equationArray[2]}</div>
-        <div id="display-equation-3">{equationArray[3]}</div>
-        <div id="display-equation-4" style={{ display: "none" }}>
-          {equationArray[4]}
-        </div>
-        <div id="display-equation-5" style={{ display: "none" }}>
-          {equationArray[5]}
-        </div>
-      </ControlsCard>
       <FormGroup>
         <ControlsCard>
           <CustomSlider
