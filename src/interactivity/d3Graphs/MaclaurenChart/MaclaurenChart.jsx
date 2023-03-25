@@ -2,6 +2,7 @@ import CanvasCard from "components/interface/CanvasCard";
 import * as d3 from "d3";
 import { useRef, useEffect } from "react";
 import allValuesArray from "./maclaurenValues";
+import cosValuesArray from "./cosineValues";
 import { hexToRgba } from "utils/utils";
 import {
   synthCyberPaleBlue,
@@ -33,6 +34,7 @@ const y_scale = d3
 
 const MaclaurinChart = () => {
   const chartRef = useRef(null);
+  let movingGraph;
   useEffect(() => {
     const svg = d3
       .select(chartRef.current)
@@ -48,6 +50,7 @@ const MaclaurinChart = () => {
       .attr("height", height);
 
     const allValues = allValuesArray();
+    const cosValues = cosValuesArray();
 
     //axis
     const xAxisGenerator = d3.axisBottom(x_scale);
@@ -89,11 +92,22 @@ const MaclaurinChart = () => {
 
     svg
       .append("path")
+      .datum(cosValues) //.attr("clip-path", "url(#chart-area)").attr("
+      .attr("stroke", sunsetYellow)
+      .attr("stroke-width", 2)
+      .attr("d", line)
+      .style("fill", "none")
+      .style("fill-opacity", 0);
+
+    movingGraph = svg
+      .append("path")
       .datum(allValues[12]) //.attr("clip-path", "url(#chart-area)").attr("
-      .attr("fill", "none")
+      .style("fill", "none")
       .attr("stroke", sunsetMagenta)
       .attr("stroke-width", 1.5)
       .attr("d", line);
+
+    movingGraph.transition().duration(3000).attr("d", line(allValues[11]));
   });
   return (
     <CanvasCard height={height} width={width}>

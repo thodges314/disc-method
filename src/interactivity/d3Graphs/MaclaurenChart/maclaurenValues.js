@@ -19,7 +19,6 @@ const allValuesArray = (min = -2 * Math.PI, max = 4 * Math.PI, freq = 0.1) => {
     let idx = 0;
     for (let x = min; x <= max; x += freq) {
       const xBig = new Big(x);
-      // const contribution = sign * (j ** (2 * i) / denominator);
       const contribution = xBig
         .pow(2 * n)
         .div(denominator)
@@ -29,7 +28,6 @@ const allValuesArray = (min = -2 * Math.PI, max = 4 * Math.PI, freq = 0.1) => {
     }
     idx = 0;
     if (allValues[n][allValues[n].length - 1][0] < max) {
-      // const contribution = sign * (max ** (2 * i) / denominator);
       const xBig = new Big(max);
       const contribution = xBig
         .pow(2 * n)
@@ -39,12 +37,9 @@ const allValuesArray = (min = -2 * Math.PI, max = 4 * Math.PI, freq = 0.1) => {
       allValues[n].push([max, value.plus(contribution)]);
     }
   }
-  console.log(allValues);
-  const returnValues = allValues.map(
-    (row) => row.map((val) => [val[0], val[1].toNumber()])
-    // .filter((val) => Math.abs(val[1]) < 3)
+  const returnValues = allValues.map((row) =>
+    row.map((val) => [val[0], val[1].toNumber()])
   );
-  console.log(returnValues);
   return returnValues;
 };
 
