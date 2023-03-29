@@ -2,26 +2,18 @@ import CanvasCard from "components/interface/CanvasCard";
 import ControlsCard from "components/interface/ControlsCard";
 import CustomSlider from "components/interface/CustomSlider";
 import { FormGroup } from "@mui/material";
-import MyEquation from "./equation.svg";
-// import {tex2svg} from 'Ma'
-import Equation from "./Equation";
+import { equationArray } from "./maclaurinSvgs/equations";
 
 import * as d3 from "d3";
 import { useRef, useEffect, useMemo, useState, useLayoutEffect } from "react";
 import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
-import FunctionDisplay from "./FunctionDisplay";
 import { hexToRgba } from "utils/utils";
-import equationArray, { equationArray2 } from "./equationArray";
 import {
   synthSunsetMagenta,
   synthSunsetYellow,
   synthCyberPaleBlue,
 } from "interactivity/resources/constants/colors";
-
-// import { MathJax } from "better-react-mathjax";
-// import MathJax, { tex2svg } from "mathjax";
-// import TeXToSVG from "tex-to-svg";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
@@ -42,13 +34,8 @@ const y_scale = d3
   .domain([-y_distance / 2, y_distance / 2])
   .range([height, 0]);
 
-// let dd = 0;
-
 const MaclaurinChart = () => {
   const chartRef = useRef(null);
-  // const functionRef = useRef(0);
-  const [dd, setDD] = useState(0);
-  let derp = 0;
   const line = d3
     .line()
     .x((d) => x_scale(d[0]))
@@ -97,14 +84,8 @@ const MaclaurinChart = () => {
     equationDisplay = svg
       .append("g")
       .append("image")
-      // .append("xml")
-
-      // .append("text")
-      .attr("transform", `translate(20,${height - 50})`)
-      .attr("fill", hexToRgba(synthCyberPaleBlue))
-      .attr("fill-opacity", 1);
-    // .attr("font-size", "1.5em");
-    // .text("derp");
+      .attr("xlink:href", equationArray[0])
+      .attr("transform", `translate(12, ${height - 50})`);
 
     xAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
     xAxis
@@ -143,45 +124,8 @@ const MaclaurinChart = () => {
 
   const switchGraphs = (n) => {
     movingGraph.transition().duration(300).attr("d", line(allValues[n]));
-    // console.log(MyEquation);
-    // equationDisplay.attr(<Equation />);
-    equationDisplay.attr("xlink:href", MyEquation);
-    // equationDisplay.html(
-    //   <MathJax.Context>
-    //     <TeXToSVG
-    //       tex={MyEquation}
-    //       svgOptions={{
-    //         width: "100%",
-    //         height: "100%",
-    //       }}
-    //     />
-    //   </MathJax.Context>
-    // );
-    // .append("text")
-    // .attr("fill", hexToRgba(synthCyberPaleBlue))
-    // .attr("fill-opacity", 1)
-    // .attr("font-size", "1.5em")
-    // .text(equationArray[n]);
-    // .append(() => MathJax.tex2svg(equationArray2[n]));
-    // .append("div")
-    // .html(Equation);
-    // .appendSVG(Equation);
-    // .attr(equationArray2[n]);
-    // equationDisplay.text(() => equationArray2[n]); //.append("text").text(equationArray2[n]);
-    // .on("start", () => {
-    //   // console.log(n);
-    //   // setDD(n);
-    //   // derp = n;
-    // });
-    // console.log(movingGraph);
-    // setDD(n);
+    equationDisplay.attr("xlink:href", equationArray[n]);
   };
-
-  const canvasCard = useMemo(() => (
-    <CanvasCard height={height} width={width}>
-      <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
-    </CanvasCard>
-  ));
 
   return (
     <div
@@ -195,16 +139,12 @@ const MaclaurinChart = () => {
       <CanvasCard height={height} width={width}>
         <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
       </CanvasCard>
-      <Equation />
-      {/* {canvasCard} */}
-      {/* <FunctionDisplay dd={dd} /> */}
-      {/* {dd} */}
       <FormGroup>
         <ControlsCard>
           <CustomSlider
             onChange={(_evt, newValue) => switchGraphs(newValue)}
             min={0}
-            max={12}
+            max={11}
             step={1}
             size="small"
             valueLabelDisplay="auto"

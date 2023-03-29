@@ -1,3 +1,3 @@
-import MaclaurenChart from "./MaclaurenChart";
+import MaclaurinChart from "./MaclaurinChart";
 
-export default MaclaurenChart;
+export default MaclaurinChart;
