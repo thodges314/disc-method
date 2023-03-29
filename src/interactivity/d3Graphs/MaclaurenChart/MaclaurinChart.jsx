@@ -1,5 +1,6 @@
 import CanvasCard from "components/interface/CanvasCard";
 import ControlsCard from "components/interface/ControlsCard";
+import EquationCard from "components/interface/EquationCard";
 import CustomSlider from "components/interface/CustomSlider";
 import { FormGroup } from "@mui/material";
 import { equationArray } from "./maclaurinSvgs/equations";
@@ -36,19 +37,27 @@ const y_scale = d3
 
 const MaclaurinChart = () => {
   const chartRef = useRef(null);
+  const equationRef = useRef(null);
   const line = d3
     .line()
     .x((d) => x_scale(d[0]))
     .y((d) => y_scale(d[1]));
   const allValues = allValuesArray();
   let movingGraph;
-  let formulaField;
+  // let formulaField;
   let equationDisplay;
 
   useEffect(() => {
     const svg = d3
       .select(chartRef.current)
       .attr("height", height)
+      .attr("width", width)
+      .attr("fill", "none")
+      .attr("fill-opacity", 0);
+
+    const eqnSvg = d3
+      .select(equationRef.current)
+      .attr("height", 64)
       .attr("width", width)
       .attr("fill", "none")
       .attr("fill-opacity", 0);
@@ -81,11 +90,11 @@ const MaclaurinChart = () => {
       .attr("transform", `translate(${x_scale(0)},0)`)
       .call(yAxisGenerator);
 
-    equationDisplay = svg
+    equationDisplay = eqnSvg
       .append("g")
       .append("image")
       .attr("xlink:href", equationArray[0])
-      .attr("transform", `translate(12, ${height - 50})`);
+      .attr("transform", `translate(12, 11)`);
 
     xAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
     xAxis
@@ -119,7 +128,7 @@ const MaclaurinChart = () => {
       .attr("fill", "none")
       .attr("d", line(allValues[0]));
 
-    formulaField = svg.append("div");
+    // formulaField = svg.append("div");
   }, [allValues]);
 
   const switchGraphs = (n) => {
@@ -139,6 +148,9 @@ const MaclaurinChart = () => {
       <CanvasCard height={height} width={width}>
         <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
       </CanvasCard>
+      <EquationCard>
+        <svg id="equations" ref={equationRef} fillOpacity="0" fill="none"></svg>
+      </EquationCard>
       <FormGroup>
         <ControlsCard>
           <CustomSlider
