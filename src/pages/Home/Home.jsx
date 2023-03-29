@@ -78,6 +78,11 @@ const finishedPages = [
       Derivatives - Log Functions
     </CustomLink>,
   ],
+  [
+    <CustomLink href="/IntegralApplicationsAndMethods/VolumeDiskwasherMethod">
+      Volume - Disk/Washer Method
+    </CustomLink>,
+  ],
 ];
 
 const Component = () => (
