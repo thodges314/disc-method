@@ -25,4 +25,14 @@ const equationArray = [
   </DisplayEquation>,
 ];
 
+const equationArray2 = [
+  `$$ {\\color{${sunsetYellow}}{u=\\frac{\\sin(x)}{2}}} $$`,
+  `$$ {\\color{${sunsetYellow}}{u=\\cos(x)}} $$`,
+  `$$ {\\color{${sunsetYellow}}{u=\\tan(x)}} $$`,
+  `$$ {\\color{${sunsetYellow}}{u=\\sec(x)}} $$`,
+  `$$ {\\color{${sunsetYellow}}{u=\\csc(x)}} $$`,
+  `$$ {\\color{${sunsetYellow}}{u=\\cot(x)}} $$`,
+];
+
+export { equationArray2 };
 export default equationArray;
