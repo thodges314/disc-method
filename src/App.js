@@ -50,6 +50,10 @@ function App() {
     });
   });
 
+  const HomePage = loadable(() => import(`pages/Home`), {
+    fallback: <div>Hello, This page is Loading...</div>,
+  });
+
   const routes = [];
   items.forEach((itm, idx) => {
     itm.items.forEach((itm2, idx2) => {
@@ -62,6 +66,8 @@ function App() {
       );
     });
   });
+
+  routes.push(<Route key={9999999999} path={"/"} element={<HomePage />} />);
 
   return (
     <MathJaxContext

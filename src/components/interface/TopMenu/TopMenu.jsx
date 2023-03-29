@@ -1,7 +1,9 @@
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import HouseIcon from "@mui/icons-material/House";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { location, hexToRgba } from "utils/utils";
+import { useNavigate } from "react-router-dom";
 import {
   synthSunsetMagenta,
   themeBackground,
@@ -13,6 +15,11 @@ const magentaHeavy = hexToRgba(synthSunsetMagenta, 1);
 
 const TopMenu = ({ toggleDrawer = () => {} }) => {
   const headerArray = location();
+  const navigate = useNavigate();
+  const navigateHome = () => {
+    navigate("/");
+    navigate(0);
+  };
 
   return (
     <Box
@@ -60,6 +67,15 @@ const TopMenu = ({ toggleDrawer = () => {} }) => {
               </>
             )}
           </Typography>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={navigateHome}
+            // sx={{ mr: 2, display: { sm: "none" } }}
+          >
+            <HouseIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
