@@ -99,9 +99,10 @@ const Component = () => (
       <CustomTypography>
         I had not yet started working as a professional developer when I created
         this app, but it helped me land my first position. After I got my first
-        job, I stopped using the app and did not bring any new content. Nor did
-        I update it to the latest Android version. At that time, it had over
-        150K downloads with an overall rating of 4.7 from about 700 reviews.
+        job, I stopped focusing on the app and did not bring any new content.
+        Nor did I update it to the latest Android version. At that time, it had
+        over 150K downloads with an overall rating of 4.7 from about 700
+        reviews.
       </CustomTypography>
       <CustomTypography>
         It has always been in the back of my mind that I would like to port
