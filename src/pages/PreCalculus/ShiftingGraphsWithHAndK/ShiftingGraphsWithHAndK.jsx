@@ -4,6 +4,7 @@ import CustomTypography from "components/interface/CustomTypography";
 import Typography from "@mui/material/Typography";
 import CustomTable from "components/interface/CustomTable";
 import DisplayEquation from "components/interface/DisplayEquation";
+import HandKTableGraph from "interactivity/d3Graphs/HandKTableGraph";
 
 import {
   synthSunsetMagenta,
@@ -110,12 +111,32 @@ const Component = () => (
         process in tabular format. First, begin with{" "}
         {`$ y={\\color{${sunsetMagenta}} {x}}^2 $`}
       </CustomTypography>
-      <CustomTable entries={table1Entries} />
+      <div
+        style={{
+          maxWidth: "800px",
+          marginTop: "30px",
+          marginBottom: "30px",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      >
+        <CustomTable entries={table1Entries} />
+      </div>
       <CustomTypography sx={{ mt: 4 }}>
         Next, replace {`$ {\\color{${sunsetMagenta}} {x}} $`} with{" "}
         {`$ {\\color{${sunsetMagenta}} {(x-2)}} $`}.
       </CustomTypography>
-      <CustomTable entries={table2Entries} />
+      <div
+        style={{
+          maxWidth: "800px",
+          marginTop: "30px",
+          marginBottom: "30px",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      >
+        <CustomTable entries={table2Entries} />
+      </div>
       <CustomTypography sx={{ mt: 4 }}>
         This change resulted in the output row being shifted to the right by{" "}
         {`$ {\\color{${sunsetMagenta}} {2}} $`}. y was found by squaring, not{" "}
@@ -123,6 +144,7 @@ const Component = () => (
         {`$ {\\color{${sunsetMagenta}} {2}} $`} spaces to the left of{" "}
         {`$ {\\color{${sunsetMagenta}} {x}} $`}.
       </CustomTypography>
+      <HandKTableGraph />
     </SectionCard>
   </>
 );
