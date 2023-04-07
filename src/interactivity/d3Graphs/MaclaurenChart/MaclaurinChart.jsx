@@ -36,17 +36,16 @@ const y_scale = d3
 
 const MaclaurinChart = () => {
   const chartRef = useRef(null);
-  const equationRef = useRef(null);
   const movingGraphRef = useRef(null);
   const lineRef = useRef(null);
-  const allValues = allValuesArray();
+  const allValuesRef = useRef(null);
   const svgRef = useRef(null);
-  const eqnSvgRef = useRef(null);
   const childRef = useRef(null);
 
   // static portion
   useEffect(() => {
     const cosValues = cosValuesArray();
+    allValuesRef.current = allValuesArray();
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
     lineRef.current = d3
@@ -108,30 +107,22 @@ const MaclaurinChart = () => {
       .attr("d", lineRef.current)
       .attr("fill", "none")
       .attr("fill-opacity", 0);
-  }, []);
-
-  useEffect(() => {
-    eqnSvgRef.current = d3
-      .select(equationRef.current)
-      .attr("height", 64)
-      .attr("width", width)
-      .attr("fill", "none")
-      .attr("fill-opacity", 0);
 
     movingGraphRef.current = svgRef.current
       .append("path")
+      .datum(allValuesRef.current[0])
       .attr("stroke", sunsetYellow)
       .attr("stroke-width", 1.5)
+      .attr("d", lineRef.current)
       .attr("fill-opacity", 0)
-      .attr("fill", "none")
-      .attr("d", lineRef.current(allValues[0]));
-  }, [allValues]);
+      .attr("fill", "none");
+  }, []);
 
   const switchGraphs = (n) => {
     movingGraphRef.current
       .transition()
       .duration(300)
-      .attr("d", lineRef.current(allValues[n]));
+      .attr("d", lineRef.current(allValuesRef.current[n]));
     childRef.current.setEqn(n);
   };
 
