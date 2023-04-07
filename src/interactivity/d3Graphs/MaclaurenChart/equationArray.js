@@ -1,4 +1,3 @@
-import DisplayEquation from "components/interface/DisplayEquation";
 import { synthSunsetYellow } from "interactivity/resources/constants/colors";
 import { hexToRgba } from "utils/utils";
 

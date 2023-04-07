@@ -20,15 +20,6 @@ const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 const sunsetViolet = hexToRgba(synthSunsetViolet, 1);
 
-const entries = [
-  [
-    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{u=\\sin(x)}} $$`}</DisplayEquation>,
-  ],
-  [
-    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{\\frac{\\mathrm{d} u}{\\mathrm{d} x}=\\cos(x)}} $$`}</DisplayEquation>,
-  ],
-];
-
 const table1Entries = [
   [
     <DisplayEquation style={{ fontSize: "120%", margin: "0.2rem" }}>
