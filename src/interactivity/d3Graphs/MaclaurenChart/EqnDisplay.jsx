@@ -15,11 +15,13 @@ const EqnDisplay = forwardRef((_props, ref) => {
     },
   }));
   return (
-    <EquationCard height={80}>
+    <EquationCard>
       <div
         style={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: "space-between",
+          height: 70,
         }}
       >
         <InlineEquation>{`$ {\\color{${sunsetMagenta}}{y=\\cos(x)}} $`}</InlineEquation>
