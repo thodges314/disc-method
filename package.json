@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@types/big.js": "^6.1.6",
+    "@types/d3": "^7.4.0",
     "@types/loadable__component": "^5.13.4",
     "@types/three": "^0.149.0"
   }

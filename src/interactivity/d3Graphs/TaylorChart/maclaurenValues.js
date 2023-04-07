@@ -42,8 +42,8 @@ const allValuesArray = (min = -2 * Math.PI, max = 4 * Math.PI, freq = 0.1) => {
       // allValues[n].push([max, value.plus(contribution)]);
       // allValues[n].push([max, value.plus(contribution)]);
     }
-    // allValues[n].push([max, oneHundredBig]);
-    // allValues[n].push([min, oneHundredBig]);
+    allValues[n].push([max, oneHundredBig]);
+    allValues[n].push([min, oneHundredBig]);
   }
   const returnValues = allValues.map((row) =>
     row.map((val) => [val[0], val[1].toNumber()])

@@ -6,9 +6,10 @@ import { FormGroup } from "@mui/material";
 import { equationArray } from "./maclaurinSvgs/equations";
 
 import * as d3 from "d3";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useMemo, useState, useLayoutEffect } from "react";
 import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
+import lnValuesArray from "./lnValuesArray";
 import { hexToRgba } from "utils/utils";
 import {
   synthSunsetMagenta,
@@ -25,30 +26,25 @@ const width = height * goldenRatio;
 const x_distance = 3 * Math.PI;
 const y_distance = x_distance / goldenRatio;
 
-const x_scale = d3
-  .scaleLinear()
-  .domain([-2 * Math.PI, 4 * Math.PI])
-  .range([0, width]);
+const x_scale = d3.scaleLinear().domain([-0.5, 5.25]).range([0, width]);
 
 const y_scale = d3
   .scaleLinear()
   .domain([-y_distance / 2, y_distance / 2])
   .range([height, 0]);
 
-const MaclaurinChart = () => {
+const TaylorChart = () => {
   const chartRef = useRef(null);
   const equationRef = useRef(null);
-  const equationDisplayRef = useRef(null);
-  const movingGraphRef = useRef(null);
   const line = d3
     .line()
     .x((d) => x_scale(d[0]))
     .y((d) => y_scale(d[1]));
-  const allValues = allValuesArray();
-  const [currentGraph, setCurrentGraph] = useState(0);
-
-  // let movingGraphRef;
-  // let equationDisplayRef;
+  const [cosValues, allValues] = lnValuesArray();
+  // const allValues = allValuesArray();
+  let movingGraph;
+  // let formulaField;
+  let equationDisplay;
 
   useEffect(() => {
     const svg = d3
@@ -65,22 +61,12 @@ const MaclaurinChart = () => {
       .attr("fill", "none")
       .attr("fill-opacity", 0);
 
-    const cosValues = cosValuesArray();
+    // const [cosValues, allValues] = lnValuesArray();
 
     //axis
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
-    xAxisGenerator
-      .tickValues([
-        -2 * Math.PI,
-        -1 * Math.PI,
-        0,
-        1 * Math.PI,
-        2 * Math.PI,
-        3 * Math.PI,
-        4 * Math.PI,
-      ])
-      .tickFormat((_d, i) => ["-2π", "-1π", "", "1π", "2π", "3π", "4π"][i]);
+    xAxisGenerator.tickValues([1, 2, 3, 4, 5]);
     yAxisGenerator.tickValues([-2, -1, 1, 2]);
     const xAxis = svg
       .append("g")
@@ -93,7 +79,7 @@ const MaclaurinChart = () => {
       .attr("transform", `translate(${x_scale(0)},0)`)
       .call(yAxisGenerator);
 
-    equationDisplayRef.current = eqnSvg
+    equationDisplay = eqnSvg
       .append("g")
       .append("image")
       .attr("xlink:href", equationArray[0])
@@ -118,28 +104,26 @@ const MaclaurinChart = () => {
       .append("path")
       .datum(cosValues)
       .attr("stroke", sunsetYellow)
-      .attr("stroke-width", 2)
+      .attr("stroke-width", 1.5)
       .attr("d", line)
       .attr("fill", "none")
       .attr("fill-opacity", 0);
 
-    movingGraphRef.current = svg
+    movingGraph = svg
       .append("path")
       .attr("stroke", sunsetMagenta)
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 3.5)
       .attr("fill-opacity", 0)
       .attr("fill", "none")
-      .attr("d", line(allValues[0]));
-  }, [allValues, line]);
+      .attr("d", line(allValues));
 
-  const switchGraphs = (n) => {
-    movingGraphRef.current
-      .transition()
-      .duration(300)
-      .attr("d", line(allValues[n]));
-    equationDisplayRef.current.attr("xlink:href", equationArray[n]);
-    setCurrentGraph(n);
-  };
+    // formulaField = svg.append("div");
+  }, []);
+
+  // const switchGraphs = (n) => {
+  //   movingGraph.transition().duration(300).attr("d", line(allValues[n]));
+  //   equationDisplay.attr("xlink:href", equationArray[n]);
+  // };
 
   return (
     <div
@@ -159,7 +143,7 @@ const MaclaurinChart = () => {
       <FormGroup>
         <ControlsCard>
           <CustomSlider
-            onChange={(_evt, newValue) => switchGraphs(newValue)}
+            // onChange={(_evt, newValue) => switchGraphs(newValue)}
             min={0}
             max={11}
             step={1}
@@ -178,4 +162,4 @@ const MaclaurinChart = () => {
   );
 };
 
-export default MaclaurinChart;
+export default TaylorChart;

@@ -7,6 +7,7 @@ import CustomTable from "components/interface/CustomTable";
 import CustomLink from "components/interface/CustomLink";
 import SideNoteCard from "components/interface/SideNoteCard";
 import MaclaurenChart from "interactivity/d3Graphs/MaclaurenChart";
+import TaylorChart from "interactivity/d3Graphs/TaylorChart";
 
 import {
   synthSunsetMagenta,
@@ -547,6 +548,7 @@ const Component = () => (
         Plotting this Taylor Series over {"$(0,5)$"}, it follows the form of the
         natural log exactly, but cuts off after {"$x=4$"}.
       </CustomTypography>
+      <TaylorChart />
     </SectionCard>
   </>
 );
