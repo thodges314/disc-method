@@ -12,7 +12,7 @@ const coolPages = [
   ],
   [
     <CustomLink href="/TaylorMaclaurinSeries/TaylorMaclaurinSeries">
-      Taylor (Maclaurin) Series (not finished)
+      Taylor (Maclaurin) Series
     </CustomLink>,
   ],
   [
