@@ -175,7 +175,7 @@ const table2Entries = [
       {"$$f^{(2)}(x)=\\frac{-1}{x^2}$$"}
     </DisplayEquation>,
     <DisplayEquation style={{ fontSize: "120%", margin: "0.2rem" }}>
-      {"$$f^{(2)}(2)=\\frac{1}{2^2}$$"}
+      {"$$f^{(2)}(2)=\\frac{-1}{2^2}$$"}
     </DisplayEquation>,
   ],
   [

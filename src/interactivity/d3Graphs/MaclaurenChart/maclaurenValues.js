@@ -8,7 +8,6 @@ const allValues = [[]];
 const allValuesArray = (min = -2 * Math.PI, max = 4 * Math.PI, freq = 0.1) => {
   const oneBig = new Big(1);
   const oneHundredBig = new Big(1000);
-  // const negOneHundredBig = new Big(-100);
   for (let k = min; k <= max; k += freq) {
     allValues[0].push([k, oneBig]);
   }
@@ -39,11 +38,7 @@ const allValuesArray = (min = -2 * Math.PI, max = 4 * Math.PI, freq = 0.1) => {
         .times(sign);
       const value = allValues[n - 1][idx][1];
       allValues[n].push([max, value.plus(contribution)]);
-      // allValues[n].push([max, value.plus(contribution)]);
-      // allValues[n].push([max, value.plus(contribution)]);
     }
-    // allValues[n].push([max, oneHundredBig]);
-    // allValues[n].push([min, oneHundredBig]);
   }
   const returnValues = allValues.map((row) =>
     row.map((val) => [val[0], val[1].toNumber()])

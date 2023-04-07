@@ -18,7 +18,7 @@ const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 
 const displayEquations = [
   <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{y=\\ln(x)}} $$`}</DisplayEquation>,
-  <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{y=\\ln(2)+\\sum_{n=1}^{\\infty} \\frac{(-1)^{n+1}(2)^n}{2^n n}}}$$`}</DisplayEquation>,
+  <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{y=\\ln(2)+\\sum_{n=1}^{\\infty} \\frac{(-1)^{n+1}(x-2)^n}{2^n n}}}$$`}</DisplayEquation>,
 ];
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
