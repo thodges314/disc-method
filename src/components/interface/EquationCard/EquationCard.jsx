@@ -1,5 +1,5 @@
 import Card from "@mui/material/Card";
-// import CardContent from "@mui/material/CardContent";
+import CardContent from "@mui/material/CardContent";
 
 import { styled } from "@mui/material/styles";
 import { hexToRgba } from "utils/utils";
@@ -33,8 +33,7 @@ const StyledControlsCard = styled(Card)({
 
 const ControlsCard = ({ children }) => (
   <StyledControlsCard>
-    {children}
-    {/* <CardContent>{children}</CardContent> */}
+    <CardContent>{children}</CardContent>
   </StyledControlsCard>
 );
 

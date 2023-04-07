@@ -1,12 +1,11 @@
 import CanvasCard from "components/interface/CanvasCard";
 import ControlsCard from "components/interface/ControlsCard";
-import EquationCard from "components/interface/EquationCard";
 import CustomSlider from "components/interface/CustomSlider";
 import { FormGroup } from "@mui/material";
-import { equationArray } from "./maclaurinSvgs/equations";
+import EqnDisplay from "./EqnDisplay";
 
 import * as d3 from "d3";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
 import { hexToRgba } from "utils/utils";
@@ -38,38 +37,22 @@ const y_scale = d3
 const MaclaurinChart = () => {
   const chartRef = useRef(null);
   const equationRef = useRef(null);
-  const equationDisplayRef = useRef(null);
   const movingGraphRef = useRef(null);
-  const line = d3
-    .line()
-    .x((d) => x_scale(d[0]))
-    .y((d) => y_scale(d[1]));
+  const lineRef = useRef(null);
   const allValues = allValuesArray();
-  const [currentGraph, setCurrentGraph] = useState(0);
+  const svgRef = useRef(null);
+  const eqnSvgRef = useRef(null);
+  const childRef = useRef(null);
 
-  // let movingGraphRef;
-  // let equationDisplayRef;
-
+  // static portion
   useEffect(() => {
-    const svg = d3
-      .select(chartRef.current)
-      .attr("height", height)
-      .attr("width", width)
-      .attr("fill", "none")
-      .attr("fill-opacity", 0);
-
-    const eqnSvg = d3
-      .select(equationRef.current)
-      .attr("height", 64)
-      .attr("width", width)
-      .attr("fill", "none")
-      .attr("fill-opacity", 0);
-
     const cosValues = cosValuesArray();
-
-    //axis
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
+    lineRef.current = d3
+      .line()
+      .x((d) => x_scale(d[0]))
+      .y((d) => y_scale(d[1]));
     xAxisGenerator
       .tickValues([
         -2 * Math.PI,
@@ -82,22 +65,18 @@ const MaclaurinChart = () => {
       ])
       .tickFormat((_d, i) => ["-2π", "-1π", "", "1π", "2π", "3π", "4π"][i]);
     yAxisGenerator.tickValues([-2, -1, 1, 2]);
-    const xAxis = svg
+    svgRef.current = d3
+      .select(chartRef.current)
+      .attr("height", height)
+      .attr("width", width)
+      .attr("fill", "none")
+      .attr("fill-opacity", 0);
+
+    const xAxis = svgRef.current
       .append("g")
       .attr("class", "x-axis")
       .attr("transform", `translate(0,${height / 2})`)
       .call(xAxisGenerator);
-    const yAxis = svg
-      .append("g")
-      .attr("class", "y-axis")
-      .attr("transform", `translate(${x_scale(0)},0)`)
-      .call(yAxisGenerator);
-
-    equationDisplayRef.current = eqnSvg
-      .append("g")
-      .append("image")
-      .attr("xlink:href", equationArray[0])
-      .attr("transform", `translate(12, 11)`);
 
     xAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
     xAxis
@@ -106,6 +85,13 @@ const MaclaurinChart = () => {
       .attr("fill-opacity", 1)
       .attr("font-size", "1.5em");
     xAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
+
+    const yAxis = svgRef.current
+      .append("g")
+      .attr("class", "y-axis")
+      .attr("transform", `translate(${x_scale(0)},0)`)
+      .call(yAxisGenerator);
+
     yAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
     yAxis
       .selectAll("text")
@@ -114,31 +100,39 @@ const MaclaurinChart = () => {
       .attr("font-size", "1.5em");
     yAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
 
-    svg
+    svgRef.current
       .append("path")
       .datum(cosValues)
-      .attr("stroke", sunsetYellow)
-      .attr("stroke-width", 2)
-      .attr("d", line)
+      .attr("stroke", sunsetMagenta)
+      .attr("stroke-width", 5)
+      .attr("d", lineRef.current)
+      .attr("fill", "none")
+      .attr("fill-opacity", 0);
+  }, []);
+
+  useEffect(() => {
+    eqnSvgRef.current = d3
+      .select(equationRef.current)
+      .attr("height", 64)
+      .attr("width", width)
       .attr("fill", "none")
       .attr("fill-opacity", 0);
 
-    movingGraphRef.current = svg
+    movingGraphRef.current = svgRef.current
       .append("path")
-      .attr("stroke", sunsetMagenta)
+      .attr("stroke", sunsetYellow)
       .attr("stroke-width", 1.5)
       .attr("fill-opacity", 0)
       .attr("fill", "none")
-      .attr("d", line(allValues[0]));
-  }, [allValues, line]);
+      .attr("d", lineRef.current(allValues[0]));
+  }, [allValues]);
 
   const switchGraphs = (n) => {
     movingGraphRef.current
       .transition()
       .duration(300)
-      .attr("d", line(allValues[n]));
-    equationDisplayRef.current.attr("xlink:href", equationArray[n]);
-    setCurrentGraph(n);
+      .attr("d", lineRef.current(allValues[n]));
+    childRef.current.setEqn(n);
   };
 
   return (
@@ -153,9 +147,7 @@ const MaclaurinChart = () => {
       <CanvasCard height={height} width={width}>
         <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
       </CanvasCard>
-      <EquationCard>
-        <svg id="equations" ref={equationRef} fillOpacity="0" fill="none"></svg>
-      </EquationCard>
+      <EqnDisplay ref={childRef} />
       <FormGroup>
         <ControlsCard>
           <CustomSlider
