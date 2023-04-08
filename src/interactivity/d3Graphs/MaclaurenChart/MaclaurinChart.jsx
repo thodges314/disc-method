@@ -5,9 +5,10 @@ import { FormGroup } from "@mui/material";
 import EqnDisplay from "./EqnDisplay";
 
 import * as d3 from "d3";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
+import { marksArray } from "../utilities";
 import { hexToRgba } from "utils/utils";
 import {
   synthSunsetMagenta,
@@ -41,6 +42,7 @@ const MaclaurinChart = () => {
   const allValuesRef = useRef(null);
   const svgRef = useRef(null);
   const childRef = useRef(null);
+  const marks = useMemo(() => marksArray(0, 11), []);
 
   // static portion
   useEffect(() => {
@@ -147,13 +149,7 @@ const MaclaurinChart = () => {
             max={11}
             step={1}
             size="small"
-            valueLabelDisplay="auto"
-            marks
-            sx={{
-              ml: 1,
-              mr: 1,
-              mt: 1,
-            }}
+            marks={marks}
           />
         </ControlsCard>
       </FormGroup>

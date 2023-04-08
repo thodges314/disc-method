@@ -144,6 +144,12 @@ const Component = () => (
         {`$ {\\color{${sunsetMagenta}} {2}} $`} spaces to the left of{" "}
         {`$ {\\color{${sunsetMagenta}} {x}} $`}.
       </CustomTypography>
+      <CustomTypography>
+        Play with the demo below to get an intuitive feeling for shifting a
+        graph left and right by using different values of{" "}
+        {`$ {\\color{${sunsetMagenta}} {h}} $`} with{" "}
+        {`$ {\\color{${sunsetMagenta}} {(x-h)}} $`}.
+      </CustomTypography>
       <HandKTableGraph />
     </SectionCard>
   </>

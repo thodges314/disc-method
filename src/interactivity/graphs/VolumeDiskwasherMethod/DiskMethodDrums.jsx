@@ -101,10 +101,6 @@ const DiskMethodDrums = () => {
             step={step}
             size="small"
             valueLabelDisplay="auto"
-            sx={{
-              ml: 1,
-              mr: 1,
-            }}
           />
         </ControlsCard>
       </FormGroup>

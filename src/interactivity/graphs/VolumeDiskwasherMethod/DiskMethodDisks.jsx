@@ -89,11 +89,7 @@ const DiskMethodDiscsShifted = () => {
             max={domain[1]}
             step={step}
             size="small"
-            valueLabelDisplay="auto"
-            sx={{
-              ml: 1,
-              mr: 1,
-            }}
+            valueLabelDisplay
           />
         </ControlsCard>
       </FormGroup>

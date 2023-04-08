@@ -135,7 +135,7 @@ const ShiftingTable = forwardRef((_props, ref) => {
       style={{
         maxWidth: "860px",
         marginTop: "30px",
-        marginBottom: "30px",
+        marginBottom: "10px",
         marginLeft: "auto",
         marginRight: "auto",
       }}
