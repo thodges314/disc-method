@@ -26,8 +26,7 @@ const StyledControlsCard = styled(Card)({
 
   "& > div": {
     display: "flex",
-    alignItems: "center",
-    flexWrap: "wrap",
+    flexDirection: "column",
   },
 });
 

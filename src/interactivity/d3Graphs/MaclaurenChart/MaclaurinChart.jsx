@@ -1,5 +1,5 @@
 import CanvasCard from "components/interface/CanvasCard";
-import ControlsCard from "components/interface/ControlsCard";
+import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
 import CustomSlider from "components/interface/CustomSlider";
 import { FormGroup } from "@mui/material";
 import EqnDisplay from "./EqnDisplay";
@@ -143,14 +143,19 @@ const MaclaurinChart = () => {
       <EqnDisplay ref={childRef} />
       <FormGroup>
         <ControlsCard>
-          <CustomSlider
-            onChange={(_evt, newValue) => switchGraphs(newValue)}
-            min={0}
-            max={11}
-            step={1}
-            size="small"
-            marks={marks}
-          />
+          <ControlsRow>
+            <div>iterations</div>
+            <div>
+              <CustomSlider
+                onChange={(_evt, newValue) => switchGraphs(newValue)}
+                min={0}
+                max={11}
+                step={1}
+                size="small"
+                marks={marks}
+              />
+            </div>
+          </ControlsRow>
         </ControlsCard>
       </FormGroup>
     </div>

@@ -5,7 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { CameraControls, Environment } from "@react-three/drei";
 import CustomSlider from "components/interface/CustomSlider";
 import { FormGroup, FormControlLabel } from "@mui/material";
-import ControlsCard from "components/interface/ControlsCard";
+import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
 import CustomCheckbox from "components/interface/CustomCheckbox";
 
 import {
@@ -92,16 +92,20 @@ const DiskMethodDrums = () => {
             }
             label="Rotate Graph"
           />
-
-          <CustomSlider
-            onChange={(_evt, newValue) => setValue(newValue)}
-            value={value}
-            min={domain[0]}
-            max={domain[1] - step}
-            step={step}
-            size="small"
-            valueLabelDisplay="auto"
-          />
+          <ControlsRow>
+            <div>x</div>
+            <div>
+              <CustomSlider
+                onChange={(_evt, newValue) => setValue(newValue)}
+                value={value}
+                min={domain[0]}
+                max={domain[1] - step}
+                step={step}
+                size="small"
+                valueLabelDisplay="auto"
+              />
+            </div>
+          </ControlsRow>
         </ControlsCard>
       </FormGroup>
     </div>
