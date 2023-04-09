@@ -15,6 +15,7 @@ import {
 import parabolaValuesArray from "./parabolaValuesArray";
 
 import ShiftingUnit from "./ShiftingTable/ShiftingUnit";
+import ShiftingTableComponent from "./ShiftingTable/ShiftingTable";
 
 import { Button, FormGroup } from "@mui/material";
 
@@ -36,6 +37,7 @@ const y_scale = d3
 
 const HandKTableGraph = () => {
   const tableRef = useRef(null);
+  const newTableRef = useRef(null);
   const chartRef = useRef(null);
   const movingGraphRef = useRef(null);
   const lineRef = useRef(null);
@@ -113,6 +115,7 @@ const HandKTableGraph = () => {
     shiftGraph(h);
     shiftingUnitRef.current.setNewValue(h);
   };
+  const square = (n) => n ** 2;
 
   return (
     <>
@@ -129,6 +132,7 @@ const HandKTableGraph = () => {
         </CanvasCard>
       </div>
       <ShiftingTable ref={tableRef} />
+      <ShiftingTableComponent ref={newTableRef} />
       <FormGroup>
         {/* 
           <Button
@@ -169,8 +173,9 @@ const HandKTableGraph = () => {
       {/* <Button onClick={() => setShowComponent(!showComponent)}>show</Button> */}
       <div css={{ position: "absolute", width: 100 }}>
         <ShiftingUnit
-          initialValue={0}
+          initialValue={4}
           colorValue={sunsetYellow}
+          // fcn={square}
           ref={shiftingUnitRef}
         />
       </div>
