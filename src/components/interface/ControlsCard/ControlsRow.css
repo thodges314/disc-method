@@ -1,0 +1,12 @@
+.controls-row {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controls-row > *:last-child {
+  flex-grow: 1;
+  margin-left: 15px;
+  margin-right: 20px;
+}

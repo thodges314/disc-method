@@ -1,7 +1,7 @@
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import * as d3 from "d3";
 import ShiftingTable from "./ShiftingTable";
-import ControlsCard from "components/interface/ControlsCard";
+import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
 import CustomSlider from "components/interface/CustomSlider";
 import CanvasCard from "components/interface/CanvasCard";
 import { hexToRgba } from "utils/utils";
@@ -13,6 +13,8 @@ import {
   synthCyberPink,
 } from "interactivity/resources/constants/colors";
 import parabolaValuesArray from "./parabolaValuesArray";
+
+import ShiftingUnit from "./ShiftingTable/ShiftingUnit";
 
 import { Button, FormGroup } from "@mui/material";
 
@@ -39,6 +41,8 @@ const HandKTableGraph = () => {
   const lineRef = useRef(null);
   const svgRef = useRef(null);
   const marks = useMemo(() => marksArray(-5, 5), []);
+  // const [showComponent, setShowComponent] = useState(false);
+  const shiftingUnitRef = useRef(null);
 
   useEffect(() => {
     const parabolaValues = parabolaValuesArray();
@@ -105,6 +109,11 @@ const HandKTableGraph = () => {
       .attr("transform", `translate(${x_scale(h) - width / 2},0)`);
   };
 
+  const updateValue = (h) => {
+    shiftGraph(h);
+    shiftingUnitRef.current.setNewValue(h);
+  };
+
   return (
     <>
       <div
@@ -121,7 +130,7 @@ const HandKTableGraph = () => {
       </div>
       <ShiftingTable ref={tableRef} />
       <FormGroup>
-        {/* <ControlsCard>
+        {/* 
           <Button
             onClick={() => {
               shiftGraph(-1);
@@ -130,27 +139,37 @@ const HandKTableGraph = () => {
           >
             -1
           </Button>
-          <Button
-            onClick={() => {
-              shiftGraph(1);
-              tableRef.current.offsetUp();
-            }}
-          >
-            +1
-          </Button>
-        </ControlsCard> */}
-        <ControlsCard>
-          <CustomSlider
-            onChange={(_evt, newValue) => shiftGraph(newValue)}
-            min={-5}
-            max={5}
-            step={1}
-            defaultValue={0}
-            size="small"
-            marks={marks}
-          />
-        </ControlsCard>
+ */}
+        <div
+          style={{
+            width: "860px",
+            marginBottom: "10px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <ControlsCard>
+            <ControlsRow>
+              <div>h</div>
+              <div>
+                <CustomSlider
+                  onChange={(_evt, newValue) => updateValue(newValue)}
+                  min={-5}
+                  max={5}
+                  step={1}
+                  defaultValue={0}
+                  size="small"
+                  marks={marks}
+                />
+              </div>
+            </ControlsRow>
+          </ControlsCard>
+        </div>
       </FormGroup>
+      {/* <Button onClick={() => setShowComponent(!showComponent)}>show</Button> */}
+      <div css={{ position: "absolute", width: 100 }}>
+        <ShiftingUnit initialValue={0} ref={shiftingUnitRef} />
+      </div>
     </>
   );
 };
