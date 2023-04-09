@@ -168,7 +168,11 @@ const HandKTableGraph = () => {
       </FormGroup>
       {/* <Button onClick={() => setShowComponent(!showComponent)}>show</Button> */}
       <div css={{ position: "absolute", width: 100 }}>
-        <ShiftingUnit initialValue={0} ref={shiftingUnitRef} />
+        <ShiftingUnit
+          initialValue={0}
+          colorValue={sunsetYellow}
+          ref={shiftingUnitRef}
+        />
       </div>
     </>
   );

@@ -1,12 +1,18 @@
 import { CSSTransition } from "react-transition-group";
 import { useState, forwardRef, useImperativeHandle } from "react";
+import DisplayEquation from "components/interface/DisplayEquation";
 
 import "./ShiftingUnit.css";
 
-const ShiftingUnit = forwardRef(({ initialValue }, ref) => {
+const ShiftingUnit = forwardRef(({ initialValue, colorValue }, ref) => {
   const [currentValue, setCurrentValue] = useState(initialValue);
   const [valueChange, setValueChange] = useState(0);
   const [initialRender, setInitialRender] = useState(true);
+  const displayValue = (value) => (
+    <DisplayEquation
+      style={{ marginLeft: 0, marginRight: 0 }}
+    >{`$ {\\color{${colorValue}}{${value}}} $`}</DisplayEquation>
+  );
   useImperativeHandle(ref, () => ({
     setNewValue: (n) => {
       setValueChange(0);
@@ -15,10 +21,10 @@ const ShiftingUnit = forwardRef(({ initialValue }, ref) => {
       n !== initialValue && initialRender && setInitialRender(false);
     },
   }));
-  console.log(initialValue, initialRender);
+
   return (
     <div className="parent">
-      {!!initialRender && <div>{initialValue}</div>}
+      {!!initialRender && displayValue(initialValue)}
       <CSSTransition
         in={valueChange > 0}
         timeout={300}
@@ -26,7 +32,7 @@ const ShiftingUnit = forwardRef(({ initialValue }, ref) => {
         appear={true}
       >
         {!initialRender && valueChange > 0 ? (
-          <div>{-currentValue}</div>
+          displayValue(-currentValue)
         ) : (
           <div />
         )}
@@ -38,7 +44,7 @@ const ShiftingUnit = forwardRef(({ initialValue }, ref) => {
         appear={true}
       >
         {!initialRender && valueChange > 0 ? (
-          <div>{-currentValue + 1}</div>
+          displayValue(-currentValue + 1)
         ) : (
           <div />
         )}
@@ -50,7 +56,7 @@ const ShiftingUnit = forwardRef(({ initialValue }, ref) => {
         appear={true}
       >
         {!initialRender && valueChange < 0 ? (
-          <div>{-currentValue}</div>
+          displayValue(-currentValue)
         ) : (
           <div />
         )}
@@ -62,7 +68,7 @@ const ShiftingUnit = forwardRef(({ initialValue }, ref) => {
         appear={true}
       >
         {!initialRender && valueChange < 0 ? (
-          <div>{-currentValue - 1}</div>
+          displayValue(-currentValue - 1)
         ) : (
           <div />
         )}

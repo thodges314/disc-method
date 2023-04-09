@@ -1,31 +1,33 @@
 .parent {
-  position: relative;
+  position: absolute;
   width: 90px;
-  height: 53px;
-  border: 1px solid red;
+  height: 10px;
 }
 
 /* enter left */
 .enter-left-enter {
   position: absolute;
-  left: 0%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  /* left: 0%; */
+  right: 100%;
+  /* top: 50%; */
+  /* opacity: 0; */
 }
 
 .enter-left-enter-active {
-  left: 50%;
-  top: 50%;
+  /* left: 50%; */
+  right: 0%;
+  /* top: 50%; */
   position: absolute;
-  transition: left 300ms;
-  transform: translate(-50%, -50%);
+  transition: right 300ms;
+  /* opacity: 1; */
 }
 
 .enter-left-enter-done {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  /* left: 50%; */
+  right: 0%;
+  /* top: 50%; */
+  /* opacity: 1; */
 }
 
 .enter-left-exit {
@@ -43,25 +45,28 @@
 /* exit left */
 .exit-left-enter {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 0%;
+  /* right: 50%; */
+  /* top: 50%; */
+  /* opacity: 0; */
 }
 
 .exit-left-enter-active {
   left: 100%;
-  top: 50%;
+  /* right: 0%; */
+  /* top: 50%; */
   position: absolute;
   transition: left 300ms;
-  transform: translate(-50%, -50%);
+  /* opacity: 1; */
 }
 
 .exit-left-enter-done {
   position: absolute;
   left: 100%;
-  top: 50%;
+  /* right: 0%; */
+  /* top: 50%; */
   opacity: 0;
-  transform: translate(-50%, -50%);
+  /* opacity: 1; */
 }
 
 .exit-left-exit {
@@ -80,23 +85,26 @@
 .enter-right-enter {
   position: absolute;
   left: 100%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  /* right: 0%; */
+  /* top: 50%; */
+  /* opacity: 0; */
 }
 
 .enter-right-enter-active {
-  left: 50%;
-  top: 50%;
+  left: 0%;
+  /* right: 50%;
+  top: 50%; */
   position: absolute;
   transition: left 300ms;
-  transform: translate(-50%, -50%);
+  /* opacity: 1; */
 }
 
 .enter-right-enter-done {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 0%;
+  /* right: 50%;
+  top: 50%; */
+  /* opacity: 1; */
 }
 
 .enter-right-exit {
@@ -114,25 +122,28 @@
 /* exit right */
 .exit-right-enter {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  /* left: 50%; */
+  right: 0%;
+  /* top: 50%; */
+  /* opacity: 0; */
 }
 
 .exit-right-enter-active {
-  left: 0%;
-  top: 50%;
+  /* left: 0%; */
+  right: 100%;
+  /* top: 50%; */
   position: absolute;
-  transition: left 300ms;
-  transform: translate(-50%, -50%);
+  transition: right 300ms;
+  /* opacity: 1; */
 }
 
 .exit-right-enter-done {
   position: absolute;
-  left: 0%;
-  top: 50%;
+  /* left: 0%; */
+  right: 100%;
+  /* top: 50%; */
   opacity: 0;
-  transform: translate(-50%, -50%);
+  /* opacity: 1; */
 }
 
 .exit-right-exit {
