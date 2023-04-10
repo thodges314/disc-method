@@ -25,7 +25,7 @@ const ShiftingUnit = forwardRef(
         newValue !== initialValue && initialRender && setInitialRender(false);
       },
     }));
-    console.log(initialRender);
+
     return (
       <div className="parent">
         {!!initialRender && (
@@ -38,6 +38,7 @@ const ShiftingUnit = forwardRef(
           timeout={300}
           classNames="enter-right"
           appear={true}
+          // transitionDelay={300}
         >
           {!initialRender && valueChange > 0 ? (
             displayValue(fcn(currentValue))
@@ -62,6 +63,7 @@ const ShiftingUnit = forwardRef(
           timeout={300}
           classNames="enter-left"
           appear={true}
+          // transitionDelay={300}
         >
           {!initialRender && valueChange < 0 ? (
             displayValue(fcn(currentValue))

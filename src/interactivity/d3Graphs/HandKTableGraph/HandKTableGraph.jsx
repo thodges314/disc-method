@@ -113,7 +113,8 @@ const HandKTableGraph = () => {
 
   const updateValue = (h) => {
     shiftGraph(h);
-    shiftingUnitRef.current.setNewValue(h);
+    // shiftingUnitRef.current.setNewValue(h);
+    newTableRef.current.updateH(h);
   };
   const square = (n) => n ** 2;
 
@@ -171,14 +172,14 @@ const HandKTableGraph = () => {
         </div>
       </FormGroup>
       {/* <Button onClick={() => setShowComponent(!showComponent)}>show</Button> */}
-      <div css={{ position: "absolute", width: 100 }}>
+      {/* <div css={{ position: "absolute", width: 100 }}>
         <ShiftingUnit
           initialValue={4}
           colorValue={sunsetYellow}
           // fcn={square}
           ref={shiftingUnitRef}
         />
-      </div>
+      </div> */}
     </>
   );
 };

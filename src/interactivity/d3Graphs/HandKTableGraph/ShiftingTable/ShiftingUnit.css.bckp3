@@ -16,6 +16,11 @@
 }
 
 .enter-left-enter-active {
+  /* left: 50%;
+  top: 50%;
+  position: absolute;
+  transition: left 150ms;
+  transform: translate(-50%, -50%); */
   transition: opacity 5ms;
   opacity: 1;
   transition-delay: 290ms;
@@ -27,6 +32,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   opacity: 1;
+  /* transition-delay: 290ms; */
 }
 
 .enter-left-exit {
@@ -34,9 +40,7 @@
 }
 
 .enter-left-exit-active {
-  /* transition-delay: 290ms; */
-  opacity: 1;
-  /* transition: opacity 5ms; */
+  opacity: 0;
 }
 
 .enter-left-exit-done {

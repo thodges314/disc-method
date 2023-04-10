@@ -9,6 +9,7 @@ import CustomTable from "components/interface/CustomTable";
 import DisplayEquation from "components/interface/DisplayEquation";
 import Slide from "@mui/material/Slide";
 import Box from "@mui/material/Box";
+import ShiftingUnit from "./ShiftingUnit";
 
 import { hexToRgba } from "utils/utils";
 import {
@@ -22,6 +23,19 @@ const displayValue = (colorValue, value) => (
   <DisplayEquation
     style={{ margin: "auto", width: 10 }}
   >{`$ {\\color{${colorValue}}{${value}}} $`}</DisplayEquation>
+);
+
+const dummyFcn = (n) => n;
+const squareFcn = (n) => n * n;
+
+const offsetDisplayEqn = (
+  <DisplayEquation>{`$ (x - {\\color{${sunsetMagenta}}h}) $`}</DisplayEquation>
+);
+
+const offsetDisplayEqn2 = (
+  <DisplayEquation>
+    {`$ (x - {\\color{${sunsetMagenta}}h})^2 $`}
+  </DisplayEquation>
 );
 
 const row1 = [
@@ -73,37 +87,43 @@ const entry = (value, change, ref, highlight = false) => (
     </Slide>
   </Box>
 );
+
+const domainArray = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
 const offsetValues = [-4, -3, -2, -1, 0, 1, 2, 3, 4];
 const offsetSquared = offsetValues.map((value) => value ** 2);
 
-const offsetRow = (change, ref) => {
-  const rowArray = offsetValues.map((value, idx) =>
-    entry(value, change, ref[idx])
-  );
-  const offset = offsetValues[4];
-  rowArray.unshift(
-    <DisplayEquation>
-      {offset <= 0
-        ? `$ x - {\\color{${sunsetMagenta}}${-offset}} $`
-        : `$ x + {\\color{${sunsetMagenta}}${offset}} $`}
-    </DisplayEquation>
-  );
-  return rowArray;
-};
+// const offsetRow = (change, ref) => {
+//   const rowArray = offsetValues.map((value, idx) =>
+//     // entry(value, change, ref[idx])
+//   );
+//   // const offset = offsetValues[4];
+//   rowArray.unshift(
+//     <DisplayEquation>
+//       {offset <= 0
+//         ? `$ x - {\\color{${sunsetMagenta}}${-offset}} $`
+//         : `$ x + {\\color{${sunsetMagenta}}${offset}} $`}
+//     </DisplayEquation>
+//   );
+//   return rowArray;
+// };
 
-const offsetSquaredRow = (change, ref) => {
-  const rowArray = offsetSquared.map((value, idx) =>
-    entry(value, change, ref[idx], true)
+const offsetRow = (ref, fcn, displayEqn) => {
+  const row = domainArray.map((value, idx) => (
+    <ShiftingUnit
+      initialValue={value}
+      colorValue={sunsetYellow}
+      key={idx}
+      fcn={fcn}
+      ref={ref[idx]}
+    />
+  ));
+  row.unshift(
+    displayEqn
+    // <DisplayEquation>
+    //   {`$ (x - {\\color{${sunsetMagenta}}h}) $`}
+    // </DisplayEquation>
   );
-  const offset = offsetValues[4];
-  rowArray.unshift(
-    <DisplayEquation>
-      {offset <= 0
-        ? `$ (x - {\\color{${sunsetMagenta}}${-offset}})^2 $`
-        : `$ (x + {\\color{${sunsetMagenta}}${offset}})^2 $`}
-    </DisplayEquation>
-  );
-  return rowArray;
+  return row;
 };
 
 const ShiftingTable = forwardRef((_props, ref) => {
@@ -111,44 +131,37 @@ const ShiftingTable = forwardRef((_props, ref) => {
   const [change, setChange] = useState(0);
   const offsetRowRefs = useMemo(
     () =>
-      Array(offsetValues.length)
+      Array(domainArray.length)
         .fill()
         .map(() => createRef()),
-    [offsetValues.length]
+    [domainArray.length]
   );
   const offsetSquaredRefs = useMemo(
     () =>
-      Array(offsetValues.length)
+      Array(domainArray.length)
         .fill()
         .map(() => createRef()),
-    [offsetValues.length]
+    [domainArray.length]
   );
 
-  const animateDecrement = () => {
-    // const animateIncrement = () => {
-    const newValue = offsetValues[offsetValues.length - 1] + 1;
+  const row2 = useMemo(
+    () => offsetRow(offsetRowRefs, dummyFcn, offsetDisplayEqn),
+    [offsetRowRefs.length]
+  );
+  const row3 = useMemo(
+    () => offsetRow(offsetSquaredRefs, squareFcn, offsetDisplayEqn2),
+    [offsetRowRefs.length]
+  );
 
-    offsetValues.push(newValue);
-    offsetValues.shift();
-    offsetSquared.push(newValue ** 2);
-    offsetSquared.shift();
-    // do the stuff
-    setChange(1);
-    setOffset(offset + 1);
-  };
-  const animateIncrement = () => {
-    // const animateDecrement = () => {
-    const newValue = offsetValues[0] - 1;
-    offsetValues.unshift(newValue);
-    offsetValues.pop();
-    offsetSquared.unshift(newValue ** 2);
-    offsetSquared.pop();
-    setChange(-1);
-    setOffset(offset - 1);
-  };
   useImperativeHandle(ref, () => ({
-    offsetUp: () => animateIncrement(),
-    offsetDown: () => animateDecrement(),
+    updateH: (value) => {
+      offsetRowRefs.forEach((currentRef, idx) =>
+        currentRef.current.setNewValue(value)
+      );
+      offsetSquaredRefs.forEach((currentRef, idx) =>
+        currentRef.current.setNewValue(value)
+      );
+    },
   }));
   return (
     <div
@@ -163,6 +176,8 @@ const ShiftingTable = forwardRef((_props, ref) => {
       <CustomTable
         entries={[
           row1,
+          row2,
+          row3,
           // offsetRow(change, offsetRowRefs),
           // offsetSquaredRow(change, offsetSquaredRefs),
         ]}
