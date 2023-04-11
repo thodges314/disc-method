@@ -1,0 +1,10 @@
+.numbers-x-minus-h {
+  position: absolute;
+  font-size: large;
+  color: blueviolet;
+  width: 20px;
+}
+
+.inactive-number {
+  display: none;
+}

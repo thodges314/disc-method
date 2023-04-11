@@ -19,6 +19,8 @@ import ShiftingTableComponent from "./ShiftingTable/ShiftingTable";
 
 import { Button, FormGroup } from "@mui/material";
 
+import "./HandKTableGraph.css";
+
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 const cyberPink = hexToRgba(synthCyberPink);
@@ -35,6 +37,16 @@ const y_scale = d3
   .domain([-y_distance / 5, (y_distance * 4) / 5])
   .range([height, 0]);
 
+const numbersXMinusH = [
+  -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+];
+const numbersXMinusH2 = [
+  100, 81, 64, 49, 36, 25, 16, 9, 4, 1, 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100,
+];
+
+const numbersToIndexScale = d3.scaleLinear().domain([10, -10]).range([0, 21]);
+const indexToNumbersScale = d3.scaleLinear().domain([0, 21]).range([10, -10]);
+
 const HandKTableGraph = () => {
   const tableRef = useRef(null);
   const newTableRef = useRef(null);
@@ -44,7 +56,11 @@ const HandKTableGraph = () => {
   const svgRef = useRef(null);
   const marks = useMemo(() => marksArray(-5, 5), []);
   // const [showComponent, setShowComponent] = useState(false);
-  const shiftingUnitRef = useRef(null);
+  // const shiftingUnitRef = useRef(null);
+  const numbersXMinusHRef = useRef(null);
+  const placeForNumbersXMinusHRef = useRef(null);
+  // const numbersToIndexScale = d3.scaleLinear().domain([-10, 10]).range([0, 21]);
+  // const indexToNumbersScale = d3.scaleLinear().domain([0, 21]).range([-10, 10]);
 
   useEffect(() => {
     const parabolaValues = parabolaValuesArray();
@@ -68,7 +84,7 @@ const HandKTableGraph = () => {
 
     const xAxis = svgRef.current
       .append("g")
-      .attr("class", "x-axis")
+      .classed("x-axis", true)
       .attr("transform", `translate(0,${(height * 4) / 5})`)
       .call(xAxisGenerator);
 
@@ -82,7 +98,7 @@ const HandKTableGraph = () => {
 
     const yAxis = svgRef.current
       .append("g")
-      .attr("class", "y-axis")
+      .classed("y-axis", true)
       .attr("transform", `translate(${x_scale(0)},0)`)
       .call(yAxisGenerator);
 
@@ -102,6 +118,30 @@ const HandKTableGraph = () => {
       .attr("d", lineRef.current)
       .attr("fill-opacity", 0)
       .attr("fill", "none");
+
+    numbersXMinusHRef.current = d3
+      .select(placeForNumbersXMinusHRef.current)
+      .selectAll("div")
+      .data(numbersXMinusH)
+      .enter()
+      .append("div")
+      .text((d) => d)
+      .classed("numbers-x-minus-h", true)
+      .each((_d, i, nodes) =>
+        Math.abs(numbersToIndexScale(0) - i) <= 5
+          ? d3.select(nodes[i]).classed("inactive-number", false)
+          : d3.select(nodes[i]).classed("inactive-number", true)
+      )
+      .each(
+        (_d, i, nodes) =>
+          d3
+            .select(nodes[i])
+            .style("left", `${20 * (5 - indexToNumbersScale(i))}px`) //.attr("transform", `translate(${18 * i},5)`)
+      );
+    // .classed(
+    //   "inactive-number",
+    //   (_d, i) => Math.abs(indexToNumbersScale(i) - 0) <= 5
+    // );
   });
 
   const shiftGraph = (h) => {
@@ -109,6 +149,20 @@ const HandKTableGraph = () => {
       .transition()
       .duration(750)
       .attr("transform", `translate(${x_scale(h) - width / 2},0)`);
+
+    numbersXMinusHRef.current
+      .each((_d, i, nodes) =>
+        Math.abs(h - indexToNumbersScale(i)) <= 5
+          ? d3.select(nodes[i]).classed("inactive-number", false)
+          : d3.select(nodes[i]).classed("inactive-number", true)
+      )
+      .each((_d, i, nodes) => {
+        console.log(i);
+        d3.select(nodes[i])
+          .transition()
+          .duration(350)
+          .style("left", `${20 * (h - indexToNumbersScale(i) + 5)}px`);
+      });
   };
 
   const updateValue = (h) => {
@@ -135,16 +189,6 @@ const HandKTableGraph = () => {
       <ShiftingTable ref={tableRef} />
       <ShiftingTableComponent ref={newTableRef} />
       <FormGroup>
-        {/* 
-          <Button
-            onClick={() => {
-              shiftGraph(-1);
-              tableRef.current.offsetDown();
-            }}
-          >
-            -1
-          </Button>
- */}
         <div
           style={{
             width: "860px",
@@ -171,6 +215,10 @@ const HandKTableGraph = () => {
           </ControlsCard>
         </div>
       </FormGroup>
+      <div
+        style={{ width: "500px", height: "500px", position: "relative" }}
+        ref={placeForNumbersXMinusHRef}
+      ></div>
       {/* <Button onClick={() => setShowComponent(!showComponent)}>show</Button> */}
       {/* <div css={{ position: "absolute", width: 100 }}>
         <ShiftingUnit

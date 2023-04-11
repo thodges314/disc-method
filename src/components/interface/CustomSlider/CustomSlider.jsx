@@ -8,9 +8,9 @@ const cyberPink = hexToRgba(synthCyberPink);
 
 export const CustomSlider = styled(Slider)({
   color: cyberPink,
-  "margin-left": 8,
-  "margin-right": 8,
-  "margin-top": 8,
+  marginLeft: 8,
+  marginRight: 8,
+  marginTop: 8,
   ".MuiSlider-markLabel": {
     color: cyberPink,
   },
