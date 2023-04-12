@@ -151,6 +151,12 @@ const Component = () => (
         always be driving 10mph <em>faster</em> than you intended to drive.
       </CustomTypography>
       <CustomTypography>
+        Imagine, so that you won't be late, you set your alarm clock to display
+        the time 15 minutes <em>later</em> than the current time. By doing to,
+        you will hopefully wake up 15 minutes <em>earlier</em> than you need to
+        (some people do things like this).
+      </CustomTypography>
+      <CustomTypography>
         Similar to the speedometer, which by giving you a value <em>less</em>{" "}
         than the current speed {`$ (x-10) $`} will cause you to drive 10mph{" "}
         <em>more</em> than the current speed, the parabola equation, receiving a
@@ -158,6 +164,13 @@ const Component = () => (
         {`$ {\\color{${sunsetMagenta}} {x}} $`} with{" "}
         {`$ {\\color{${sunsetMagenta}} {(x-2)}} $`}) will give us a graph of a
         parabola shifted <em>to the right</em> by 2.
+      </CustomTypography>
+      <CustomTypography>
+        From the alarm clock analogy, you can probably guess what happens if you
+        add a positive {`$ {\\color{${sunsetMagenta}} {h}} $`} to{" "}
+        {`$ {\\color{${sunsetMagenta}} {x}} $`} (which would be the same as
+        subtracting a negative {`$ {\\color{${sunsetMagenta}} {h}} $`} from{" "}
+        {`$ {\\color{${sunsetMagenta}} {x}} $`}).
       </CustomTypography>
       <CustomTypography>
         Play with the demo below to get an intuitive feeling for shifting a
