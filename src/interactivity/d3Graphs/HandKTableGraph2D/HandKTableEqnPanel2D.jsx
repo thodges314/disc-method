@@ -1,15 +1,15 @@
 import { forwardRef, useImperativeHandle, useState, useMemo } from "react";
 import EquationCard from "components/interface/EquationCard";
-import equationArray from "./hAndKEqnArray";
+import equationArray from "./hAndKEqnArray2D";
 import DisplayEquation from "components/interface/DisplayEquation";
 
 const EqnDisplay = forwardRef((_props, ref) => {
-  const [eqn, setEqn] = useState(5);
   const eqnArray = useMemo(() => equationArray, []);
+  const [eqnH, setEqnH] = useState(5);
+  const [eqnK, setEqnK] = useState(5);
   useImperativeHandle(ref, () => ({
-    setEqn: (newEqn) => {
-      setEqn(newEqn);
-    },
+    setEqnH: (newEqn) => setEqnH(newEqn),
+    setEqnK: (newEqn) => setEqnK(newEqn),
   }));
   return (
     <EquationCard>
@@ -22,7 +22,7 @@ const EqnDisplay = forwardRef((_props, ref) => {
           width: "100%",
         }}
       >
-        <DisplayEquation>{eqnArray[eqn]}</DisplayEquation>
+        <DisplayEquation>{eqnArray[eqnH][eqnK]}</DisplayEquation>
       </div>
     </EquationCard>
   );

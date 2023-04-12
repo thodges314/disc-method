@@ -5,17 +5,18 @@ import Typography from "@mui/material/Typography";
 import CustomTable from "components/interface/CustomTable";
 import DisplayEquation from "components/interface/DisplayEquation";
 import HandKTableGraph from "interactivity/d3Graphs/HandKTableGraph";
+import HandKTableGraph2D from "interactivity/d3Graphs/HandKTableGraph2D";
 
 import {
   synthSunsetMagenta,
-  // synthSunsetYellow,
-  // synthSunsetViolet,
+  synthSunsetYellow,
+  synthSunsetViolet,
 } from "interactivity/resources/constants/colors";
 import { hexToRgba } from "utils/utils";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
-// const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
-// const sunsetViolet = hexToRgba(synthSunsetViolet, 1);
+const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
+const sunsetViolet = hexToRgba(synthSunsetViolet, 1);
 
 const table1Entries = [
   [
@@ -179,6 +180,36 @@ const Component = () => (
         {`$ {\\color{${sunsetMagenta}} {(x-h)}} $`}.
       </CustomTypography>
       <HandKTableGraph />
+    </SectionCard>
+    <SectionCard>
+      <Typography variant="h6" width="100%">
+        Another Example
+      </Typography>
+      <CustomTypography>
+        Shift the graph of the parabola {"$ y=x^2 $"} to the right by {"$ 2 $"}{" "}
+        spaces and up by {"$ 2 $"} space.
+      </CustomTypography>
+      <CustomTypography>
+        This is an expansion of the principle above. We replace{" "}
+        {`$ {\\color{${sunsetMagenta}} {x}} $`} with{" "}
+        {`$ {\\color{${sunsetMagenta}} {(x-2)}} $`} and{" "}
+        {`$ {\\color{${sunsetYellow}} {y}} $`} with{" "}
+        {`$ {\\color{${sunsetYellow}} {(y-1)}} $`}.
+      </CustomTypography>
+      <DisplayEquation>{`$$ {\\color{${sunsetYellow}} {(y-1)}} = {\\color{${sunsetMagenta}} {(x-2)}}^2 $$`}</DisplayEquation>
+      <CustomTypography>
+        Before drawing this or entering it into a graphing calculator, we will
+        want to isolate the {`$ {\\color{${sunsetYellow}} {y}} $`} on one side
+        of the equation.
+      </CustomTypography>
+      <DisplayEquation>{`$$ y{\\color{${sunsetViolet}} { - 1}} = (x-2)^2 $$`}</DisplayEquation>
+      <DisplayEquation>{`$$ y = (x-2)^2{\\color{${sunsetViolet}} { + 1}} $$`}</DisplayEquation>
+      <CustomTypography>
+        Fiddle with the demo below to get an idea for using both{" "}
+        {`$ {\\color{${sunsetMagenta}} {(x-h)}} $`} and{" "}
+        {`$ {\\color{${sunsetYellow}} {(y-k)}} $`} to shift your graph.
+      </CustomTypography>
+      <HandKTableGraph2D />
     </SectionCard>
   </>
 );

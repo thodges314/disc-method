@@ -17,25 +17,21 @@ const backgroundColor = hexToRgba(themeBackground, 1);
 const sunsetPink = hexToRgba(synthSunsetPink, 1);
 
 const mapEntryColumns = (entries, sx, headerCol) => {
-  console.log(sx);
-  return entries.map((entry, i) => {
-    // if (i === 0 && headerCol) sx.width = "100%";
-    return (
-      <TableCell
-        sx={{
-          borderLeft: `0.1px solid ${sunsetPink}`,
-          borderRight: `0.1px solid ${sunsetPink}`,
-          borderBottom: `0.1px solid ${sunsetPink}`,
-          color: sunsetPink,
-          ...sx,
-          width: i === 0 && headerCol ? "100%" : sx.width,
-        }}
-        key={i}
-      >
-        {entry}
-      </TableCell>
-    );
-  });
+  return entries.map((entry, i) => (
+    <TableCell
+      sx={{
+        borderLeft: `0.1px solid ${sunsetPink}`,
+        borderRight: `0.1px solid ${sunsetPink}`,
+        borderBottom: `0.1px solid ${sunsetPink}`,
+        color: sunsetPink,
+        ...sx,
+        width: i === 0 && headerCol ? "100%" : sx.width,
+      }}
+      key={i}
+    >
+      {entry}
+    </TableCell>
+  ));
 };
 
 const mapEntryRows = (entries, sx, headerCol) =>
@@ -65,7 +61,6 @@ const WrapperCard = ({ children }) => (
 );
 
 const CustomTable = ({ entries, sx = {}, headerCol = false }) => {
-  console.log(sx);
   return (
     <TableContainer component={WrapperCard}>
       <Table>

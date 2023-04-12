@@ -3,18 +3,13 @@ import { hexToRgba } from "utils/utils";
 
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 
-const equationArray = [
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - (-5) \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - (-4) \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - (-3) \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - (-2) \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - (-1) \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - 0 \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - 1 \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - 2 \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - 3 \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - 4 \\right ) ^ 2}} $$`,
-  `$$ {\\color{${sunsetYellow}}{y= \\left ( x - 5 \\right ) ^ 2}} $$`,
-];
+const equationArray = [];
+for (let h = -5; h <= 5; h++) {
+  equationArray.push(
+    h < 0
+      ? `$$ {\\color{${sunsetYellow}}{y= \\left ( x - (${h}) \\right ) ^ 2}} $$`
+      : `$$ {\\color{${sunsetYellow}}{y= \\left ( x - ${h} \\right ) ^ 2}} $$`
+  );
+}
 
 export default equationArray;
