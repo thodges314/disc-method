@@ -145,6 +145,22 @@ const Component = () => (
         {`$ {\\color{${sunsetMagenta}} {x}} $`}.
       </CustomTypography>
       <CustomTypography>
+        For an analogy, imagine that you are driving a car with a broken
+        speedometer that always under reports your speed by 10mph. The
+        speedometer always presents the actual speed at 10mph <em>less</em> than
+        the actual speed. Consequently, relying on the speedometer you will
+        always be driving 10mph <em>greater</em> than you intended to drive.
+      </CustomTypography>
+      <CustomTypography>
+        Similar to the speedometer, which by giving you a value <em>less</em>{" "}
+        than the current speed {`$ (x-10) $`} will cause you to drive 10mph{" "}
+        <em>more</em> than the current speed, the parabola equation, receiving a
+        value of 2 <em>less</em> than the current x value (replacing{" "}
+        {`$ {\\color{${sunsetMagenta}} {x}} $`} with{" "}
+        {`$ {\\color{${sunsetMagenta}} {(x-2)}} $`}) will give us a graph of a
+        parabola shifted <em>to the right</em> by 2.
+      </CustomTypography>
+      <CustomTypography>
         Play with the demo below to get an intuitive feeling for shifting a
         graph left and right by using different values of{" "}
         {`$ {\\color{${sunsetMagenta}} {h}} $`} with{" "}
