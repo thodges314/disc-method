@@ -8,14 +8,14 @@ import HandKTableGraph from "interactivity/d3Graphs/HandKTableGraph";
 
 import {
   synthSunsetMagenta,
-  synthSunsetYellow,
-  synthSunsetViolet,
+  // synthSunsetYellow,
+  // synthSunsetViolet,
 } from "interactivity/resources/constants/colors";
 import { hexToRgba } from "utils/utils";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
-const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
-const sunsetViolet = hexToRgba(synthSunsetViolet, 1);
+// const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
+// const sunsetViolet = hexToRgba(synthSunsetViolet, 1);
 
 const table1Entries = [
   [
@@ -146,10 +146,9 @@ const Component = () => (
       </CustomTypography>
       <CustomTypography>
         For an analogy, imagine that you are driving a car with a broken
-        speedometer that always under reports your speed by 10mph. The
-        speedometer always presents the actual speed at 10mph <em>less</em> than
-        the actual speed. Consequently, relying on the speedometer you will
-        always be driving 10mph <em>greater</em> than you intended to drive.
+        speedometer that always reports your speed as 10mph <em>slower</em> than
+        you are driving. Consequently, relying on the speedometer you will
+        always be driving 10mph <em>faster</em> than you intended to drive.
       </CustomTypography>
       <CustomTypography>
         Similar to the speedometer, which by giving you a value <em>less</em>{" "}

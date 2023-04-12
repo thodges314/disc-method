@@ -19,7 +19,7 @@ const RotationObject = ({
     }
     pts.push(new Vector2(func(domain[1]), domain[1]));
     return pts;
-  });
+  }, [domain, func, resolution]);
 
   return (
     <mesh rotation-z={-Math.PI / 2} rotation-x={-Math.PI / 2} position={shift}>

@@ -1,5 +1,5 @@
 import { darkGrey, lightGrey } from "../constants/colors";
-import { DoubleSide, Vector2 } from "three";
+import { DoubleSide } from "three";
 
 const darkPhongMaterial = (
   <meshPhongMaterial

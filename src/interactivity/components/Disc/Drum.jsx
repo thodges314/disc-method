@@ -17,7 +17,7 @@ const Drum = ({
   value = domain[0],
   shift = null,
 }) => {
-  const step = useMemo(() => 1 / resolution);
+  const step = useMemo(() => 1 / resolution, [resolution]);
 
   const drums = useMemo(() => {
     const drumArray = [];
@@ -56,7 +56,7 @@ const Drum = ({
       );
     }
     return drumArray;
-  }, [value, threeDee]);
+  }, [value, threeDee, domain, func, sides, step]);
 
   return (
     <>

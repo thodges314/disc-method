@@ -14,7 +14,7 @@ const RotationObjectLine = ({
     }
     pts.push(new Vector2(func(domain[1]), domain[1]));
     return pts;
-  });
+  }, [domain, func, resolution]);
 
   return (
     <ThickCurveyLine

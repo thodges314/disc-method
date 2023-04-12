@@ -11,6 +11,11 @@ const coolPages = [
     </Typography>,
   ],
   [
+    <CustomLink href="/PreCalculus/ShiftingGraphsWithHAndK">
+      Shifting Graphs with h and k (unfinished)
+    </CustomLink>,
+  ],
+  [
     <CustomLink href="/TaylorMaclaurinSeries/TaylorMaclaurinSeries">
       Taylor (Maclaurin) Series
     </CustomLink>,

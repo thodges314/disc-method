@@ -28,7 +28,7 @@ const mapEntryColumns = (entries, sx, headerCol) => {
           borderBottom: `0.1px solid ${sunsetPink}`,
           color: sunsetPink,
           ...sx,
-          width: i == 0 && headerCol ? "100%" : sx.width,
+          width: i === 0 && headerCol ? "100%" : sx.width,
         }}
         key={i}
       >
