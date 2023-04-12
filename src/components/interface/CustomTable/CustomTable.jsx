@@ -16,24 +16,33 @@ const cyberPink = hexToRgba(synthCyberPink, 1);
 const backgroundColor = hexToRgba(themeBackground, 1);
 const sunsetPink = hexToRgba(synthSunsetPink, 1);
 
-const mapEntryColumns = (entries) =>
-  entries.map((entry, i) => (
-    <TableCell
-      sx={{
-        borderLeft: `0.1px solid ${sunsetPink}`,
-        borderRight: `0.1px solid ${sunsetPink}`,
-        borderBottom: `0.1px solid ${sunsetPink}`,
-        color: sunsetPink,
-      }}
-      key={i}
-    >
-      {entry}
-    </TableCell>
-  ));
+const mapEntryColumns = (entries, sx, headerCol) => {
+  console.log(sx);
+  return entries.map((entry, i) => {
+    // if (i === 0 && headerCol) sx.width = "100%";
+    return (
+      <TableCell
+        sx={{
+          borderLeft: `0.1px solid ${sunsetPink}`,
+          borderRight: `0.1px solid ${sunsetPink}`,
+          borderBottom: `0.1px solid ${sunsetPink}`,
+          color: sunsetPink,
+          ...sx,
+          width: i == 0 && headerCol ? "100%" : sx.width,
+        }}
+        key={i}
+      >
+        {entry}
+      </TableCell>
+    );
+  });
+};
 
-const mapEntryRows = (entries) =>
+const mapEntryRows = (entries, sx, headerCol) =>
   entries.map(
-    (entryRow, i) => <TableRow key={i}>{mapEntryColumns(entryRow)}</TableRow>,
+    (entryRow, i) => (
+      <TableRow key={i}>{mapEntryColumns(entryRow, sx, headerCol)}</TableRow>
+    ),
     []
   );
 
@@ -55,12 +64,15 @@ const WrapperCard = ({ children }) => (
   </Card>
 );
 
-const CustomTable = ({ sx = {}, entries }) => (
-  <TableContainer component={WrapperCard}>
-    <Table>
-      <TableBody>{mapEntryRows(entries)}</TableBody>
-    </Table>
-  </TableContainer>
-);
+const CustomTable = ({ entries, sx = {}, headerCol = false }) => {
+  console.log(sx);
+  return (
+    <TableContainer component={WrapperCard}>
+      <Table>
+        <TableBody>{mapEntryRows(entries, sx, headerCol)}</TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
 
 export default CustomTable;

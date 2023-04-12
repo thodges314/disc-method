@@ -1,29 +1,32 @@
 import { useRef, useEffect, useMemo, useState } from "react";
 import * as d3 from "d3";
-import ShiftingTable from "./ShiftingTable";
+// import ShiftingTable from "./ShiftingTable";
+import CustomTable from "components/interface/CustomTable";
+import DisplayEquation from "components/interface/DisplayEquation";
 import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
 import CustomSlider from "components/interface/CustomSlider";
 import CanvasCard from "components/interface/CanvasCard";
 import { hexToRgba } from "utils/utils";
 import { marksArray } from "../utilities";
 import {
-  synthSunsetMagenta,
+  // synthSunsetMagenta,
   synthSunsetYellow,
   synthCyberPaleBlue,
-  synthCyberPink,
+  // synthCyberPink,
 } from "interactivity/resources/constants/colors";
 import parabolaValuesArray from "./parabolaValuesArray";
+import EqnDisplay from "./HandKTableEqnPanel";
 
-import ShiftingUnit from "./ShiftingTable/ShiftingUnit";
-import ShiftingTableComponent from "./ShiftingTable/ShiftingTable";
+// import ShiftingUnit from "./ShiftingTable/ShiftingUnit";
+// import ShiftingTableComponent from "./ShiftingTable/ShiftingTable";
 
-import { Button, FormGroup } from "@mui/material";
+import { FormGroup } from "@mui/material";
 
 import "./HandKTableGraph.css";
 
-const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
+// const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
-const cyberPink = hexToRgba(synthCyberPink);
+// const cyberPink = hexToRgba(synthCyberPink);
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;
@@ -40,27 +43,73 @@ const y_scale = d3
 const numbersXMinusH = [
   -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
 ];
-const numbersXMinusH2 = [
-  100, 81, 64, 49, 36, 25, 16, 9, 4, 1, 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100,
-];
 
-const numbersToIndexScale = d3.scaleLinear().domain([10, -10]).range([0, 21]);
-const indexToNumbersScale = d3.scaleLinear().domain([0, 21]).range([10, -10]);
+// const numbersToIndexScale = d3.scaleLinear().domain([10, -10]).range([0, 20]);
+const indexToNumbersScale = d3.scaleLinear().domain([0, 20]).range([-10, 10]);
+
+// rows
+// row 1
+const row1 = [
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+    }}
+  >
+    <DisplayEquation>{`$ x $`}</DisplayEquation>
+  </div>,
+];
+for (let i = -5; i <= 5; i++) {
+  row1.push(
+    <div key={i} className="tableNumber" style={{ color: sunsetYellow }}>
+      {i}
+    </div>
+  );
+}
+// row  2
+const row2 = [
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+    }}
+  >
+    <DisplayEquation>{`$ (x-h) $`}</DisplayEquation>
+  </div>,
+];
+for (let i = -5; i <= 5; i++) {
+  row2.push(
+    <div key={i} className="tableNumber" style={{ color: sunsetYellow }} />
+  );
+}
+// row  3
+const row3 = [
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+    }}
+  >
+    <DisplayEquation>{`$ (x-h)^2 $`}</DisplayEquation>
+  </div>,
+];
+for (let i = -5; i <= 5; i++) {
+  row3.push(
+    <div key={i} className="tableNumber" style={{ color: sunsetYellow }} />
+  );
+}
 
 const HandKTableGraph = () => {
-  const tableRef = useRef(null);
-  const newTableRef = useRef(null);
   const chartRef = useRef(null);
   const movingGraphRef = useRef(null);
   const lineRef = useRef(null);
   const svgRef = useRef(null);
   const marks = useMemo(() => marksArray(-5, 5), []);
-  // const [showComponent, setShowComponent] = useState(false);
-  // const shiftingUnitRef = useRef(null);
   const numbersXMinusHRef = useRef(null);
+  const numbersXMinusHSqrRef = useRef(null);
   const placeForNumbersXMinusHRef = useRef(null);
-  // const numbersToIndexScale = d3.scaleLinear().domain([-10, 10]).range([0, 21]);
-  // const indexToNumbersScale = d3.scaleLinear().domain([0, 21]).range([-10, 10]);
+  const placeForNumbersXMinusHSqrRef = useRef(null);
+  const eqnDisplayRef = useRef(null);
 
   useEffect(() => {
     const parabolaValues = parabolaValuesArray();
@@ -128,20 +177,24 @@ const HandKTableGraph = () => {
       .text((d) => d)
       .classed("numbers-x-minus-h", true)
       .each((_d, i, nodes) =>
-        Math.abs(numbersToIndexScale(0) - i) <= 5
-          ? d3.select(nodes[i]).classed("inactive-number", false)
-          : d3.select(nodes[i]).classed("inactive-number", true)
-      )
-      .each(
-        (_d, i, nodes) =>
-          d3
-            .select(nodes[i])
-            .style("left", `${20 * (5 - indexToNumbersScale(i))}px`) //.attr("transform", `translate(${18 * i},5)`)
+        d3
+          .select(nodes[i])
+          .style("left", `${50 * (indexToNumbersScale(i) + 5)}px`)
       );
-    // .classed(
-    //   "inactive-number",
-    //   (_d, i) => Math.abs(indexToNumbersScale(i) - 0) <= 5
-    // );
+
+    numbersXMinusHSqrRef.current = d3
+      .select(placeForNumbersXMinusHSqrRef.current)
+      .selectAll("div")
+      .data(numbersXMinusH)
+      .enter()
+      .append("div")
+      .text((d) => d ** 2)
+      .classed("numbers-x-minus-h-squared", true)
+      .each((_d, i, nodes) =>
+        d3
+          .select(nodes[i])
+          .style("left", `${50 * (indexToNumbersScale(i) + 5)}px`)
+      );
   });
 
   const shiftGraph = (h) => {
@@ -150,27 +203,25 @@ const HandKTableGraph = () => {
       .duration(750)
       .attr("transform", `translate(${x_scale(h) - width / 2},0)`);
 
-    numbersXMinusHRef.current
-      .each((_d, i, nodes) =>
-        Math.abs(h - indexToNumbersScale(i)) <= 5
-          ? d3.select(nodes[i]).classed("inactive-number", false)
-          : d3.select(nodes[i]).classed("inactive-number", true)
-      )
-      .each((_d, i, nodes) => {
-        console.log(i);
-        d3.select(nodes[i])
-          .transition()
-          .duration(350)
-          .style("left", `${20 * (h - indexToNumbersScale(i) + 5)}px`);
-      });
+    numbersXMinusHRef.current.each((_d, i, nodes) => {
+      d3.select(nodes[i])
+        .transition()
+        .duration(750)
+        .style("left", `${50 * (indexToNumbersScale(i) + 5 + h)}px`);
+    });
+
+    numbersXMinusHSqrRef.current.each((_d, i, nodes) => {
+      d3.select(nodes[i])
+        .transition()
+        .duration(750)
+        .style("left", `${50 * (indexToNumbersScale(i) + 5 + h)}px`);
+    });
   };
 
   const updateValue = (h) => {
     shiftGraph(h);
-    // shiftingUnitRef.current.setNewValue(h);
-    newTableRef.current.updateH(h);
+    eqnDisplayRef.current.setEqn(h + 5);
   };
-  const square = (n) => n ** 2;
 
   return (
     <>
@@ -182,12 +233,11 @@ const HandKTableGraph = () => {
           marginBottom: "10px",
         }}
       >
+        <EqnDisplay ref={eqnDisplayRef} />
         <CanvasCard height={height} width={width}>
           <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
         </CanvasCard>
       </div>
-      <ShiftingTable ref={tableRef} />
-      <ShiftingTableComponent ref={newTableRef} />
       <FormGroup>
         <div
           style={{
@@ -216,18 +266,30 @@ const HandKTableGraph = () => {
         </div>
       </FormGroup>
       <div
-        style={{ width: "500px", height: "500px", position: "relative" }}
-        ref={placeForNumbersXMinusHRef}
-      ></div>
-      {/* <Button onClick={() => setShowComponent(!showComponent)}>show</Button> */}
-      {/* <div css={{ position: "absolute", width: 100 }}>
-        <ShiftingUnit
-          initialValue={4}
-          colorValue={sunsetYellow}
-          // fcn={square}
-          ref={shiftingUnitRef}
+        style={{
+          width: "700px",
+          marginBottom: "10px",
+          marginLeft: "auto",
+          marginRight: "auto",
+          position: "relative",
+        }}
+      >
+        <CustomTable
+          sx={{ p: 0, width: "50px" }}
+          entries={[row1, row2, row3]}
+          headerCol
         />
-      </div> */}
+        <div
+          className="placeForNumbers"
+          ref={placeForNumbersXMinusHRef}
+          style={{ top: 51, left: 148 }}
+        />
+        <div
+          className="placeForNumbers"
+          ref={placeForNumbersXMinusHSqrRef}
+          style={{ top: 103, left: 148 }}
+        />
+      </div>
     </>
   );
 };

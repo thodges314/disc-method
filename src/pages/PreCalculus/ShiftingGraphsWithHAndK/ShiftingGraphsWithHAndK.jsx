@@ -113,14 +113,14 @@ const Component = () => (
       </CustomTypography>
       <div
         style={{
-          maxWidth: "800px",
+          maxWidth: "600px",
           marginTop: "30px",
           marginBottom: "30px",
           marginLeft: "auto",
           marginRight: "auto",
         }}
       >
-        <CustomTable entries={table1Entries} />
+        <CustomTable entries={table1Entries} sx={{ p: 0, width: "50px" }} />
       </div>
       <CustomTypography sx={{ mt: 4 }}>
         Next, replace {`$ {\\color{${sunsetMagenta}} {x}} $`} with{" "}
@@ -128,14 +128,14 @@ const Component = () => (
       </CustomTypography>
       <div
         style={{
-          maxWidth: "800px",
+          maxWidth: "600px",
           marginTop: "30px",
           marginBottom: "30px",
           marginLeft: "auto",
           marginRight: "auto",
         }}
       >
-        <CustomTable entries={table2Entries} />
+        <CustomTable entries={table2Entries} sx={{ p: 0, width: "50px" }} />
       </div>
       <CustomTypography sx={{ mt: 4 }}>
         This change resulted in the output row being shifted to the right by{" "}
