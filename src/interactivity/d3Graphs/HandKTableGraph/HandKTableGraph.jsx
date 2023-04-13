@@ -27,7 +27,7 @@ const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;
 const width = height * goldenRatio;
-const x_distance = 3 * Math.PI;
+const x_distance = 11;
 const y_distance = x_distance / goldenRatio;
 
 const x_scale = d3.scaleLinear().domain([-5.5, 5.5]).range([0, width]);
@@ -117,7 +117,7 @@ const HandKTableGraph = () => {
     xAxisGenerator
       .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
       .tickFormat(d3.format("d"));
-    yAxisGenerator.tickValues([-1, 1, 2, 3, 4]).tickFormat(d3.format("d"));
+    yAxisGenerator.tickValues([-1, 1, 2, 3, 4, 5]).tickFormat(d3.format("d"));
 
     svgRef.current = d3
       .select(chartRef.current)

@@ -6,6 +6,7 @@ import CustomTable from "components/interface/CustomTable";
 import DisplayEquation from "components/interface/DisplayEquation";
 import HandKTableGraph from "interactivity/d3Graphs/HandKTableGraph";
 import HandKTableGraph2D from "interactivity/d3Graphs/HandKTableGraph2D";
+import HandKCircleGraph from "interactivity/d3Graphs/HandKCircleGraph";
 
 import {
   synthSunsetMagenta,
@@ -210,6 +211,45 @@ const Component = () => (
         {`$ {\\color{${sunsetYellow}} {(y-k)}} $`} to shift your graph.
       </CustomTypography>
       <HandKTableGraph2D />
+    </SectionCard>
+    <SectionCard>
+      <Typography variant="h6" width="100%">
+        An Example with Circles
+      </Typography>
+      <CustomTypography>
+        Write an equation for a circle with a radius {`$2$`} centered at{" "}
+        {`$(1,2)$`}.
+      </CustomTypography>
+      <CustomTypography>
+        Rather than look this up in a textbook, let's think about how to write
+        an equation for a circle centered at {`$(0,0)$`}, and then use{" "}
+        {`$ {\\color{${sunsetMagenta}} {h}} $`} and{" "}
+        {`$ {\\color{${sunsetYellow}} {k}} $`} to shift the circle into our
+        desired position.
+      </CustomTypography>
+      <CustomTypography>
+        Let's define a circle as{" "}
+        <em>
+          the set of all points equidistant from a fixed point (the center).
+        </em>
+      </CustomTypography>
+      <CustomTypography>
+        If the points are a distance {`$r$`} from the center, than the radius{" "}
+        {`$r$`} and the coordinates of the individual points {`$x$`} and {`$y$`}{" "}
+        are all related by the equation: {`$r^2 = x^2 + y^2$`}.
+      </CustomTypography>
+      <HandKCircleGraph />
+      <CustomTypography>
+        A circle with radius {`$2$`} will have the equation{" "}
+        {`$4^2 = x^2 + y^2$`}{" "}
+      </CustomTypography>
+      <CustomTypography>
+        To shift this circle to the right by {`$1$`}, we have to replace{" "}
+        {`$ {\\color{${sunsetMagenta}} {x}} $`} with{" "}
+        {`$ {\\color{${sunsetMagenta}} {(x-1)}} $`}. To shift the circle down by{" "}
+        {`$2$`}, we have to replace {`$ {\\color{${sunsetYellow}} {y}} $`} with{" "}
+        {`$ {\\color{${sunsetYellow}} {(y-2)}} $`}.
+      </CustomTypography>
     </SectionCard>
   </>
 );

@@ -1,0 +1,457 @@
+import { useRef, useEffect, useMemo } from "react";
+import * as d3 from "d3";
+import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
+import CustomSlider from "components/interface/CustomSlider";
+import CanvasCard from "components/interface/CanvasCard";
+import { hexToRgba } from "utils/utils";
+import { marksArray } from "../utilities";
+import {
+  synthSunsetMagenta,
+  synthSunsetYellow,
+  synthCyberPaleBlue,
+  synthCyberLightBlue,
+  synthSunsetOrange,
+} from "interactivity/resources/constants/colors";
+import EqnDisplay from "./HandKCircleEqnPanel";
+
+import { FormGroup } from "@mui/material";
+
+import "./HandKCircleGraph.css";
+
+const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
+const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
+const cyberLightBlue = hexToRgba(synthCyberLightBlue);
+const sunsetOrange = hexToRgba(synthSunsetOrange, 1);
+
+const goldenRatio = (1 + 5 ** 0.5) / 2;
+const height = 400;
+const width = height * goldenRatio;
+const x_distance = 13;
+const y_distance = x_distance / goldenRatio;
+
+const x_scale = d3.scaleLinear().domain([-6.5, 6.5]).range([0, width]);
+const y_scale = d3
+  .scaleLinear()
+  .domain([-y_distance / 2, y_distance / 2])
+  .range([height, 0]);
+
+const d_Scale = d3.scaleLinear().domain([0, 13]).range([0, width]);
+
+const numbersRadius = [];
+for (let i = 0; i <= 24; i++) {
+  numbersRadius.push((i * Math.PI) / 13);
+}
+
+const HandKCircleGraph = () => {
+  const chartRef = useRef(null);
+  const lineRef = useRef(null);
+  const svgRef = useRef(null);
+  const radiusMarks = useMemo(() => marksArray(1, 4), []);
+  const eqnDisplayRef = useRef(null);
+  const movingCircleRef = useRef(null);
+  const cosLineRef = useRef(null);
+  const sinLineRef = useRef(null);
+  const radiusRef = useRef(2);
+  const angleRef = useRef(0);
+  const lastAngleRef = useRef(0);
+  const radialLineRef = useRef();
+  const lastRadiusRef = useRef(2);
+  const cosLineLabelRef = useRef(null);
+  const sinLineLabelRef = useRef(null);
+  const radiusLineLabelRef = useRef(null);
+
+  const positionCosineText = (angleRads) => {
+    const middle_x = radiusRef.current * Math.cos(angleRads);
+    const yValue =
+      angleRads >= Math.PI && angleRads < 2 * Math.PI
+        ? y_scale(0) - 6
+        : y_scale(0) + 18;
+    return [x_scale(middle_x / 2) - 4, yValue];
+  };
+
+  const positionSineText = (angleRads) => {
+    const middle_x = radiusRef.current * Math.cos(angleRads);
+    const middle_y = radiusRef.current * Math.sin(angleRads);
+    const xValue =
+      angleRads >= Math.PI / 2 && angleRads < Math.PI
+        ? x_scale(middle_x) - 14
+        : x_scale(middle_x) + 4;
+    return [xValue, y_scale(middle_y / 2) + 6];
+  };
+
+  const positionRadiusText = (angleRads) => {
+    const middle_x = radiusRef.current * Math.cos(angleRads);
+    const middle_y = radiusRef.current * Math.sin(angleRads);
+    const yValue =
+      angleRads >= Math.PI && angleRads < 2 * Math.PI
+        ? y_scale(middle_y / 2) + 18
+        : y_scale(middle_y / 2) - 6;
+    const xValue =
+      (angleRads >= Math.PI / 4 && angleRads < Math.PI / 2) ||
+      (angleRads >= (Math.Pi * 3) / 4 && angleRads <= (Math.PI * 7) / 4)
+        ? x_scale(middle_x / 2) - 14
+        : (angleRads >= Math.PI / 2 && angleRads <= (Math.PI * 3) / 4) ||
+          (angleRads >= (Math.Pi * 5) / 4 && angleRads < (Math.PI * 3) / 4)
+        ? x_scale(middle_x / 2) + 4
+        : x_scale(middle_x / 2) - 4;
+    return [xValue, yValue];
+  };
+
+  const formatValue = (value) => {
+    const nominalValue = Math.round(value * 10000) / 10000;
+    if (nominalValue % 1 === 0) {
+      return d3.format(".0f")(nominalValue);
+    }
+    if (nominalValue % 0.5 === 0) {
+      return d3.format(".1f")(nominalValue);
+    }
+    return d3.format(".4f")(nominalValue);
+  };
+
+  useEffect(() => {
+    const xAxisGenerator = d3.axisBottom(x_scale);
+    const yAxisGenerator = d3.axisLeft(y_scale);
+    lineRef.current = d3
+      .line()
+      .x((d) => x_scale(d[0]))
+      .y((d) => y_scale(d[1]));
+    xAxisGenerator
+      .tickValues([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6])
+      .tickFormat(d3.format("d"));
+    yAxisGenerator
+      .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
+      .tickFormat(d3.format("d"));
+
+    svgRef.current = d3
+      .select(chartRef.current)
+      .attr("height", height)
+      .attr("width", width)
+      .attr("fill", "none")
+      .attr("fill-opacity", 0);
+
+    const xAxis = svgRef.current
+      .append("g")
+      .classed("x-axis", true)
+      .attr("transform", `translate(0,${height / 2})`)
+      .call(xAxisGenerator);
+
+    xAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
+    xAxis
+      .selectAll("text")
+      .attr("fill", hexToRgba(synthCyberPaleBlue))
+      .attr("fill-opacity", 1)
+      .attr("font-size", "1.5em");
+    xAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
+
+    const yAxis = svgRef.current
+      .append("g")
+      .classed("y-axis", true)
+      .attr("transform", `translate(${x_scale(0)},0)`)
+      .call(yAxisGenerator);
+
+    yAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
+    yAxis
+      .selectAll("text")
+      .attr("fill", hexToRgba(synthCyberPaleBlue))
+      .attr("fill-opacity", 1)
+      .attr("font-size", "1.5em");
+    yAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
+
+    movingCircleRef.current = svgRef.current
+      .append("circle")
+      .attr("cx", width / 2)
+      .attr("cy", height / 2)
+      .attr("r", d_Scale(2))
+      .attr("stroke", cyberLightBlue)
+      .attr("stroke-width", 2)
+      .attr("fill-opacity", 0)
+      .attr("fill", "none");
+
+    cosLineRef.current = svgRef.current
+      .append("path")
+      .datum([
+        [0, 0],
+        [2, 0],
+      ])
+      .attr("stroke", sunsetMagenta)
+      .attr("stroke-width", 2)
+      .attr("d", lineRef.current)
+      .attr("fill-opacity", 0)
+      .attr("fill", "none");
+
+    sinLineRef.current = svgRef.current
+      .append("path")
+      .datum([
+        [2, 0],
+        [2, 0],
+      ])
+      .attr("stroke", sunsetYellow)
+      .attr("stroke-width", 2)
+      .attr("d", lineRef.current)
+      .attr("fill-opacity", 0)
+      .attr("fill", "none");
+
+    radialLineRef.current = svgRef.current
+      .append("path")
+      .datum([
+        [0, 0],
+        [2, 0],
+      ])
+      .attr("stroke", sunsetOrange)
+      .attr("stroke-width", 2)
+      .attr("d", lineRef.current)
+      .attr("fill-opacity", 0)
+      .attr("fill", "none");
+
+    cosLineLabelRef.current = svgRef.current
+      .append("text")
+      .text(`${2}`)
+      .attr("x", positionCosineText(0)[0])
+      .attr("y", positionCosineText(0)[1])
+      .attr("fill", sunsetMagenta)
+      .attr("fill-opacity", 1)
+      .attr("font-size", "1em");
+
+    sinLineLabelRef.current = svgRef.current
+      .append("text")
+      .text(`${0}`)
+      .attr("x", positionSineText(0)[0])
+      .attr("y", positionSineText(0)[1])
+      .attr("fill", sunsetYellow)
+      .attr("fill-opacity", 1);
+
+    radiusLineLabelRef.current = svgRef.current
+      .append("text")
+      .text(`${2}`)
+      .attr("x", positionRadiusText(0)[0])
+      .attr("y", positionRadiusText(0)[1])
+      .attr("fill", sunsetOrange)
+      .attr("fill-opacity", 1);
+  });
+
+  const shiftGraph = () => {
+    const angleDegrees = (angleRef.current * 180) / Math.PI;
+    if (angleDegrees !== lastAngleRef.current) {
+      const bbBoxRadialLine = radialLineRef.current.node().getBBox();
+
+      const { x: x_middle, y: y_middle } = bbBoxRadialLine;
+
+      const interpolateRotate = d3.interpolateString(
+        `rotate(${lastAngleRef.current},${x_middle},${y_middle})`,
+        `rotate(${-angleDegrees},${x_middle},${y_middle})`
+      );
+
+      radialLineRef.current
+        .transition()
+        .duration(0)
+        .attrTween("transform", () => interpolateRotate);
+
+      lastAngleRef.current = (angleRef.current * 180) / Math.PI;
+
+      cosLineRef.current
+        .transition()
+        .duration(0)
+        .attr(
+          "d",
+          lineRef.current([
+            [0, 0],
+            [radiusRef.current * Math.cos(angleRef.current), 0],
+          ])
+        );
+
+      sinLineRef.current
+        .transition()
+        .duration(0)
+        .attr(
+          "d",
+          lineRef.current([
+            [radiusRef.current * Math.cos(angleRef.current), 0],
+            [
+              radiusRef.current * Math.cos(angleRef.current),
+              radiusRef.current * Math.sin(angleRef.current),
+            ],
+          ])
+        );
+
+      const cosinePosition = positionCosineText(angleRef.current);
+      const sinePosition = positionSineText(angleRef.current);
+      const radiusPosition = positionRadiusText(angleRef.current);
+      const cosinePositionText = formatValue(
+        radiusRef.current * Math.cos(angleRef.current)
+      );
+      const sinePositionText = formatValue(
+        radiusRef.current * Math.sin(angleRef.current)
+      );
+      const radiusPositionText = formatValue(radiusRef.current);
+
+      cosLineLabelRef.current
+        .transition()
+        .duration(0)
+        .attr("x", cosinePosition[0])
+        .attr("y", cosinePosition[1])
+        .text(cosinePositionText);
+
+      sinLineLabelRef.current
+        .transition()
+        .duration(0)
+        .attr("x", sinePosition[0])
+        .attr("y", sinePosition[1])
+        .text(sinePositionText);
+
+      radiusLineLabelRef.current
+        .transition()
+        .duration(0)
+        .attr("x", radiusPosition[0])
+        .attr("y", radiusPosition[1])
+        .text(radiusPositionText);
+    }
+
+    if (radiusRef.current !== lastRadiusRef.current) {
+      radialLineRef.current
+        .transition()
+        .duration(350)
+        .attr(
+          "d",
+          lineRef.current([
+            [0, 0],
+            [radiusRef.current, 0],
+          ])
+        );
+
+      movingCircleRef.current
+        .transition()
+        .duration(350)
+        .attr("r", d_Scale(radiusRef.current));
+
+      lastRadiusRef.current = radiusRef.current;
+
+      cosLineRef.current
+        .transition()
+        .duration(350)
+        .attr(
+          "d",
+          lineRef.current([
+            [0, 0],
+            [radiusRef.current * Math.cos(angleRef.current), 0],
+          ])
+        );
+
+      sinLineRef.current
+        .transition()
+        .duration(350)
+        .attr(
+          "d",
+          lineRef.current([
+            [radiusRef.current * Math.cos(angleRef.current), 0],
+            [
+              radiusRef.current * Math.cos(angleRef.current),
+              radiusRef.current * Math.sin(angleRef.current),
+            ],
+          ])
+        );
+
+      const cosinePosition = positionCosineText(angleRef.current);
+      const sinePosition = positionSineText(angleRef.current);
+      const radiusPosition = positionRadiusText(angleRef.current);
+      const cosinePositionText = formatValue(
+        radiusRef.current * Math.cos(angleRef.current)
+      );
+      const sinePositionText = formatValue(
+        radiusRef.current * Math.sin(angleRef.current)
+      );
+      const radiusPositionText = formatValue(radiusRef.current);
+
+      cosLineLabelRef.current
+        .transition()
+        .duration(350)
+        .attr("x", cosinePosition[0])
+        .attr("y", cosinePosition[1])
+        .text(cosinePositionText);
+
+      sinLineLabelRef.current
+        .transition()
+        .duration(350)
+        .attr("x", sinePosition[0])
+        .attr("y", sinePosition[1])
+        .text(sinePositionText);
+
+      radiusLineLabelRef.current
+        .transition()
+        .duration(350)
+        .attr("x", radiusPosition[0])
+        .attr("y", radiusPosition[1])
+        .text(radiusPositionText);
+    }
+  };
+
+  const updateThetaValue = (theta) => {
+    angleRef.current = theta;
+    shiftGraph();
+  };
+
+  const updateRValue = (r) => {
+    radiusRef.current = r;
+    shiftGraph();
+    eqnDisplayRef.current.setEqnR(r);
+  };
+
+  return (
+    <>
+      <div
+        style={{
+          width: width,
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginBottom: "10px",
+        }}
+      >
+        <EqnDisplay ref={eqnDisplayRef} />
+        <CanvasCard height={height} width={width}>
+          <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
+        </CanvasCard>
+      </div>
+      <FormGroup>
+        <div
+          style={{
+            width: "860px",
+            marginBottom: "10px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <ControlsCard>
+            <ControlsRow>
+              <div>Θ</div>
+              <div>
+                <CustomSlider
+                  onChange={(_evt, newValue) => updateThetaValue(newValue)}
+                  min={0}
+                  max={2 * Math.PI}
+                  step={Math.PI / 24}
+                  defaultValue={0}
+                  size="small"
+                />
+              </div>
+            </ControlsRow>
+            <ControlsRow>
+              <div>r</div>
+              <div>
+                <CustomSlider
+                  onChange={(_evt, newValue) => updateRValue(newValue)}
+                  min={1}
+                  max={4}
+                  step={1}
+                  defaultValue={2}
+                  size="small"
+                  marks={radiusMarks}
+                />
+              </div>
+            </ControlsRow>
+          </ControlsCard>
+        </div>
+      </FormGroup>
+    </>
+  );
+};
+
+export default HandKCircleGraph;

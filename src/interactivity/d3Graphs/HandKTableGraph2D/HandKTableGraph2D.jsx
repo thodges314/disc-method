@@ -1,17 +1,13 @@
 import { useRef, useEffect, useMemo } from "react";
 import * as d3 from "d3";
-// import CustomTable from "components/interface/CustomTable";
-// import DisplayEquation from "components/interface/DisplayEquation";
 import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
 import CustomSlider from "components/interface/CustomSlider";
 import CanvasCard from "components/interface/CanvasCard";
 import { hexToRgba } from "utils/utils";
 import { marksArray } from "../utilities";
 import {
-  // synthSunsetMagenta,
   synthSunsetYellow,
   synthCyberPaleBlue,
-  // synthCyberPink,
 } from "interactivity/resources/constants/colors";
 import parabolaValuesArray from "./parabolaValuesArray";
 import EqnDisplay from "./HandKTableEqnPanel2D";
@@ -20,14 +16,12 @@ import { FormGroup } from "@mui/material";
 
 import "./HandKTableGraph2D.css";
 
-// const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
-// const cyberPink = hexToRgba(synthCyberPink);
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;
 const width = height * goldenRatio;
-const x_distance = 3 * Math.PI;
+const x_distance = 11;
 const y_distance = x_distance / goldenRatio;
 
 const x_scale = d3.scaleLinear().domain([-5.5, 5.5]).range([0, width]);
@@ -41,58 +35,6 @@ const numbersXMinusH = [
 ];
 
 const indexToNumbersScale = d3.scaleLinear().domain([0, 20]).range([-10, 10]);
-
-// // rows
-// // row 1
-// const row1 = [
-//   <div
-//     style={{
-//       display: "flex",
-//       justifyContent: "center",
-//     }}
-//   >
-//     <DisplayEquation>{`$ x $`}</DisplayEquation>
-//   </div>,
-// ];
-// for (let i = -5; i <= 5; i++) {
-//   row1.push(
-//     <div key={i} className="tableNumber" style={{ color: sunsetYellow }}>
-//       {i}
-//     </div>
-//   );
-// }
-// // row  2
-// const row2 = [
-//   <div
-//     style={{
-//       display: "flex",
-//       justifyContent: "center",
-//     }}
-//   >
-//     <DisplayEquation>{`$ (x-h) $`}</DisplayEquation>
-//   </div>,
-// ];
-// for (let i = -5; i <= 5; i++) {
-//   row2.push(
-//     <div key={i} className="tableNumber" style={{ color: sunsetYellow }} />
-//   );
-// }
-// // row  3
-// const row3 = [
-//   <div
-//     style={{
-//       display: "flex",
-//       justifyContent: "center",
-//     }}
-//   >
-//     <DisplayEquation>{`$ (x-h)^2 $`}</DisplayEquation>
-//   </div>,
-// ];
-// for (let i = -5; i <= 5; i++) {
-//   row3.push(
-//     <div key={i} className="tableNumber" style={{ color: sunsetYellow }} />
-//   );
-// }
 
 const HandKTableGraph = () => {
   const chartRef = useRef(null);
@@ -119,7 +61,7 @@ const HandKTableGraph = () => {
     xAxisGenerator
       .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
       .tickFormat(d3.format("d"));
-    yAxisGenerator.tickValues([-1, 1, 2, 3, 4]).tickFormat(d3.format("d"));
+    yAxisGenerator.tickValues([-1, 1, 2, 3, 4, 5]).tickFormat(d3.format("d"));
 
     svgRef.current = d3
       .select(chartRef.current)
@@ -194,11 +136,6 @@ const HandKTableGraph = () => {
       );
   });
 
-  // const shiftGraphH = (h) => {
-  //   movingGraphRef.current
-  //     .transition()
-  //     .duration(750)
-  //     .attr("transform", `translate(${x_scale(h) - width / 2},0)`);
   const shiftGraph = () => {
     movingGraphRef.current
       .transition()
@@ -208,35 +145,16 @@ const HandKTableGraph = () => {
         `translate(${x_scale(hLocationRef.current) - width / 2},${
           y_scale(kLocationRef.current) - (height * 4) / 5
         })`
-
-        // `translate(${x_scale(hLocationRef.current) - width / 2},0)`
       );
   };
 
-  // numbersXMinusHRef.current.each((_d, i, nodes) => {
-  //   d3.select(nodes[i])
-  //     .transition()
-  //     .duration(750)
-  //     .style("left", `${50 * (indexToNumbersScale(i) + 5 + h)}px`);
-  // });
-
-  // numbersXMinusHSqrRef.current.each((_d, i, nodes) => {
-  //   d3.select(nodes[i])
-  //     .transition()
-  //     .duration(750)
-  //     .style("left", `${50 * (indexToNumbersScale(i) + 5 + h)}px`);
-  // });
-  // };
-
   const updateHValue = (h) => {
-    // shiftGraphH(h);
     hLocationRef.current = h;
     shiftGraph();
     eqnDisplayRef.current.setEqnH(h + 5);
   };
 
   const updateKValue = (k) => {
-    // shiftGraphH(h);
     kLocationRef.current = k;
     shiftGraph();
     eqnDisplayRef.current.setEqnK(k + 5);
@@ -298,31 +216,6 @@ const HandKTableGraph = () => {
           </ControlsCard>
         </div>
       </FormGroup>
-      {/* <div
-        style={{
-          width: "700px",
-          marginBottom: "10px",
-          marginLeft: "auto",
-          marginRight: "auto",
-          position: "relative",
-        }}
-      >
-        <CustomTable
-          sx={{ p: 0, width: "50px" }}
-          entries={[row1, row2, row3]}
-          headerCol
-        />
-        <div
-          className="placeForNumbers"
-          ref={placeForNumbersXMinusHRef}
-          style={{ top: 51, left: 148 }}
-        />
-        <div
-          className="placeForNumbers"
-          ref={placeForNumbersXMinusHSqrRef}
-          style={{ top: 103, left: 148 }}
-        />
-      </div> */}
     </>
   );
 };

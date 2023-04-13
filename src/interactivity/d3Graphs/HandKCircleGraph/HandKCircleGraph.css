@@ -1,0 +1,54 @@
+.numbers-x-minus-h {
+  position: absolute;
+  font-size: large;
+  color: #f222ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+
+.numbers-x-minus-h-squared {
+  position: absolute;
+  font-size: large;
+  color: #ffd319;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+
+.inactive-number {
+  display: none;
+}
+
+.tableNumber {
+  height: 50px;
+  width: 49px;
+  display: flex;
+  font-size: large;
+  align-items: center;
+  justify-content: center;
+}
+
+.dummyBlock {
+  height: 50px;
+  width: 49px;
+  padding: 0;
+  position: absolute;
+}
+
+.placeForNumbers {
+  height: 50px;
+  width: 550px;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  overflow: hidden;
+}

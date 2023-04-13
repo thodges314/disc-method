@@ -121,6 +121,7 @@ const MaclaurinChart = () => {
   }, []);
 
   const switchGraphs = (n) => {
+    console.log(lineRef.current(allValuesRef.current[n]));
     movingGraphRef.current
       .transition()
       .duration(300)
