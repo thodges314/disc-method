@@ -113,10 +113,10 @@ const TaylorChart = () => {
         marginBottom: "10px",
       }}
     >
+      <EquationCard height={50}>{displayEquations}</EquationCard>
       <CanvasCard height={height} width={width}>
         <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
       </CanvasCard>
-      <EquationCard height={50}>{displayEquations}</EquationCard>
     </div>
   );
 };

@@ -52,7 +52,7 @@ const HandKCircleGraph = () => {
   const cosLineRef = useRef(null);
   const sinLineRef = useRef(null);
   const radiusRef = useRef(2);
-  const angleRef = useRef(0);
+  const angleRef = useRef(STARTING_ANGLE);
   const lastAngleRef = useRef(STARTING_ANGLE);
   const radialLineRef = useRef();
   const lastRadiusRef = useRef(STARTING_RADIUS);
@@ -433,7 +433,7 @@ const HandKCircleGraph = () => {
         >
           <ControlsCard>
             <ControlsRow>
-              <div>Θ</div>
+              <div>θ</div>
               <div>
                 <CustomSlider
                   onChange={(_evt, newValue) => updateThetaValue(newValue)}

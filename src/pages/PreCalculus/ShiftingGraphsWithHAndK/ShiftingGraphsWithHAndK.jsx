@@ -8,17 +8,16 @@ import HandKTableGraph from "interactivity/d3Graphs/HandKTableGraph";
 import HandKTableGraph2D from "interactivity/d3Graphs/HandKTableGraph2D";
 import HandKCircleGraph from "interactivity/d3Graphs/HandKCircleGraph";
 import HandKCircleGraphShift from "interactivity/d3Graphs/HandKCircleGraphShift";
+import HandKTrigChart from "interactivity/d3Graphs/HandKTrigChart";
 
 import {
   synthSunsetMagenta,
   synthSunsetYellow,
-  synthSunsetViolet,
 } from "interactivity/resources/constants/colors";
 import { hexToRgba } from "utils/utils";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
-const sunsetViolet = hexToRgba(synthSunsetViolet, 1);
 
 const table1Entries = [
   [
@@ -269,19 +268,30 @@ const Component = () => (
       </Typography>
       <CustomTypography>
         Establish the identity{" "}
-        {`$ \\cos{\\left ( \\Theta - \\frac{\\pi}{2}\\right )} = \\sin{(\\Theta)} $`}
+        {`$ \\cos{\\left ( \\theta - \\frac{\\pi}{2}\\right )} = \\sin{(\\theta)} $`}
         .
       </CustomTypography>
       <CustomTypography>
         You will usually see this written as{" "}
-        {`$ \\cos{\\left ( \\frac{\\pi}{2} -\\Theta \\right )} = \\sin{(\\Theta)} $`}
-        . Notice that since {`$ \\cos{(-\\Theta)}=\\cos{(\\Theta)}$`} (the
+        {`$ \\cos{\\left ( \\frac{\\pi}{2} -\\theta \\right )} = \\sin{(\\theta)} $`}
+        . Notice that since {`$ \\cos{(-\\theta)}=\\cos{(\\theta)}$`} (the
         Cosine function is symmetrical across the y-axis) these are equivalent.
       </CustomTypography>
       <CustomTypography>
         Play with the graphs of the Sine and Cosine functions below, and notice
         that the Cosine graph can be transformed into the sine graph by shifting
         it {`$\\frac{\\pi}{2}$`} radians to the right.
+      </CustomTypography>
+      <HandKTrigChart />
+      <CustomTypography>
+        To perform this shift, we replaced the independent variable{" "}
+        {`$ {\\color{${sunsetYellow}} {\\theta}} $`} in the Cosine function with{" "}
+        {`$ {\\color{${sunsetYellow}} {\\left (\\theta - \\frac{\\pi}{2} \\right )}} $`}
+        .
+      </CustomTypography>
+      <CustomTypography>
+        Although this is not a formal; proof, this should be sufficient to
+        intuitively <em>prove</em> this identity to yourself.
       </CustomTypography>
     </SectionCard>
   </>

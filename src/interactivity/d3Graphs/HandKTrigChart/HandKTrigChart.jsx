@@ -8,9 +8,10 @@ import * as d3 from "d3";
 import { useRef, useEffect, useMemo } from "react";
 import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
-import { marksArray } from "../utilities";
+import sinValuesArray from "./sineValues";
+import DisplayEquation from "components/interface/DisplayEquation";
 
-import "./MaclaurinChart.css";
+import "./HandKTrigChart.css";
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;
@@ -28,18 +29,164 @@ const y_scale = d3
   .domain([-y_distance / 2, y_distance / 2])
   .range([height, 0]);
 
+const d_scale = d3
+  .scaleLinear()
+  .domain([0, 6 * Math.PI])
+  .range([0, width]);
+
+const marks = [
+  {
+    value: 0,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>{"$$0$$"}</DisplayEquation>
+    ),
+  },
+  {
+    value: Math.PI / 12,
+  },
+  {
+    value: (2 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{\\pi}{6}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (3 * Math.PI) / 12,
+  },
+  {
+    value: (4 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{\\pi}{3}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (5 * Math.PI) / 12,
+  },
+  {
+    value: (6 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{\\pi}{2}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (7 * Math.PI) / 12,
+  },
+  {
+    value: (8 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{2\\pi}{3}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (9 * Math.PI) / 12,
+  },
+  {
+    value: (10 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{5\\pi}{6}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (11 * Math.PI) / 12,
+  },
+  {
+    value: (12 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>{"$$\\pi$$"}</DisplayEquation>
+    ),
+  },
+  {
+    value: (13 * Math.PI) / 12,
+  },
+  {
+    value: (14 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{7\\pi}{6}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (15 * Math.PI) / 12,
+  },
+  {
+    value: (16 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{4\\pi}{3}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (17 * Math.PI) / 12,
+  },
+  {
+    value: (18 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{3\\pi}{2}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (19 * Math.PI) / 12,
+  },
+  {
+    value: (20 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{5\\pi}{3}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (21 * Math.PI) / 12,
+  },
+  {
+    value: (22 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{11\\pi}{6}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (23 * Math.PI) / 12,
+  },
+  {
+    value: (24 * Math.PI) / 12,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$2\\pi$$"}
+      </DisplayEquation>
+    ),
+  },
+];
+
 const MaclaurinChart = () => {
   const chartRef = useRef(null);
   const movingGraphRef = useRef(null);
   const lineRef = useRef(null);
   const allValuesRef = useRef(null);
   const svgRef = useRef(null);
-  const childRef = useRef(null);
-  const marks = useMemo(() => marksArray(0, 11), []);
+  const eqnDisplayRef = useRef(null);
+  const hLocationRef = useRef(0);
+
+  const cosValues = useMemo(() => cosValuesArray(), []);
+  const sinValues = useMemo(() => sinValuesArray(), []);
 
   // static portion
   useEffect(() => {
-    const cosValues = cosValuesArray();
     allValuesRef.current = allValuesArray();
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
@@ -110,24 +257,28 @@ const MaclaurinChart = () => {
 
     svgRef.current
       .append("path")
-      .datum(cosValues)
+      .datum(sinValues)
       .classed("thick-sunset-magenta-path", true)
       .attr("d", lineRef.current);
 
     movingGraphRef.current = svgRef.current
       .append("path")
-      .datum(allValuesRef.current[0])
+      .datum(cosValues)
       .classed("medium-sunset-yellow-path", true)
       .attr("d", lineRef.current);
-  }, []);
+  }, [cosValues, sinValues]);
 
-  const switchGraphs = (n) => {
-    console.log(lineRef.current(allValuesRef.current[n]));
+  const shiftGraph = () => {
     movingGraphRef.current
       .transition()
-      .duration(300)
-      .attr("d", lineRef.current(allValuesRef.current[n]));
-    childRef.current.setEqn(n);
+      .duration(150)
+      .attr("transform", `translate(${d_scale(hLocationRef.current)},0)`);
+  };
+
+  const updateHValue = (h) => {
+    hLocationRef.current = h;
+    shiftGraph();
+    eqnDisplayRef.current.setEqn(h);
   };
 
   return (
@@ -139,20 +290,20 @@ const MaclaurinChart = () => {
         marginBottom: "10px",
       }}
     >
+      <EqnDisplay ref={eqnDisplayRef} />
       <CanvasCard height={height} width={width}>
         <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
       </CanvasCard>
-      <EqnDisplay ref={childRef} />
       <FormGroup>
         <ControlsCard>
           <ControlsRow>
-            <div>iterations</div>
+            <div>h</div>
             <div>
               <CustomSlider
-                onChange={(_evt, newValue) => switchGraphs(newValue)}
+                onChange={(_evt, newValue) => updateHValue(newValue)}
                 min={0}
-                max={11}
-                step={1}
+                max={2 * Math.PI}
+                step={Math.PI / 12}
                 size="small"
                 marks={marks}
               />

@@ -1,3 +1,3 @@
-import MaclaurinChart from "./MaclaurinChart";
+import HandKTrigChart from "./HandKTrigChart";
 
-export default MaclaurinChart;
+export default HandKTrigChart;

@@ -36,10 +36,10 @@ const MaclaurinChart = () => {
   const svgRef = useRef(null);
   const childRef = useRef(null);
   const marks = useMemo(() => marksArray(0, 11), []);
+  const cosValues = useMemo(() => cosValuesArray(), []);
 
   // static portion
   useEffect(() => {
-    const cosValues = cosValuesArray();
     allValuesRef.current = allValuesArray();
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
@@ -119,10 +119,9 @@ const MaclaurinChart = () => {
       .datum(allValuesRef.current[0])
       .classed("medium-sunset-yellow-path", true)
       .attr("d", lineRef.current);
-  }, []);
+  }, [cosValues]);
 
   const switchGraphs = (n) => {
-    console.log(lineRef.current(allValuesRef.current[n]));
     movingGraphRef.current
       .transition()
       .duration(300)
@@ -139,10 +138,10 @@ const MaclaurinChart = () => {
         marginBottom: "10px",
       }}
     >
+      <EqnDisplay ref={childRef} />
       <CanvasCard height={height} width={width}>
         <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
       </CanvasCard>
-      <EqnDisplay ref={childRef} />
       <FormGroup>
         <ControlsCard>
           <ControlsRow>

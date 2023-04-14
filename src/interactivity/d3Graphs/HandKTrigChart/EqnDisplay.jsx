@@ -11,7 +11,7 @@ const EqnDisplay = forwardRef((_props, ref) => {
   const [eqn, setEqn] = useState(0);
   useImperativeHandle(ref, () => ({
     setEqn: (newEqn) => {
-      setEqn(newEqn);
+      setEqn(Math.round((newEqn * 12) / Math.PI));
     },
   }));
   return (
@@ -19,13 +19,19 @@ const EqnDisplay = forwardRef((_props, ref) => {
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: 70,
+          // flexDirection: "column",
+          justifyContent: "space-around",
+          height: 60,
+          width: "100%",
+          alignItems: "center",
         }}
       >
-        <InlineEquation>{`$ {\\color{${sunsetMagenta}}{y=\\cos(x)}} $`}</InlineEquation>
-        <InlineEquation>{equationArray[eqn]}</InlineEquation>
+        <div style={{ width: 160 }}>
+          <InlineEquation>{`$$ {\\color{${sunsetMagenta}}{y=\\sin{(\\theta)}}} $$`}</InlineEquation>
+        </div>
+        <div style={{ width: 160 }}>
+          <InlineEquation>{equationArray[eqn]}</InlineEquation>
+        </div>
       </div>
     </EquationCard>
   );

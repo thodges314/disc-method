@@ -53,3 +53,13 @@ export const factorialArray = (n) => {
   }
   return array;
 };
+
+const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+
+export const reduceFraction = (numerator, denominator) => {
+  const gcdDenominator = gcd(numerator, denominator);
+  return {
+    numerator: numerator / gcdDenominator,
+    denominator: denominator / gcdDenominator,
+  };
+};
