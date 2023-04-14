@@ -7,12 +7,7 @@ import CustomSlider from "components/interface/CustomSlider";
 import CanvasCard from "components/interface/CanvasCard";
 import { hexToRgba } from "utils/utils";
 import { marksArray } from "../utilities";
-import {
-  // synthSunsetMagenta,
-  synthSunsetYellow,
-  synthCyberPaleBlue,
-  // synthCyberPink,
-} from "interactivity/resources/constants/colors";
+import { synthSunsetYellow } from "interactivity/resources/constants/colors";
 import parabolaValuesArray from "./parabolaValuesArray";
 import EqnDisplay from "./HandKTableEqnPanel";
 
@@ -20,9 +15,7 @@ import { FormGroup } from "@mui/material";
 
 import "./HandKTableGraph.css";
 
-// const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
-// const cyberPink = hexToRgba(synthCyberPink);
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;

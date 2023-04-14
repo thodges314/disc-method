@@ -3,20 +3,13 @@ import * as d3 from "d3";
 import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
 import CustomSlider from "components/interface/CustomSlider";
 import CanvasCard from "components/interface/CanvasCard";
-import { hexToRgba } from "utils/utils";
 import { marksArray } from "../utilities";
-import {
-  synthSunsetYellow,
-  synthCyberPaleBlue,
-} from "interactivity/resources/constants/colors";
 import parabolaValuesArray from "./parabolaValuesArray";
 import EqnDisplay from "./HandKTableEqnPanel2D";
 
 import { FormGroup } from "@mui/material";
 
 import "./HandKTableGraph2D.css";
-
-const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;

@@ -3,25 +3,12 @@ import * as d3 from "d3";
 import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
 import CustomSlider from "components/interface/CustomSlider";
 import CanvasCard from "components/interface/CanvasCard";
-import { hexToRgba } from "utils/utils";
 import { marksArray } from "../utilities";
-import {
-  synthSunsetMagenta,
-  synthSunsetYellow,
-  synthCyberPaleBlue,
-  synthCyberLightBlue,
-  synthSunsetOrange,
-} from "interactivity/resources/constants/colors";
 import EqnDisplay from "./HandKCircleEqnShiftPanel";
 
 import { FormGroup } from "@mui/material";
 
 import "./HandKCircleGraphShift.css";
-
-const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
-const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
-const cyberLightBlue = hexToRgba(synthCyberLightBlue);
-const sunsetOrange = hexToRgba(synthSunsetOrange, 1);
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;
@@ -52,17 +39,6 @@ const HandKCircleGraphShift = () => {
   const movingCircleRef = useRef(null);
   const hLocationRef = useRef(0);
   const kLocationRef = useRef(0);
-
-  const formatValue = (value) => {
-    const nominalValue = Math.round(value * 10000) / 10000;
-    if (nominalValue % 1 === 0) {
-      return d3.format(".0f")(nominalValue);
-    }
-    if (nominalValue % 0.5 === 0) {
-      return d3.format(".1f")(nominalValue);
-    }
-    return d3.format(".4f")(nominalValue);
-  };
 
   useEffect(() => {
     const xAxisGenerator = d3.axisBottom(x_scale);
