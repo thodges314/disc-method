@@ -10,8 +10,9 @@ import { hexToRgba } from "utils/utils";
 import {
   synthSunsetMagenta,
   synthSunsetYellow,
-  synthCyberPaleBlue,
 } from "interactivity/resources/constants/colors";
+
+import "./TaylorChart.css";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
@@ -43,12 +44,24 @@ const TaylorChart = () => {
     const [lnValues, allValuesTruncated] = lnValuesArray();
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
+    const xAxisGridGenerator = d3.axisBottom(x_scale);
+    const yAxisGridGenerator = d3.axisLeft(y_scale);
     lineRef.current = d3
       .line()
       .x((d) => x_scale(d[0]))
       .y((d) => y_scale(d[1]));
-    xAxisGenerator.tickValues([1, 2, 3, 4, 5]);
-    yAxisGenerator.tickValues([-2, -1, 1, 2]);
+    xAxisGenerator.tickValues([1, 2, 3, 4, 5]).tickFormat(d3.format("d"));
+    yAxisGenerator.tickValues([-2, -1, 1, 2]).tickFormat(d3.format("d"));
+    xAxisGridGenerator
+      .tickValues([1, 2, 3, 4, 5])
+      .tickFormat("")
+      .tickSize(height);
+
+    yAxisGridGenerator
+      .tickValues([-2, -1, 1, 2])
+      .tickFormat("")
+      .tickSize(-width);
+
     svgRef.current = d3
       .select(chartRef.current)
       .attr("height", height)
@@ -56,49 +69,39 @@ const TaylorChart = () => {
       .attr("fill", "none")
       .attr("fill-opacity", 0);
 
-    const xAxis = svgRef.current
+    svgRef.current
       .append("g")
-      .attr("class", "x-axis")
+      .classed("grid-lines", true)
+      .call(yAxisGridGenerator);
+
+    svgRef.current
+      .append("g")
+      .classed("grid-lines", true)
+      .call(xAxisGridGenerator);
+
+    svgRef.current
+      .append("g")
+      .attr("class", "axis")
       .attr("transform", `translate(0,${height / 2})`)
       .call(xAxisGenerator);
-    const yAxis = svgRef.current
+
+    svgRef.current
       .append("g")
-      .attr("class", "y-axis")
+      .attr("class", "axis")
       .attr("transform", `translate(${x_scale(0)},0)`)
       .call(yAxisGenerator);
-
-    xAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
-    xAxis
-      .selectAll("text")
-      .attr("fill", hexToRgba(synthCyberPaleBlue))
-      .attr("fill-opacity", 1)
-      .attr("font-size", "1.5em");
-    xAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
-    yAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
-    yAxis
-      .selectAll("text")
-      .attr("fill", hexToRgba(synthCyberPaleBlue))
-      .attr("fill-opacity", 1)
-      .attr("font-size", "1.5em");
-    yAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
 
     svgRef.current
       .append("path")
       .datum(lnValues)
-      .attr("stroke", sunsetMagenta)
-      .attr("stroke-width", 5)
-      .attr("d", lineRef.current)
-      .attr("fill", "none")
-      .attr("fill-opacity", 0);
+      .classed("thick-sunset-magenta-path", true)
+      .attr("d", lineRef.current);
 
     svgRef.current
       .append("path")
       .datum(allValuesTruncated)
-      .attr("stroke", sunsetYellow)
-      .attr("stroke-width", 2.75)
-      .attr("d", lineRef.current)
-      .attr("fill-opacity", 0)
-      .attr("fill", "none");
+      .classed("medium-thick-sunset-yellow-path", true)
+      .attr("d", lineRef.current);
   }, []);
 
   return (

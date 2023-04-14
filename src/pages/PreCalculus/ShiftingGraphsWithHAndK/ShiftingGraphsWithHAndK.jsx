@@ -251,6 +251,18 @@ const Component = () => (
         {`$ {\\color{${sunsetYellow}} {(y-(-2)) = (y+2)}} $`}.
       </CustomTypography>
       <HandKCircleGraphShift />
+      <CustomTypography>
+        You will have to do some algebra to isolate the y and put this equation
+        into a form suitable for a graphing calculator.
+      </CustomTypography>
+      <DisplayEquation>{`$$4=(x-1)^2+(y+2)^2$$`}</DisplayEquation>
+      <DisplayEquation>{`$$(y+2)^2 = 4 - (x-1)^2$$`}</DisplayEquation>
+      <DisplayEquation>{`$$y+2 = \\pm \\sqrt{4-(x-1)^2} $$`}</DisplayEquation>
+      <DisplayEquation>{`$$y =  -2 \\pm \\sqrt{4-(x-1)^2} $$`}</DisplayEquation>
+      <CustomTypography>
+        Then you will have to enter these as two separate functions, one for the
+        positive root and one for the negative root.
+      </CustomTypography>
     </SectionCard>
     <SectionCard>
       <Typography variant="h6" width="100%">
@@ -265,7 +277,7 @@ const Component = () => (
         You will usually see this written as{" "}
         {`$ \\cos{\\left ( \\frac{\\pi}{2} -\\Theta \\right )} = \\sin{(\\Theta)} $`}
         . Notice that since {`$ \\cos{(-\\Theta)}=\\cos{(\\Theta)}$`} (the
-        cosine function is symmetrical across the y-axis) these are equivalent.
+        Cosine function is symmetrical across the y-axis) these are equivalent.
       </CustomTypography>
       <CustomTypography>
         Play with the graphs of the sine and cosine functions below, and notice

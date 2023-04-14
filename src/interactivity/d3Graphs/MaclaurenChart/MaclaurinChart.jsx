@@ -9,15 +9,8 @@ import { useRef, useEffect, useMemo } from "react";
 import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
 import { marksArray } from "../utilities";
-import { hexToRgba } from "utils/utils";
-import {
-  synthSunsetMagenta,
-  synthSunsetYellow,
-  synthCyberPaleBlue,
-} from "interactivity/resources/constants/colors";
 
-const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
-const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
+import "./MaclaurinChart.css";
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;
@@ -50,6 +43,8 @@ const MaclaurinChart = () => {
     allValuesRef.current = allValuesArray();
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
+    const xAxisGridGenerator = d3.axisBottom(x_scale);
+    const yAxisGridGenerator = d3.axisLeft(y_scale);
     lineRef.current = d3
       .line()
       .x((d) => x_scale(d[0]))
@@ -65,7 +60,25 @@ const MaclaurinChart = () => {
         4 * Math.PI,
       ])
       .tickFormat((_d, i) => ["-2π", "-1π", "", "1π", "2π", "3π", "4π"][i]);
-    yAxisGenerator.tickValues([-2, -1, 1, 2]);
+    yAxisGenerator.tickValues([-2, -1, 1, 2]).tickFormat(d3.format("d"));
+    xAxisGridGenerator
+      .tickValues([
+        -2 * Math.PI,
+        -1 * Math.PI,
+        0,
+        1 * Math.PI,
+        2 * Math.PI,
+        3 * Math.PI,
+        4 * Math.PI,
+      ])
+      .tickFormat("")
+      .tickSize(height);
+
+    yAxisGridGenerator
+      .tickValues([-2, -1, 1, 2])
+      .tickFormat("")
+      .tickSize(-width);
+
     svgRef.current = d3
       .select(chartRef.current)
       .attr("height", height)
@@ -73,51 +86,39 @@ const MaclaurinChart = () => {
       .attr("fill", "none")
       .attr("fill-opacity", 0);
 
-    const xAxis = svgRef.current
+    svgRef.current
       .append("g")
-      .attr("class", "x-axis")
+      .classed("grid-lines", true)
+      .call(yAxisGridGenerator);
+
+    svgRef.current
+      .append("g")
+      .classed("orange-grid-lines", true)
+      .call(xAxisGridGenerator);
+
+    svgRef.current
+      .append("g")
+      .attr("class", "axis")
       .attr("transform", `translate(0,${height / 2})`)
       .call(xAxisGenerator);
 
-    xAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
-    xAxis
-      .selectAll("text")
-      .attr("fill", hexToRgba(synthCyberPaleBlue))
-      .attr("fill-opacity", 1)
-      .attr("font-size", "1.5em");
-    xAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
-
-    const yAxis = svgRef.current
+    svgRef.current
       .append("g")
-      .attr("class", "y-axis")
+      .attr("class", "axis")
       .attr("transform", `translate(${x_scale(0)},0)`)
       .call(yAxisGenerator);
-
-    yAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
-    yAxis
-      .selectAll("text")
-      .attr("fill", hexToRgba(synthCyberPaleBlue))
-      .attr("fill-opacity", 1)
-      .attr("font-size", "1.5em");
-    yAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
 
     svgRef.current
       .append("path")
       .datum(cosValues)
-      .attr("stroke", sunsetMagenta)
-      .attr("stroke-width", 5)
-      .attr("d", lineRef.current)
-      .attr("fill", "none")
-      .attr("fill-opacity", 0);
+      .classed("thick-sunset-magenta-path", true)
+      .attr("d", lineRef.current);
 
     movingGraphRef.current = svgRef.current
       .append("path")
       .datum(allValuesRef.current[0])
-      .attr("stroke", sunsetYellow)
-      .attr("stroke-width", 1.5)
-      .attr("d", lineRef.current)
-      .attr("fill-opacity", 0)
-      .attr("fill", "none");
+      .classed("medium-sunset-yellow-path", true)
+      .attr("d", lineRef.current);
   }, []);
 
   const switchGraphs = (n) => {
