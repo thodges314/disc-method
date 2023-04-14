@@ -79,13 +79,9 @@
   fill: none;
 }
 
-.thick-line {
+.sunset-yellow-circle {
+  stroke: #ffd319;
   stroke-width: 2px;
   fill-opacity: 0;
   fill: none;
-}
-
-.label {
-  font-size: 1em;
-  fill-opacity: 1;
 }

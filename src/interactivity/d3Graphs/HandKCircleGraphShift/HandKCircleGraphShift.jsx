@@ -6,52 +6,65 @@ import CanvasCard from "components/interface/CanvasCard";
 import { hexToRgba } from "utils/utils";
 import { marksArray } from "../utilities";
 import {
+  synthSunsetMagenta,
   synthSunsetYellow,
   synthCyberPaleBlue,
+  synthCyberLightBlue,
+  synthSunsetOrange,
 } from "interactivity/resources/constants/colors";
-import parabolaValuesArray from "./parabolaValuesArray";
-import EqnDisplay from "./HandKTableEqnPanel2D";
+import EqnDisplay from "./HandKCircleEqnShiftPanel";
 
 import { FormGroup } from "@mui/material";
 
-import "./HandKTableGraph2D.css";
+import "./HandKCircleGraphShift.css";
 
+const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
+const cyberLightBlue = hexToRgba(synthCyberLightBlue);
+const sunsetOrange = hexToRgba(synthSunsetOrange, 1);
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
 const height = 400;
 const width = height * goldenRatio;
-const x_distance = 11;
+const x_distance = 13;
 const y_distance = x_distance / goldenRatio;
 
-const x_scale = d3.scaleLinear().domain([-5.5, 5.5]).range([0, width]);
+const x_scale = d3.scaleLinear().domain([-6.5, 6.5]).range([0, width]);
 const y_scale = d3
   .scaleLinear()
-  .domain([-y_distance / 5, (y_distance * 4) / 5])
+  .domain([-y_distance / 2, y_distance / 2])
   .range([height, 0]);
 
-const numbersXMinusH = [
-  -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-];
+const d_Scale = d3.scaleLinear().domain([0, 13]).range([0, width]);
 
-const indexToNumbersScale = d3.scaleLinear().domain([0, 20]).range([-10, 10]);
+const numbersRadius = [];
+for (let i = 0; i <= 24; i++) {
+  numbersRadius.push((i * Math.PI) / 13);
+}
 
-const HandKTableGraph = () => {
+const HandKCircleGraphShift = () => {
   const chartRef = useRef(null);
-  const movingGraphRef = useRef(null);
   const lineRef = useRef(null);
   const svgRef = useRef(null);
   const marks = useMemo(() => marksArray(-5, 5), []);
-  const numbersXMinusHRef = useRef(null);
-  const numbersXMinusHSqrRef = useRef(null);
-  const placeForNumbersXMinusHRef = useRef(null);
-  const placeForNumbersXMinusHSqrRef = useRef(null);
+
   const eqnDisplayRef = useRef(null);
+  const movingCircleRef = useRef(null);
   const hLocationRef = useRef(0);
   const kLocationRef = useRef(0);
 
+  const formatValue = (value) => {
+    const nominalValue = Math.round(value * 10000) / 10000;
+    if (nominalValue % 1 === 0) {
+      return d3.format(".0f")(nominalValue);
+    }
+    if (nominalValue % 0.5 === 0) {
+      return d3.format(".1f")(nominalValue);
+    }
+    return d3.format(".4f")(nominalValue);
+  };
+
   useEffect(() => {
-    const parabolaValues = parabolaValuesArray();
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
     const xAxisGridGenerator = d3.axisBottom(x_scale);
@@ -61,16 +74,19 @@ const HandKTableGraph = () => {
       .x((d) => x_scale(d[0]))
       .y((d) => y_scale(d[1]));
     xAxisGenerator
+      .tickValues([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6])
+      .tickFormat(d3.format("d"));
+    yAxisGenerator
       .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
       .tickFormat(d3.format("d"));
-    yAxisGenerator.tickValues([-1, 1, 2, 3, 4, 5]).tickFormat(d3.format("d"));
+
     xAxisGridGenerator
-      .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
+      .tickValues([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6])
       .tickFormat("")
       .tickSize(height);
 
     yAxisGridGenerator
-      .tickValues([-1, 1, 2, 3, 4, 5])
+      .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
       .tickFormat("")
       .tickSize(-width);
 
@@ -94,7 +110,7 @@ const HandKTableGraph = () => {
     svgRef.current
       .append("g")
       .classed("axis", true)
-      .attr("transform", `translate(0,${(height * 4) / 5})`)
+      .attr("transform", `translate(0,${height / 2})`)
       .call(xAxisGenerator);
 
     svgRef.current
@@ -103,49 +119,22 @@ const HandKTableGraph = () => {
       .attr("transform", `translate(${x_scale(0)},0)`)
       .call(yAxisGenerator);
 
-    movingGraphRef.current = svgRef.current
-      .append("path")
-      .datum(parabolaValues)
-      .classed("medium-sunset-yellow-path", true)
-      .attr("d", lineRef.current);
-
-    numbersXMinusHRef.current = d3
-      .select(placeForNumbersXMinusHRef.current)
-      .selectAll("div")
-      .data(numbersXMinusH)
-      .enter()
-      .append("div")
-      .text((d) => d)
-      .classed("numbers-x-minus-h", true)
-      .each((_d, i, nodes) =>
-        d3
-          .select(nodes[i])
-          .style("left", `${50 * (indexToNumbersScale(i) + 5)}px`)
-      );
-
-    numbersXMinusHSqrRef.current = d3
-      .select(placeForNumbersXMinusHSqrRef.current)
-      .selectAll("div")
-      .data(numbersXMinusH)
-      .enter()
-      .append("div")
-      .text((d) => d ** 2)
-      .classed("numbers-x-minus-h-squared", true)
-      .each((_d, i, nodes) =>
-        d3
-          .select(nodes[i])
-          .style("left", `${50 * (indexToNumbersScale(i) + 5)}px`)
-      );
+    movingCircleRef.current = svgRef.current
+      .append("circle")
+      .attr("cx", width / 2)
+      .attr("cy", height / 2)
+      .attr("r", d_Scale(2))
+      .classed("sunset-yellow-circle", true);
   });
 
   const shiftGraph = () => {
-    movingGraphRef.current
+    movingCircleRef.current
       .transition()
       .duration(750)
       .attr(
         "transform",
         `translate(${x_scale(hLocationRef.current) - width / 2},${
-          y_scale(kLocationRef.current) - (height * 4) / 5
+          y_scale(kLocationRef.current) - height / 2
         })`
       );
   };
@@ -222,4 +211,4 @@ const HandKTableGraph = () => {
   );
 };
 
-export default HandKTableGraph;
+export default HandKCircleGraphShift;

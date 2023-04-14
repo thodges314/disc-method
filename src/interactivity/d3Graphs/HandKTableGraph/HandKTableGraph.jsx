@@ -110,6 +110,8 @@ const HandKTableGraph = () => {
     const parabolaValues = parabolaValuesArray();
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
+    const xAxisGridGenerator = d3.axisBottom(x_scale);
+    const yAxisGridGenerator = d3.axisLeft(y_scale);
     lineRef.current = d3
       .line()
       .x((d) => x_scale(d[0]))
@@ -118,6 +120,15 @@ const HandKTableGraph = () => {
       .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
       .tickFormat(d3.format("d"));
     yAxisGenerator.tickValues([-1, 1, 2, 3, 4, 5]).tickFormat(d3.format("d"));
+    xAxisGridGenerator
+      .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
+      .tickFormat("")
+      .tickSize(height);
+
+    yAxisGridGenerator
+      .tickValues([-1, 1, 2, 3, 4, 5])
+      .tickFormat("")
+      .tickSize(-width);
 
     svgRef.current = d3
       .select(chartRef.current)
@@ -126,42 +137,33 @@ const HandKTableGraph = () => {
       .attr("fill", "none")
       .attr("fill-opacity", 0);
 
-    const xAxis = svgRef.current
+    svgRef.current
       .append("g")
-      .classed("x-axis", true)
+      .classed("grid-lines", true)
+      .call(yAxisGridGenerator);
+
+    svgRef.current
+      .append("g")
+      .classed("grid-lines", true)
+      .call(xAxisGridGenerator);
+
+    svgRef.current
+      .append("g")
+      .classed("axis", true)
       .attr("transform", `translate(0,${(height * 4) / 5})`)
       .call(xAxisGenerator);
 
-    xAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
-    xAxis
-      .selectAll("text")
-      .attr("fill", hexToRgba(synthCyberPaleBlue))
-      .attr("fill-opacity", 1)
-      .attr("font-size", "1.5em");
-    xAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
-
-    const yAxis = svgRef.current
+    svgRef.current
       .append("g")
-      .classed("y-axis", true)
+      .classed("axis", true)
       .attr("transform", `translate(${x_scale(0)},0)`)
       .call(yAxisGenerator);
-
-    yAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
-    yAxis
-      .selectAll("text")
-      .attr("fill", hexToRgba(synthCyberPaleBlue))
-      .attr("fill-opacity", 1)
-      .attr("font-size", "1.5em");
-    yAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
 
     movingGraphRef.current = svgRef.current
       .append("path")
       .datum(parabolaValues)
-      .attr("stroke", sunsetYellow)
-      .attr("stroke-width", 1.5)
-      .attr("d", lineRef.current)
-      .attr("fill-opacity", 0)
-      .attr("fill", "none");
+      .classed("medium-sunset-yellow-path", true)
+      .attr("d", lineRef.current);
 
     numbersXMinusHRef.current = d3
       .select(placeForNumbersXMinusHRef.current)

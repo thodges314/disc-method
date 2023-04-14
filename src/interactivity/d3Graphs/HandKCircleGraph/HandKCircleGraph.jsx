@@ -8,8 +8,6 @@ import { marksArray } from "../utilities";
 import {
   synthSunsetMagenta,
   synthSunsetYellow,
-  synthCyberPaleBlue,
-  synthCyberLightBlue,
   synthSunsetOrange,
 } from "interactivity/resources/constants/colors";
 import EqnDisplay from "./HandKCircleEqnPanel";
@@ -20,7 +18,6 @@ import "./HandKCircleGraph.css";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
-const cyberLightBlue = hexToRgba(synthCyberLightBlue);
 const sunsetOrange = hexToRgba(synthSunsetOrange, 1);
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
@@ -111,6 +108,8 @@ const HandKCircleGraph = () => {
   useEffect(() => {
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
+    const xAxisGridGenerator = d3.axisBottom(x_scale);
+    const yAxisGridGenerator = d3.axisLeft(y_scale);
     lineRef.current = d3
       .line()
       .x((d) => x_scale(d[0]))
@@ -122,6 +121,16 @@ const HandKCircleGraph = () => {
       .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
       .tickFormat(d3.format("d"));
 
+    xAxisGridGenerator
+      .tickValues([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6])
+      .tickFormat("")
+      .tickSize(height);
+
+    yAxisGridGenerator
+      .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
+      .tickFormat("")
+      .tickSize(-width);
+
     svgRef.current = d3
       .select(chartRef.current)
       .attr("height", height)
@@ -129,43 +138,34 @@ const HandKCircleGraph = () => {
       .attr("fill", "none")
       .attr("fill-opacity", 0);
 
-    const xAxis = svgRef.current
+    svgRef.current
       .append("g")
-      .classed("x-axis", true)
+      .classed("grid-lines", true)
+      .call(yAxisGridGenerator);
+
+    svgRef.current
+      .append("g")
+      .classed("grid-lines", true)
+      .call(xAxisGridGenerator);
+
+    svgRef.current
+      .append("g")
+      .classed("axis", true)
       .attr("transform", `translate(0,${height / 2})`)
       .call(xAxisGenerator);
 
-    xAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
-    xAxis
-      .selectAll("text")
-      .attr("fill", hexToRgba(synthCyberPaleBlue))
-      .attr("fill-opacity", 1)
-      .attr("font-size", "1.5em");
-    xAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
-
-    const yAxis = svgRef.current
+    svgRef.current
       .append("g")
-      .classed("y-axis", true)
+      .classed("axis", true)
       .attr("transform", `translate(${x_scale(0)},0)`)
       .call(yAxisGenerator);
-
-    yAxis.select(".domain").attr("stroke", hexToRgba(synthCyberPaleBlue));
-    yAxis
-      .selectAll("text")
-      .attr("fill", hexToRgba(synthCyberPaleBlue))
-      .attr("fill-opacity", 1)
-      .attr("font-size", "1.5em");
-    yAxis.selectAll("line").attr("stroke", hexToRgba(synthCyberPaleBlue));
 
     movingCircleRef.current = svgRef.current
       .append("circle")
       .attr("cx", width / 2)
       .attr("cy", height / 2)
       .attr("r", d_Scale(2))
-      .attr("stroke", cyberLightBlue)
-      .attr("stroke-width", 2)
-      .attr("fill-opacity", 0)
-      .attr("fill", "none");
+      .classed("cyber-light-blue-circle", true);
 
     cosLineRef.current = svgRef.current
       .append("path")
@@ -173,11 +173,9 @@ const HandKCircleGraph = () => {
         [0, 0],
         [2, 0],
       ])
+      .classed("thick-line", true)
       .attr("stroke", sunsetMagenta)
-      .attr("stroke-width", 2)
-      .attr("d", lineRef.current)
-      .attr("fill-opacity", 0)
-      .attr("fill", "none");
+      .attr("d", lineRef.current);
 
     sinLineRef.current = svgRef.current
       .append("path")
@@ -185,11 +183,9 @@ const HandKCircleGraph = () => {
         [2, 0],
         [2, 0],
       ])
+      .classed("thick-line", true)
       .attr("stroke", sunsetYellow)
-      .attr("stroke-width", 2)
-      .attr("d", lineRef.current)
-      .attr("fill-opacity", 0)
-      .attr("fill", "none");
+      .attr("d", lineRef.current);
 
     radialLineRef.current = svgRef.current
       .append("path")
@@ -197,36 +193,33 @@ const HandKCircleGraph = () => {
         [0, 0],
         [2, 0],
       ])
+      .classed("thick-line", true)
       .attr("stroke", sunsetOrange)
-      .attr("stroke-width", 2)
-      .attr("d", lineRef.current)
-      .attr("fill-opacity", 0)
-      .attr("fill", "none");
+      .attr("d", lineRef.current);
 
     cosLineLabelRef.current = svgRef.current
       .append("text")
+      .classed("label", true)
       .text(`${2}`)
       .attr("x", positionCosineText(0)[0])
       .attr("y", positionCosineText(0)[1])
-      .attr("fill", sunsetMagenta)
-      .attr("fill-opacity", 1)
-      .attr("font-size", "1em");
+      .attr("fill", sunsetMagenta);
 
     sinLineLabelRef.current = svgRef.current
       .append("text")
+      .classed("label", true)
       .text(`${0}`)
       .attr("x", positionSineText(0)[0])
       .attr("y", positionSineText(0)[1])
-      .attr("fill", sunsetYellow)
-      .attr("fill-opacity", 1);
+      .attr("fill", sunsetYellow);
 
     radiusLineLabelRef.current = svgRef.current
       .append("text")
+      .classed("label", true)
       .text(`${2}`)
       .attr("x", positionRadiusText(0)[0])
       .attr("y", positionRadiusText(0)[1])
-      .attr("fill", sunsetOrange)
-      .attr("fill-opacity", 1);
+      .attr("fill", sunsetOrange);
   });
 
   const shiftGraph = () => {

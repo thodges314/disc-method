@@ -6,10 +6,10 @@ const equationArray = [];
 for (let h = -5; h <= 5; h++) {
   equationArray.push([]);
   for (let k = -5; k <= 5; k++) {
-    const yPart = k < 0 ? `(y+${-k}) = ` : k == 0 ? `y = ` : `(y-${k}) = `;
+    const yPart = k < 0 ? `(y+${-k})^2` : k == 0 ? `y^2` : `(y-${k})^2`;
     const xPart = h < 0 ? `(x+${-h})^2` : h == 0 ? `x^2` : `(x-${h})^2`;
     equationArray[h + 5].push(
-      `$$ {\\color{${sunsetYellow}}{${yPart}${xPart}}} $$`
+      `$$ {\\color{${sunsetYellow}}{4=${xPart}+${yPart}}} $$`
     );
   }
 }

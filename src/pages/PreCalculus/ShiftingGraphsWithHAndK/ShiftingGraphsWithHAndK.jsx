@@ -7,6 +7,7 @@ import DisplayEquation from "components/interface/DisplayEquation";
 import HandKTableGraph from "interactivity/d3Graphs/HandKTableGraph";
 import HandKTableGraph2D from "interactivity/d3Graphs/HandKTableGraph2D";
 import HandKCircleGraph from "interactivity/d3Graphs/HandKCircleGraph";
+import HandKCircleGraphShift from "interactivity/d3Graphs/HandKCircleGraphShift";
 
 import {
   synthSunsetMagenta,
@@ -240,15 +241,36 @@ const Component = () => (
       </CustomTypography>
       <HandKCircleGraph />
       <CustomTypography>
-        A circle with radius {`$2$`} will have the equation{" "}
-        {`$4^2 = x^2 + y^2$`}{" "}
+        A circle with radius {`$2$`} will have the equation {`$4 = x^2 + y^2$`}{" "}
       </CustomTypography>
       <CustomTypography>
         To shift this circle to the right by {`$1$`}, we have to replace{" "}
         {`$ {\\color{${sunsetMagenta}} {x}} $`} with{" "}
         {`$ {\\color{${sunsetMagenta}} {(x-1)}} $`}. To shift the circle down by{" "}
         {`$2$`}, we have to replace {`$ {\\color{${sunsetYellow}} {y}} $`} with{" "}
-        {`$ {\\color{${sunsetYellow}} {(y-2)}} $`}.
+        {`$ {\\color{${sunsetYellow}} {(y-(-2)) = (y+2)}} $`}.
+      </CustomTypography>
+      <HandKCircleGraphShift />
+    </SectionCard>
+    <SectionCard>
+      <Typography variant="h6" width="100%">
+        Example with Trigonometry
+      </Typography>
+      <CustomTypography>
+        Establish the identity{" "}
+        {`$ \\cos{\\left ( \\Theta - \\frac{\\pi}{2}\\right )} = \\sin{(\\Theta)} $`}
+        .
+      </CustomTypography>
+      <CustomTypography>
+        You will usually see this written as{" "}
+        {`$ \\cos{\\left ( \\frac{\\pi}{2} -\\Theta \\right )} = \\sin{(\\Theta)} $`}
+        . Notice that since {`$ \\cos{(-\\Theta)}=\\cos{(\\Theta)}$`} (the
+        cosine function is symmetrical across the y-axis) these are equivalent.
+      </CustomTypography>
+      <CustomTypography>
+        Play with the graphs of the sine and cosine functions below, and notice
+        that the cosine graph can be transformed into the sine graph by shifting
+        it {`$\\frac{\\pi}{2}$`} radians to the right.
       </CustomTypography>
     </SectionCard>
   </>
