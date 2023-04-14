@@ -200,18 +200,17 @@ const Component = () => (
       </CustomTypography>
       <DisplayEquation>{`$$ {\\color{${sunsetYellow}} {(y-1)}} = {\\color{${sunsetMagenta}} {(x-2)}}^2 $$`}</DisplayEquation>
       <CustomTypography>
-        Before drawing this or entering it into a graphing calculator, we will
-        want to isolate the {`$ {\\color{${sunsetYellow}} {y}} $`} on one side
-        of the equation.
-      </CustomTypography>
-      <DisplayEquation>{`$$ y{\\color{${sunsetViolet}} { - 1}} = (x-2)^2 $$`}</DisplayEquation>
-      <DisplayEquation>{`$$ y = (x-2)^2{\\color{${sunsetViolet}} { + 1}} $$`}</DisplayEquation>
-      <CustomTypography>
         Fiddle with the demo below to get an idea for using both{" "}
         {`$ {\\color{${sunsetMagenta}} {(x-h)}} $`} and{" "}
         {`$ {\\color{${sunsetYellow}} {(y-k)}} $`} to shift your graph.
       </CustomTypography>
       <HandKTableGraph2D />
+      <CustomTypography>
+        Before entering this into a graphing calculator, we will want to isolate
+        the y on one side of the equation.
+      </CustomTypography>
+      <DisplayEquation>{`$$ y - 1 = (x-2)^2 $$`}</DisplayEquation>
+      <DisplayEquation>{`$$ y = (x-2)^2 + 1 $$`}</DisplayEquation>
     </SectionCard>
     <SectionCard>
       <Typography variant="h6" width="100%">
@@ -280,8 +279,8 @@ const Component = () => (
         Cosine function is symmetrical across the y-axis) these are equivalent.
       </CustomTypography>
       <CustomTypography>
-        Play with the graphs of the sine and cosine functions below, and notice
-        that the cosine graph can be transformed into the sine graph by shifting
+        Play with the graphs of the Sine and Cosine functions below, and notice
+        that the Cosine graph can be transformed into the sine graph by shifting
         it {`$\\frac{\\pi}{2}$`} radians to the right.
       </CustomTypography>
     </SectionCard>

@@ -16,6 +16,9 @@ import { FormGroup } from "@mui/material";
 
 import "./HandKCircleGraph.css";
 
+const STARTING_ANGLE = Math.PI / 6;
+const STARTING_RADIUS = 2;
+
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 const sunsetOrange = hexToRgba(synthSunsetOrange, 1);
@@ -50,9 +53,9 @@ const HandKCircleGraph = () => {
   const sinLineRef = useRef(null);
   const radiusRef = useRef(2);
   const angleRef = useRef(0);
-  const lastAngleRef = useRef(0);
+  const lastAngleRef = useRef(STARTING_ANGLE);
   const radialLineRef = useRef();
-  const lastRadiusRef = useRef(2);
+  const lastRadiusRef = useRef(STARTING_RADIUS);
   const cosLineLabelRef = useRef(null);
   const sinLineLabelRef = useRef(null);
   const radiusLineLabelRef = useRef(null);
@@ -171,7 +174,7 @@ const HandKCircleGraph = () => {
       .append("path")
       .datum([
         [0, 0],
-        [2, 0],
+        [radiusRef.current * Math.cos(lastAngleRef.current), 0],
       ])
       .classed("thick-line", true)
       .attr("stroke", sunsetMagenta)
@@ -180,8 +183,11 @@ const HandKCircleGraph = () => {
     sinLineRef.current = svgRef.current
       .append("path")
       .datum([
-        [2, 0],
-        [2, 0],
+        [radiusRef.current * Math.cos(lastAngleRef.current), 0],
+        [
+          radiusRef.current * Math.cos(lastAngleRef.current),
+          radiusRef.current * Math.sin(lastAngleRef.current),
+        ],
       ])
       .classed("thick-line", true)
       .attr("stroke", sunsetYellow)
@@ -200,26 +206,39 @@ const HandKCircleGraph = () => {
     cosLineLabelRef.current = svgRef.current
       .append("text")
       .classed("label", true)
-      .text(`${2}`)
-      .attr("x", positionCosineText(0)[0])
-      .attr("y", positionCosineText(0)[1])
+      .text(`${formatValue(2 * Math.cos(lastAngleRef.current))}`)
+      .attr("x", positionCosineText(lastAngleRef.current)[0])
+      .attr("y", positionCosineText(lastAngleRef.current)[1])
       .attr("fill", sunsetMagenta);
 
     sinLineLabelRef.current = svgRef.current
       .append("text")
       .classed("label", true)
-      .text(`${0}`)
-      .attr("x", positionSineText(0)[0])
-      .attr("y", positionSineText(0)[1])
+      .text(`${formatValue(2 * Math.sin(lastAngleRef.current))}`)
+      .attr("x", positionSineText(lastAngleRef.current)[0])
+      .attr("y", positionSineText(lastAngleRef.current)[1])
       .attr("fill", sunsetYellow);
 
     radiusLineLabelRef.current = svgRef.current
       .append("text")
       .classed("label", true)
-      .text(`${2}`)
-      .attr("x", positionRadiusText(0)[0])
-      .attr("y", positionRadiusText(0)[1])
+      .text(`${radiusRef.current}`)
+      .attr("x", positionRadiusText(lastAngleRef.current)[0])
+      .attr("y", positionRadiusText(lastAngleRef.current)[1])
       .attr("fill", sunsetOrange);
+
+    const bbBoxRadialLine = radialLineRef.current.node().getBBox();
+
+    const { x: x_middle, y: y_middle } = bbBoxRadialLine;
+
+    const interpolateRotate = d3.interpolateString(
+      `rotate(${0},${x_middle},${y_middle})`,
+      `rotate(${-30},${x_middle},${y_middle})`
+    );
+    radialLineRef.current
+      .transition()
+      .duration(0)
+      .attrTween("transform", () => interpolateRotate);
   });
 
   const shiftGraph = () => {
@@ -421,7 +440,7 @@ const HandKCircleGraph = () => {
                   min={0}
                   max={2 * Math.PI}
                   step={Math.PI / 24}
-                  defaultValue={0}
+                  defaultValue={STARTING_ANGLE}
                   size="small"
                 />
               </div>
@@ -434,7 +453,7 @@ const HandKCircleGraph = () => {
                   min={1}
                   max={4}
                   step={1}
-                  defaultValue={2}
+                  defaultValue={STARTING_RADIUS}
                   size="small"
                   marks={radiusMarks}
                 />
