@@ -39,6 +39,11 @@ const finishedPages = [
     </CustomLink>,
   ],
   [
+    <CustomLink href="/Derivatives/ConstantFunction">
+      Derivatives - Constant Function
+    </CustomLink>,
+  ],
+  [
     <CustomLink href="/Derivatives/ConstantMultiple">
       Derivatives - Constant Multiple
     </CustomLink>,

@@ -24,10 +24,6 @@
   text-align: center;
 }
 
-.inactive-number {
-  display: none;
-}
-
 .tableNumber {
   height: 50px;
   width: 49px;
@@ -37,15 +33,8 @@
   justify-content: center;
 }
 
-.dummyBlock {
-  height: 50px;
-  width: 49px;
-  padding: 0;
-  position: absolute;
-}
-
 .placeForNumbers {
-  height: 50px;
+  height: 500px;
   width: 550px;
   padding: 0;
   margin: 0;
@@ -70,13 +59,6 @@
 
 .axis line {
   stroke: #93c8c4;
-}
-
-.cyber-light-blue-circle {
-  stroke: #0b4abd;
-  stroke-width: 2px;
-  fill-opacity: 0;
-  fill: none;
 }
 
 .medium-sunset-yellow-path {

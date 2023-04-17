@@ -1,18 +1,12 @@
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect } from "react";
 import * as d3 from "d3";
-import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
-import CustomSlider from "components/interface/CustomSlider";
 import CanvasCard from "components/interface/CanvasCard";
-import { marksArray } from "../utilities";
-import parabolaValuesArray from "./parabolaValuesArray";
-import EqnDisplay from "./HandKTableEqnPanel2D";
+import EqnDisplay from "./ConstantFunctionEqnPanel";
 
-import { FormGroup } from "@mui/material";
-
-import "./HandKTableGraph2D.css";
+import "./ConstantFunctionGraph.css";
 
 const goldenRatio = (1 + 5 ** 0.5) / 2;
-const height = 400;
+const height = 200;
 const width = height * goldenRatio;
 const x_distance = 11;
 const y_distance = x_distance / goldenRatio;
@@ -23,18 +17,13 @@ const y_scale = d3
   .domain([-y_distance / 5, (y_distance * 4) / 5])
   .range([height, 0]);
 
-const HandKTableGraph = () => {
+const ConstantFunctionGraph = () => {
   const chartRef = useRef(null);
   const movingGraphRef = useRef(null);
   const lineRef = useRef(null);
   const svgRef = useRef(null);
-  const marks = useMemo(() => marksArray(-5, 5), []);
-  const eqnDisplayRef = useRef(null);
-  const hLocationRef = useRef(0);
-  const kLocationRef = useRef(0);
 
   useEffect(() => {
-    const parabolaValues = parabolaValuesArray();
     const xAxisGenerator = d3.axisBottom(x_scale);
     const yAxisGenerator = d3.axisLeft(y_scale);
     const xAxisGridGenerator = d3.axisBottom(x_scale);
@@ -88,34 +77,13 @@ const HandKTableGraph = () => {
 
     movingGraphRef.current = svgRef.current
       .append("path")
-      .datum(parabolaValues)
+      .datum([
+        [-6, 4],
+        [6, 4],
+      ])
       .classed("medium-sunset-yellow-path", true)
       .attr("d", lineRef.current);
   });
-
-  const shiftGraph = () => {
-    movingGraphRef.current
-      .transition()
-      .duration(750)
-      .attr(
-        "transform",
-        `translate(${x_scale(hLocationRef.current) - width / 2},${
-          y_scale(kLocationRef.current) - (height * 4) / 5
-        })`
-      );
-  };
-
-  const updateHValue = (h) => {
-    hLocationRef.current = h;
-    shiftGraph();
-    eqnDisplayRef.current.setEqnH(h + 5);
-  };
-
-  const updateKValue = (k) => {
-    kLocationRef.current = k;
-    shiftGraph();
-    eqnDisplayRef.current.setEqnK(k + 5);
-  };
 
   return (
     <>
@@ -127,54 +95,13 @@ const HandKTableGraph = () => {
           marginBottom: "10px",
         }}
       >
-        <EqnDisplay ref={eqnDisplayRef} />
+        <EqnDisplay />
         <CanvasCard height={height} width={width}>
           <svg id="chart" ref={chartRef} fillOpacity="0" fill="none"></svg>
         </CanvasCard>
       </div>
-      <FormGroup>
-        <div
-          style={{
-            width: "860px",
-            marginBottom: "10px",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <ControlsCard>
-            <ControlsRow>
-              <div>h</div>
-              <div>
-                <CustomSlider
-                  onChange={(_evt, newValue) => updateHValue(newValue)}
-                  min={-5}
-                  max={5}
-                  step={1}
-                  defaultValue={0}
-                  size="small"
-                  marks={marks}
-                />
-              </div>
-            </ControlsRow>
-            <ControlsRow>
-              <div>k</div>
-              <div>
-                <CustomSlider
-                  onChange={(_evt, newValue) => updateKValue(newValue)}
-                  min={-5}
-                  max={5}
-                  step={1}
-                  defaultValue={0}
-                  size="small"
-                  marks={marks}
-                />
-              </div>
-            </ControlsRow>
-          </ControlsCard>
-        </div>
-      </FormGroup>
     </>
   );
 };
 
-export default HandKTableGraph;
+export default ConstantFunctionGraph;

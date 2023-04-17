@@ -1,58 +1,3 @@
-.numbers-x-minus-h {
-  position: absolute;
-  font-size: large;
-  color: #f222ff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-}
-
-.numbers-x-minus-h-squared {
-  position: absolute;
-  font-size: large;
-  color: #ffd319;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-}
-
-.inactive-number {
-  display: none;
-}
-
-.tableNumber {
-  height: 50px;
-  width: 49px;
-  display: flex;
-  font-size: large;
-  align-items: center;
-  justify-content: center;
-}
-
-.dummyBlock {
-  height: 50px;
-  width: 49px;
-  padding: 0;
-  position: absolute;
-}
-
-.placeForNumbers {
-  height: 50px;
-  width: 550px;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  overflow: hidden;
-}
-
 .grid-lines line {
   stroke: #93c8c4;
   stroke-width: 0.25px;
@@ -70,13 +15,6 @@
 
 .axis line {
   stroke: #93c8c4;
-}
-
-.cyber-light-blue-circle {
-  stroke: #0b4abd;
-  stroke-width: 2px;
-  fill-opacity: 0;
-  fill: none;
 }
 
 .sunset-yellow-circle {
