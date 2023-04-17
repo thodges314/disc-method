@@ -94,6 +94,11 @@ const finishedPages = [
     </CustomLink>,
   ],
   [
+    <CustomLink href="/Integrals/SumOrDifferenceRule">
+      Integrals - Sum or Difference Rule
+    </CustomLink>,
+  ],
+  [
     <CustomLink href="/IntegralApplicationsAndMethods/VolumeDiskwasherMethod">
       Volume - Disk/Washer Method
     </CustomLink>,
