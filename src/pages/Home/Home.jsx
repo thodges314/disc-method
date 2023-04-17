@@ -12,7 +12,7 @@ const coolPages = [
   ],
   [
     <CustomLink href="/PreCalculus/ShiftingGraphsWithHAndK">
-      Shifting Graphs with h and k (unfinished)
+      Shifting Graphs with h and k
     </CustomLink>,
   ],
   [
@@ -32,6 +32,11 @@ const finishedPages = [
     <Typography variant="h6" width="100%">
       Finished Pages
     </Typography>,
+  ],
+  [
+    <CustomLink href="/PreCalculus/ShiftingGraphsWithHAndK">
+      Shifting Graphs with h and k
+    </CustomLink>,
   ],
   [
     <CustomLink href="/Derivatives/ConstantMultiple">
@@ -86,6 +91,11 @@ const finishedPages = [
   [
     <CustomLink href="/IntegralApplicationsAndMethods/VolumeDiskwasherMethod">
       Volume - Disk/Washer Method
+    </CustomLink>,
+  ],
+  [
+    <CustomLink href="/TaylorMaclaurinSeries/TaylorMaclaurinSeries">
+      Taylor (Maclaurin) Series
     </CustomLink>,
   ],
 ];
