@@ -106,6 +106,11 @@ const finishedPages = [
   [<CustomLink href="/Integrals/PowerRule">Integrals - Power Rule</CustomLink>],
   [<CustomLink href="/Integrals/Duu">Integrals - du/u</CustomLink>],
   [
+    <CustomLink href="/Integrals/ExponentialRule">
+      Integrals - Exponential Rule
+    </CustomLink>,
+  ],
+  [
     <CustomLink href="/IntegralApplicationsAndMethods/VolumeDiskwasherMethod">
       Volume - Disk/Washer Method
     </CustomLink>,

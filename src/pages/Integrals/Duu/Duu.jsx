@@ -53,6 +53,25 @@ const Component = () => (
       <Typography variant="h6" width="100%">
         Example
       </Typography>
+      <DisplayEquation>{`$$\\int{ \\frac{1}{x} } \\mathrm{d}x $$`}</DisplayEquation>
+      <CustomTypography>
+        This is the exception to the{" "}
+        <CustomLink href="/Integrals/PowerRule">Power Rule</CustomLink>, the
+        case where we are integrating {`$\\int{u^n}\\mathrm{d}u$`}, and{" "}
+        {`$n=-1$`}.
+      </CustomTypography>
+      <CustomTypography>
+        Note that if we move {`$\\mathrm{d}x$`} to the numerator (which we can
+        do, because we are multiplying it by a fraction), we get the form{" "}
+        {`$\\int{\\frac{\\mathrm{d}x}{x}}$`}, which is exactly what this rule
+        addresses. Therfore, we can solve:
+        <DisplayEquation>{`$$\\int{\\frac{\\mathrm{d}x}{x}} = \\ln{|x|}+C$$`}</DisplayEquation>
+      </CustomTypography>
+    </SectionCard>
+    <SectionCard>
+      <Typography variant="h6" width="100%">
+        Example
+      </Typography>
       <DisplayEquation>{`$$ \\int \\cot{(x)} \\mathrm{d}x $$`}</DisplayEquation>
       <CustomTypography>
         This might not immediately present itself as a{" "}
