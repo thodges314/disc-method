@@ -188,7 +188,7 @@ const Component = () => (
       </Typography>
       <CustomTypography>
         Shift the graph of the parabola {"$ y=x^2 $"} to the right by {"$ 2 $"}{" "}
-        spaces and up by {"$ 2 $"} space.
+        spaces and up by {"$ 1 $"} space.
       </CustomTypography>
       <CustomTypography>
         This is an expansion of the principle above. We replace{" "}

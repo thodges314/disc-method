@@ -40,12 +40,12 @@ const finishedPages = [
   ],
   [
     <CustomLink href="/Derivatives/ConstantFunction">
-      Derivatives - Constant Function
+      Derivatives - Constant Function Rule
     </CustomLink>,
   ],
   [
     <CustomLink href="/Derivatives/ConstantMultiple">
-      Derivatives - Constant Multiple
+      Derivatives - Constant Multiple Rule
     </CustomLink>,
   ],
   [
@@ -98,6 +98,13 @@ const finishedPages = [
       Integrals - Sum or Difference Rule
     </CustomLink>,
   ],
+  [
+    <CustomLink href="/Integrals/ConstantMultipleRule">
+      Integrals - Constant Multiple Rule
+    </CustomLink>,
+  ],
+  [<CustomLink href="/Integrals/PowerRule">Integrals - Power Rule</CustomLink>],
+  [<CustomLink href="/Integrals/Duu">Integrals - du/u</CustomLink>],
   [
     <CustomLink href="/IntegralApplicationsAndMethods/VolumeDiskwasherMethod">
       Volume - Disk/Washer Method
