@@ -111,6 +111,11 @@ const finishedPages = [
     </CustomLink>,
   ],
   [
+    <CustomLink href="/Integrals/LogarithmicIntegrals">
+      Integrals - Logarithmic Integrals
+    </CustomLink>,
+  ],
+  [
     <CustomLink href="/IntegralApplicationsAndMethods/VolumeDiskwasherMethod">
       Volume - Disk/Washer Method
     </CustomLink>,
