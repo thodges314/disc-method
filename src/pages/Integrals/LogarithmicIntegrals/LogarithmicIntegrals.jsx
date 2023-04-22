@@ -126,7 +126,7 @@ const Component = () => (
           (Older calculators only had an{" "}
           {`$ {\\color{${sunsetYellow}}{\\ln{()}}} $`} key, a{" "}
           {`$ {\\color{${sunsetYellow}}{\\log_{10}{()}}} $`} key, or both, and
-          to find logs to other bases, you had to use this trick)
+          to find logs in other bases, you had to use this trick)
         </em>
       </CustomTypography>
       <CustomTypography>
