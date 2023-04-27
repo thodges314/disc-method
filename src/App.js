@@ -5,6 +5,7 @@ import { CssBaseline, GlobalStyles } from "@mui/material";
 import loadable from "@loadable/component";
 import { MathJaxContext } from "better-react-mathjax";
 import BackgroundPaper from "components/interface/BackgroundPaper";
+import LoadingPage from "components/LoadingPage";
 
 import { MenuDrawer, TopMenu } from "components";
 import items from "pages/pageDirectory";
@@ -14,7 +15,7 @@ const LoadablePage = loadable(
   ({ itm1, itm2 }) =>
     import(`pages/${toPascalCase(itm1.name)}/${toPascalCase(itm2)}`),
   {
-    fallback: <div>Hello, This page is Loading...</div>,
+    fallback: <LoadingPage />,
   }
 );
 
@@ -51,7 +52,7 @@ function App() {
   });
 
   const HomePage = loadable(() => import(`pages/Home`), {
-    fallback: <div>Hello, This page is Loading...</div>,
+    fallback: <LoadingPage />,
   });
 
   const routes = [];
