@@ -1,0 +1,33 @@
+.loading-animation {
+  height: 100%;
+  width: 1128px;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  -webkit-animation: 1.5s ease 0s normal forwards 1 fadein;
+  animation: 1.5s ease 0s normal forwards 1 fadein;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
