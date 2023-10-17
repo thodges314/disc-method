@@ -196,7 +196,7 @@ const MaclaurinChart = () => {
       .line()
       .x((d) => x_scale(d[0]))
       .y((d) => y_scale(d[1]))
-      .curve(d3.curveMonotoneX);
+      .curve(d3.curveCardinal);
     xAxisGenerator
       .tickValues([
         -2 * Math.PI,
