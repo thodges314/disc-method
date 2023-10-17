@@ -125,7 +125,7 @@ const MaclaurinChart = () => {
   const switchGraphs = (n) => {
     movingGraphRef.current
       .transition()
-      .duration(300)
+      .duration(750)
       .attr("d", lineRef.current(allValuesRef.current[n]));
     childRef.current.setEqn(n);
   };
