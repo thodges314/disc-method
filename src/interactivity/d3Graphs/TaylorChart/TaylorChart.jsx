@@ -49,7 +49,8 @@ const TaylorChart = () => {
     lineRef.current = d3
       .line()
       .x((d) => x_scale(d[0]))
-      .y((d) => y_scale(d[1]));
+      .y((d) => y_scale(d[1]))
+      .curve(d3.curveCatmullRom);
     xAxisGenerator.tickValues([1, 2, 3, 4, 5]).tickFormat(d3.format("d"));
     yAxisGenerator.tickValues([-2, -1, 1, 2]).tickFormat(d3.format("d"));
     xAxisGridGenerator
