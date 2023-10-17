@@ -195,7 +195,8 @@ const MaclaurinChart = () => {
     lineRef.current = d3
       .line()
       .x((d) => x_scale(d[0]))
-      .y((d) => y_scale(d[1]));
+      .y((d) => y_scale(d[1]))
+      .curve(d3.curveMonotoneX);
     xAxisGenerator
       .tickValues([
         -2 * Math.PI,
