@@ -85,7 +85,7 @@ const Component = () => (
       </Typography>
       <DisplayEquation>{`$$ log_{\\color{${sunsetMagenta}}{a}} ({\\color{${sunsetYellow}}{b}}) = \\frac{log({\\color{${sunsetYellow}}{b}})}{log({\\color{${sunsetMagenta}}{a}})} = \\frac{ln({\\color{${sunsetYellow}}{b}})}{ln({\\color{${sunsetMagenta}}{a}})} $$`}</DisplayEquation>
       <CustomTypography>
-        THis trick is useful for older calculators that don't allow you to find
+        This trick is useful for older calculators that don't allow you to find
         logs in bases other than {`$ 10 $`} and {`$ \\mathit{e} $`}.
       </CustomTypography>
     </SectionCard>
