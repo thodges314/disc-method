@@ -17,6 +17,13 @@
   stroke: #93c8c4;
 }
 
+.thick-sunset-magenta-path {
+  stroke: #ff2975;
+  stroke-width: 5px;
+  fill-opacity: 0;
+  fill: none;
+}
+
 .medium-sunset-yellow-path {
   stroke: #ffd319;
   stroke-width: 1.5px;

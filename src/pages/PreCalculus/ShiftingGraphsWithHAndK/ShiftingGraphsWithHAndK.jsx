@@ -101,8 +101,7 @@ const Component = () => (
         Example
       </Typography>
       <CustomTypography>
-        Shift the graph of the parabola {"$ y=x^2 $"} to the right by {"$ 2 $"}{" "}
-        spaces.
+        Shift the graph of the parabola {"$ y=x^2 $"} to the right by {"$ 2 $"}.
       </CustomTypography>
       <CustomTypography>
         According to the rule above, we need to replace the{" "}
@@ -143,7 +142,7 @@ const Component = () => (
         This change resulted in the output row being shifted to the right by{" "}
         {`$ {\\color{${sunsetMagenta}} {2}} $`}. y was found by squaring, not{" "}
         {`$ {\\color{${sunsetMagenta}} {x}} $`}, but the number{" "}
-        {`$ {\\color{${sunsetMagenta}} {2}} $`} spaces to the left of{" "}
+        {`$ {\\color{${sunsetMagenta}} {2}} $`} to the left of{" "}
         {`$ {\\color{${sunsetMagenta}} {x}} $`}.
       </CustomTypography>
       <CustomTypography>
@@ -188,7 +187,7 @@ const Component = () => (
       </Typography>
       <CustomTypography>
         Shift the graph of the parabola {"$ y=x^2 $"} to the right by {"$ 2 $"}{" "}
-        spaces and up by {"$ 1 $"} space.
+        and up by {"$ 1 $"}.
       </CustomTypography>
       <CustomTypography>
         This is an expansion of the principle above. We replace{" "}
