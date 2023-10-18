@@ -35,6 +35,15 @@ const y_scale = d3
   .domain([-y_distance / 2, y_distance / 2])
   .range([height, 0]);
 
+const x_ticks = x_scale
+  .ticks()
+  .filter(Number.isInteger)
+  .filter((d) => !!d);
+const y_ticks = y_scale
+  .ticks()
+  .filter(Number.isInteger)
+  .filter((d) => !!d);
+
 const d_Scale = d3.scaleLinear().domain([0, 13]).range([0, width]);
 
 const numbersRadius = [];
@@ -117,22 +126,12 @@ const HandKCircleGraph = () => {
       .line()
       .x((d) => x_scale(d[0]))
       .y((d) => y_scale(d[1]));
-    xAxisGenerator
-      .tickValues([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6])
-      .tickFormat(d3.format("d"));
-    yAxisGenerator
-      .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
-      .tickFormat(d3.format("d"));
+    xAxisGenerator.tickValues(x_ticks).tickFormat(d3.format("d"));
+    yAxisGenerator.tickValues(y_ticks).tickFormat(d3.format("d"));
 
-    xAxisGridGenerator
-      .tickValues([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6])
-      .tickFormat("")
-      .tickSize(height);
+    xAxisGridGenerator.tickValues(x_ticks).tickFormat("").tickSize(height);
 
-    yAxisGridGenerator
-      .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
-      .tickFormat("")
-      .tickSize(-width);
+    yAxisGridGenerator.tickValues(y_ticks).tickFormat("").tickSize(-width);
 
     svgRef.current = d3
       .select(chartRef.current)

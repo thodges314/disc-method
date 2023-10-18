@@ -29,9 +29,16 @@ const y_scale = d3
   .domain([-y_distance / 5, (y_distance * 4) / 5])
   .range([height, 0]);
 
-const numbersXMinusH = [
-  -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-];
+const x_ticks = x_scale
+  .ticks()
+  .filter(Number.isInteger)
+  .filter((d) => !!d);
+const y_ticks = y_scale
+  .ticks()
+  .filter(Number.isInteger)
+  .filter((d) => !!d);
+
+const numbersXMinusH = d3.range(-10, 10 + 1);
 
 const indexToNumbersScale = d3.scaleLinear().domain([0, 20]).range([-10, 10]);
 
@@ -110,19 +117,11 @@ const HandKTableGraph = () => {
       .x((d) => x_scale(d[0]))
       .y((d) => y_scale(d[1]))
       .curve(d3.curveMonotoneX);
-    xAxisGenerator
-      .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
-      .tickFormat(d3.format("d"));
-    yAxisGenerator.tickValues([-1, 1, 2, 3, 4, 5]).tickFormat(d3.format("d"));
-    xAxisGridGenerator
-      .tickValues([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
-      .tickFormat("")
-      .tickSize(height);
+    xAxisGenerator.tickValues(x_ticks).tickFormat(d3.format("d"));
+    yAxisGenerator.tickValues(y_ticks).tickFormat(d3.format("d"));
+    xAxisGridGenerator.tickValues(x_ticks).tickFormat("").tickSize(height);
 
-    yAxisGridGenerator
-      .tickValues([-1, 1, 2, 3, 4, 5])
-      .tickFormat("")
-      .tickSize(-width);
+    yAxisGridGenerator.tickValues(y_ticks).tickFormat("").tickSize(-width);
 
     svgRef.current = d3
       .select(chartRef.current)
@@ -152,6 +151,13 @@ const HandKTableGraph = () => {
       .classed("axis", true)
       .attr("transform", `translate(${x_scale(0)},0)`)
       .call(yAxisGenerator);
+
+    svgRef.current
+      .append("path")
+      .datum(parabolaValues)
+      .classed("thick-sunset-magenta-path", true)
+      .attr("d", lineRef.current)
+      .attr("transform", `translate(${x_scale(2) - width / 2}, 0)`);
 
     movingGraphRef.current = svgRef.current
       .append("path")

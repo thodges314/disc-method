@@ -10,6 +10,7 @@ import allValuesArray from "./maclaurenValues";
 import cosValuesArray from "./cosineValues";
 import sinValuesArray from "./sineValues";
 import DisplayEquation from "components/interface/DisplayEquation";
+import { trigTicks } from "../utilities";
 
 import "./HandKTrigChart.css";
 
@@ -33,6 +34,13 @@ const d_scale = d3
   .scaleLinear()
   .domain([0, 6 * Math.PI])
   .range([0, width]);
+
+const y_ticks = y_scale
+  .ticks()
+  .filter(Number.isInteger)
+  .filter((d) => !!d);
+
+const x_ticks = trigTicks(x_scale);
 
 const marks = [
   {
@@ -198,34 +206,15 @@ const MaclaurinChart = () => {
       .y((d) => y_scale(d[1]))
       .curve(d3.curveCardinal);
     xAxisGenerator
-      .tickValues([
-        -2 * Math.PI,
-        -1 * Math.PI,
-        0,
-        1 * Math.PI,
-        2 * Math.PI,
-        3 * Math.PI,
-        4 * Math.PI,
-      ])
-      .tickFormat((_d, i) => ["-2π", "-1π", "", "1π", "2π", "3π", "4π"][i]);
-    yAxisGenerator.tickValues([-2, -1, 1, 2]).tickFormat(d3.format("d"));
+      .tickValues(x_ticks.ticks)
+      .tickFormat((_d, i) => x_ticks.formattedTicks[i]);
+    yAxisGenerator.tickValues(y_ticks).tickFormat(d3.format("d"));
     xAxisGridGenerator
-      .tickValues([
-        -2 * Math.PI,
-        -1 * Math.PI,
-        0,
-        1 * Math.PI,
-        2 * Math.PI,
-        3 * Math.PI,
-        4 * Math.PI,
-      ])
+      .tickValues(x_ticks.ticks)
       .tickFormat("")
       .tickSize(height);
 
-    yAxisGridGenerator
-      .tickValues([-2, -1, 1, 2])
-      .tickFormat("")
-      .tickSize(-width);
+    yAxisGridGenerator.tickValues(y_ticks).tickFormat("").tickSize(-width);
 
     svgRef.current = d3
       .select(chartRef.current)
