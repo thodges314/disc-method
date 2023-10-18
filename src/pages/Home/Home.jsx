@@ -35,7 +35,12 @@ const finishedPages = [
   ],
   [
     <CustomLink href="/PreCalculus/ShiftingGraphsWithHAndK">
-      Shifting Graphs with h and k
+      Pre-Calculus - Shifting Graphs with h and k
+    </CustomLink>,
+  ],
+  [
+    <CustomLink href="/PreCalculus/LogarithmProperties">
+      Pre-Calculus - Logarithm Properties
     </CustomLink>,
   ],
   [
