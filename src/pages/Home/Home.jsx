@@ -121,6 +121,11 @@ const finishedPages = [
     </CustomLink>,
   ],
   [
+    <CustomLink href="/Integrals/IntegrationByParts">
+      Integrals - Integration by Parts
+    </CustomLink>,
+  ],
+  [
     <CustomLink href="/IntegralApplicationsAndMethods/VolumeDiskwasherMethod">
       Volume - Disk/Washer Method
     </CustomLink>,

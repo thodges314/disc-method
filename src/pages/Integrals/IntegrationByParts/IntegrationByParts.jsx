@@ -20,7 +20,28 @@ const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 const sunsetViolet = hexToRgba(synthSunsetViolet, 1);
 const cyberPaleBlue = hexToRgba(synthCyberPaleBlue, 1);
 
-const entries_ex_1 = [
+// const entries_ex_1_1 = [
+//   [
+//     <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{x}}$$`}</DisplayEquation>,
+//     <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v}} = {\\color{${sunsetYellow}}{\\underline{\\hspace{0.5cm}}}}$$`}</DisplayEquation>,
+//   ],
+//   [
+//     <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u'}} = {\\color{${sunsetMagenta}}{\\underline{\\hspace{0.5cm}}}}$$`}</DisplayEquation>,
+//     <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v'}} = {\\color{${sunsetYellow}}{\\mathit{e}^x dx}}$$`}</DisplayEquation>,
+//   ],
+// ];
+const entries_ex_1_1 = [
+  [
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{x}}$$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\underline{\\hspace{1.5cm}}} $$`}</DisplayEquation>,
+  ],
+  [
+    <DisplayEquation>{`$$ {\\underline{\\hspace{1.5cm}}} $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v'}} = {\\color{${sunsetYellow}}{\\mathit{e}^x dx}}$$`}</DisplayEquation>,
+  ],
+];
+
+const entries_ex_1_2 = [
   [
     <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{x}}$$`}</DisplayEquation>,
     <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v}} = {\\color{${sunsetYellow}}{\\mathit{e}^x}}$$`}</DisplayEquation>,
@@ -31,6 +52,39 @@ const entries_ex_1 = [
   ],
 ];
 
+const entries_ex_2_1 = [
+  [
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{\\mathit{e}^x}}$$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\underline{\\hspace{1.5cm}}} $$`}</DisplayEquation>,
+  ],
+  [
+    <DisplayEquation>{`$$ {\\underline{\\hspace{1.5cm}}} $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v'}} = {\\color{${sunsetYellow}}{sin(x) dx}}$$`}</DisplayEquation>,
+  ],
+];
+
+const entries_ex_2_2 = [
+  [
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{\\mathit{e}^x}}$$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v}} = {\\color{${sunsetYellow}}{-cos(x)}}$$`}</DisplayEquation>,
+  ],
+  [
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u'}} = {\\color{${sunsetMagenta}}{\\mathit{e}^x dx}}$$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v'}} = {\\color{${sunsetYellow}}{sin(x) dx}}$$`}</DisplayEquation>,
+  ],
+];
+
+const entries_ex_2_3 = [
+  [
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{\\mathit{e}^x}}$$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v}} = {\\color{${sunsetYellow}}{sin(x)}}$$`}</DisplayEquation>,
+  ],
+  [
+    <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u'}} = {\\color{${sunsetMagenta}}{\\mathit{e}^x dx}}$$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v'}} = {\\color{${sunsetYellow}}{cos(x) dx}}$$`}</DisplayEquation>,
+  ],
+];
+
 const Component = () => (
   <>
     <SummaryCard>
@@ -38,7 +92,8 @@ const Component = () => (
       <CustomTypography>
         Several of the integreals that are derived in this app are done so with
         Integration by Parts. Integration by Parts works well if you are
-        integrating a product of a polynomial and a transcendental.
+        integrating a product of a polynomial and a transcendental, or the
+        product of two transcendentals.
       </CustomTypography>
     </SummaryCard>
     <SectionCard>
@@ -89,7 +144,7 @@ const Component = () => (
         function, {`$ \\mathit{e}^x $`}, we get {`$ \\mathit{e}^x $`} back out,
         so it's not a clear choice for either{" "}
         {`$ {\\color{${sunsetMagenta}}{u}} $`} or{" "}
-        {`$ {\\color{${sunsetYellow}}{v'}} $`}. If we take the drivative of{" "}
+        {`$ {\\color{${sunsetYellow}}{v'}} $`}. If we take the derivative of{" "}
         {`$ x $`}, it breaks down to the simpler form {`$ dx $`}, whereas if we
         take the integral of {`$ x $`}, it becomes the more complex{" "}
         {`$ \\tfrac{x^2}{2} $`}. For this reason, we chose{" "}
@@ -110,7 +165,18 @@ const Component = () => (
           paddingBottom: "1rem",
         }}
       >
-        <CustomTable entries={entries_ex_1} />
+        <CustomTable entries={entries_ex_1_1} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          width: "100%",
+          alignItems: "center",
+          paddingBottom: "1rem",
+        }}
+      >
+        <CustomTable entries={entries_ex_1_2} />
       </div>
       <CustomTypography>
         Fill in {`$ {\\color{${sunsetMagenta}}{u}} $`},{" "}
@@ -121,9 +187,85 @@ const Component = () => (
         and finish the integration.
       </CustomTypography>
       <DisplayEquation>
-        {`$$ {\\color{${sunsetMagenta}}{x}\\,\\color{${sunsetYellow}}{e^x}}-\\int {\\color{${sunsetYellow}}{e^x}\\,\\color{${sunsetMagenta}}{dx}} $$`}
+        {`$$ \\int \\color{${sunsetMagenta}}{x} \\color{${sunsetYellow}}{\\mathit{e}^x dx} = {\\color{${sunsetMagenta}}{x}\\,\\color{${sunsetYellow}}{e^x}}-\\int {\\color{${sunsetYellow}}{e^x}\\,\\color{${sunsetMagenta}}{dx}} $$`}
       </DisplayEquation>
-      <DisplayEquation>{`$$ x\\,e^x - e^x + C $$`}</DisplayEquation>
+      <DisplayEquation>{`$$ \\int x \\mathit{e}^x dx = x\\,e^x - e^x + C $$`}</DisplayEquation>
+    </SectionCard>
+    <SectionCard>
+      <Typography variant="h6" width="100%">
+        Example 2: Two Transcendentals:
+      </Typography>
+      <CustomTypography>
+        Suppose that your integral involves two transcendental functions:
+      </CustomTypography>
+      <DisplayEquation>{`$$ \\int{\\mathit{e}^x sin(x) dx} $$`}</DisplayEquation>
+      <CustomTypography>
+        Neither {`$ \\mathit{e}^x $`} for {`$ sin(x) $`} looks like a natural
+        candidate to be either {`$ \\color{${sunsetMagenta}}{u} $`} or{" "}
+        {`$ \\color{${sunsetYellow}}{v'} $`}, so make a choice and stick with
+        it. In this case, we'll use{" "}
+        {`$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{\\mathit{e}^x}}$`}{" "}
+        and{" "}
+        {`$ {\\color{${sunsetYellow}}{v'}} = {\\color{${sunsetYellow}}{sin(x) dx}}$`}
+        . Put these into a table, find {`$ \\color{${sunsetMagenta}}{u'} $`} and{" "}
+        {`$ \\color{${sunsetYellow}}{v} $`}, and plug these into{" "}
+        {`$ \\int {\\color{${sunsetMagenta}}{u}\\,\\color{${sunsetYellow}}{v'}} = {\\color{${sunsetMagenta}}{u}\\,\\color{${sunsetYellow}}{v}}-\\int {\\color{${sunsetYellow}}{v}\\,\\color{${sunsetMagenta}}{u'}} $`}{" "}
+        to move on to the next step.
+      </CustomTypography>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          width: "100%",
+          alignItems: "center",
+          paddingBottom: "1rem",
+        }}
+      >
+        <CustomTable entries={entries_ex_2_1} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          width: "100%",
+          alignItems: "center",
+          paddingBottom: "1rem",
+        }}
+      >
+        <CustomTable entries={entries_ex_2_2} />
+      </div>
+      <DisplayEquation>{`$$ \\int{{\\color{${sunsetMagenta}}{\\mathit{e}^x}} {\\color{${sunsetYellow}}{sin(x) dx}}} = {\\color{${sunsetMagenta}}{\\mathit{e}^x}} \\left ( \\color{${sunsetYellow}}{-cos(x)}\\right ) - \\int \\left ( \\color{${sunsetYellow}}{-cos(x)}\\right ) \\color{${sunsetMagenta}}{\\mathit{e}^x dx}$$`}</DisplayEquation>
+      <DisplayEquation>{`$$ \\int \\mathit{e}^x sin(x) dx = - \\mathit{e}^x cos(x) + \\int \\mathit{e}^x cos(x) dx $$`}</DisplayEquation>
+      <CustomTypography>
+        The {`$ \\int \\mathit{e}^x cos(x) dx $`} integral looks neither
+        simpler, nor more complex, then the integral we started with. Let's
+        repeat this process, again choosing{" "}
+        {`$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{\\mathit{e}^x}}$`}
+        .
+      </CustomTypography>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          width: "100%",
+          alignItems: "center",
+          paddingBottom: "1rem",
+        }}
+      >
+        <CustomTable entries={entries_ex_2_3} />
+      </div>
+      <DisplayEquation>{`$$ \\int{{\\color{${sunsetMagenta}}{\\mathit{e}^x}} {\\color{${sunsetYellow}}{cos(x) dx}}} = {\\color{${sunsetMagenta}}{\\mathit{e}^x}}  \\color{${sunsetYellow}}{sin(x)} - \\int  \\color{${sunsetYellow}}{sin(x)} \\color{${sunsetMagenta}}{\\mathit{e}^x dx}$$`}</DisplayEquation>
+      <CustomTypography>
+        You may have noticed that the original integral that we are trying to
+        solve for has reappeared. Plug the result from this step into the
+        previous step, and with a little algebra, you will see the result appear
+        quite beautifully.
+      </CustomTypography>
+      <DisplayEquation>{`$$ \\int \\mathit{e}^x sin(x) dx = - \\mathit{e}^x cos(x) + \\mathit{e}^x sin(x) - \\int \\mathit{e}^x sin(x) dx $$`}</DisplayEquation>
+      <DisplayEquation>{`$$ {\\color{${sunsetViolet}}{\\int \\mathit{e}^x sin(x) dx}} = - \\mathit{e}^x cos(x) + \\mathit{e}^x sin(x) - {\\color{${sunsetViolet}}{\\int \\mathit{e}^x sin(x) dx}} $$`}</DisplayEquation>
+      <DisplayEquation>{`$$ 2{\\color{${sunsetViolet}}{\\int \\mathit{e}^x sin(x) dx}} = - \\mathit{e}^x cos(x) + \\mathit{e}^x sin(x) $$`}</DisplayEquation>
+      <DisplayEquation>{`$$ {\\color{${sunsetViolet}}{\\int \\mathit{e}^x sin(x) dx}} = \\frac{- \\mathit{e}^x cos(x) + \\mathit{e}^x sin(x)}{2} $$`}</DisplayEquation>
+      <DisplayEquation>{`$$ \\int \\mathit{e}^x sin(x) dx = \\frac{- \\mathit{e}^x cos(x) + \\mathit{e}^x sin(x)}{2} + C$$`}</DisplayEquation>
     </SectionCard>
   </>
 );
