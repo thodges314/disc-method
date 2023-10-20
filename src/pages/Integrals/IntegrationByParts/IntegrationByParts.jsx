@@ -20,16 +20,6 @@ const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
 const sunsetViolet = hexToRgba(synthSunsetViolet, 1);
 const cyberPaleBlue = hexToRgba(synthCyberPaleBlue, 1);
 
-// const entries_ex_1_1 = [
-//   [
-//     <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{x}}$$`}</DisplayEquation>,
-//     <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v}} = {\\color{${sunsetYellow}}{\\underline{\\hspace{0.5cm}}}}$$`}</DisplayEquation>,
-//   ],
-//   [
-//     <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u'}} = {\\color{${sunsetMagenta}}{\\underline{\\hspace{0.5cm}}}}$$`}</DisplayEquation>,
-//     <DisplayEquation>{`$$ {\\color{${sunsetYellow}}{v'}} = {\\color{${sunsetYellow}}{\\mathit{e}^x dx}}$$`}</DisplayEquation>,
-//   ],
-// ];
 const entries_ex_1_1 = [
   [
     <DisplayEquation>{`$$ {\\color{${sunsetMagenta}}{u}} = {\\color{${sunsetMagenta}}{x}}$$`}</DisplayEquation>,

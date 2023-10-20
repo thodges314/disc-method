@@ -22,6 +22,8 @@ const [
 // --color-5:	#831187;
 // --color-6:	#0c0c0c;
 
+const anotherLightPink = 0xef9af2;
+
 const [themePurple, themeBackground] = [0xcf7bc1, 0x262335];
 
 export {
@@ -41,4 +43,5 @@ export {
   synthSunsetYellow,
   themeBackground,
   themePurple,
+  anotherLightPink,
 };

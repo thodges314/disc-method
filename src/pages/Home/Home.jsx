@@ -121,6 +121,11 @@ const finishedPages = [
     </CustomLink>,
   ],
   [
+    <CustomLink href="/Integrals/InverseTrigonometricIntegrals">
+      Integrals - Inverse Trigonometric Integrals
+    </CustomLink>,
+  ],
+  [
     <CustomLink href="/Integrals/IntegrationByParts">
       Integrals - Integration by Parts
     </CustomLink>,
