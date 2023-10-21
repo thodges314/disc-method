@@ -36,7 +36,13 @@ const Component = () => (
       <ul>
         <li>
           <CustomTypography>
-            {`$ log(x) $`}, with no subscript, implies <em>base 10</em>.<br />
+            {`$ log(x) $`}, with no subscript, usually implies <em>base 10</em>.
+          </CustomTypography>
+        </li>
+        <li>
+          <CustomTypography>
+            When describing a general principle, like on this page,{" "}
+            {`$ log(x) $`}, describes a logarithm of unspecified base.
           </CustomTypography>
         </li>
         <li>
