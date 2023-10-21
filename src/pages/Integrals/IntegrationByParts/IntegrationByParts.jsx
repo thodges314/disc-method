@@ -101,7 +101,7 @@ const Component = () => (
           Sum or Difference Rule
         </CustomLink>
         . If you take the derivative of a polynomial function enough times, you
-        eventually get 1.
+        eventually get 0.
       </CustomTypography>
       <CustomTypography>
         Transcendental Functions, unlike polynomials, don't break down with
