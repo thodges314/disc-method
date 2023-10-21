@@ -189,7 +189,7 @@ const Component = () => (
         , if{" "}
         {`$ {\\color{${sunsetYellow}}{u}} = {\\color{${sunsetYellow}}{tan(x) + sec(x)}}$`}
         , then{" "}
-        {`$ {\\color{${sunsetYellow}}{du}} = {\\color{${sunsetYellow}}{\\left (sec^2(x)+sec(x)tan(x) \\right ) dx}}$`}{" "}
+        {`$ {\\color{${sunsetMagenta}}{du}} = {\\color{${sunsetMagenta}}{\\left (sec^2(x)+sec(x)tan(x) \\right ) dx}}$`}{" "}
         and we can use{" "}
         {`$\\int \\frac{\\color{${sunsetMagenta}}{\\mathrm{d}u}}{\\color{${sunsetYellow}}{u}} = \\ln{\\left |\\color{${sunsetYellow}}{u}\\right |}+C$`}
       </CustomTypography>
