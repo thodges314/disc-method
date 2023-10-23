@@ -33,24 +33,24 @@ const lightPink = hexToRgba(anotherLightPink, 1);
 
 const entries = [
   [
-    <DisplayEquation>{`$$ \\int sin^{-1}(u)du = u\\,sin^{-1}(u)+\\sqrt{1-u^2}+C, \\;\\;|u|\\leq 1 $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ \\int sin^{-1}(u)\\mathrm{d}u = u\\,sin^{-1}(u)+\\sqrt{1-u^2}+C, \\;\\;|u|\\leq 1 $$`}</DisplayEquation>,
   ],
   [
-    <DisplayEquation>{`$$ \\int cos^{-1}(u)du = u\\,cos^{-1}(u)-\\sqrt{1-u^2}+C, \\;\\;|u|\\leq 1 $$`}</DisplayEquation>,
-  ],
-  [""],
-  [
-    <DisplayEquation>{`$$ \\int sec^{-1}(u)du = u\\,sec^{-1}(u)-ln \\left | u \\left ( 1+\\sqrt{1-u^{-2}}\\right )\\right |+C, \\;\\;|u|\\geq 1 $$`}</DisplayEquation>,
-  ],
-  [
-    <DisplayEquation>{`$$ \\int csc^{-1}(u)du = u\\,csc^{-1}(u)+ln \\left | u \\left ( 1+\\sqrt{1-u^{-2}}\\right )\\right |+C, \\;\\;|u|\\geq 1 $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ \\int cos^{-1}(u)\\mathrm{d}u = u\\,cos^{-1}(u)-\\sqrt{1-u^2}+C, \\;\\;|u|\\leq 1 $$`}</DisplayEquation>,
   ],
   [""],
   [
-    <DisplayEquation>{`$$ \\int tan^{-1}(u)du = u\\,tan^{-1}(u)-\\frac{1}{2}ln \\left |1+u^2 \\right |+C,\\;\\; \\forall u\\in \\mathbb{R} $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ \\int sec^{-1}(u)\\mathrm{d}u = u\\,sec^{-1}(u)-ln \\left | u \\left ( 1+\\sqrt{1-u^{-2}}\\right )\\right |+C, \\;\\;|u|\\geq 1 $$`}</DisplayEquation>,
   ],
   [
-    <DisplayEquation>{`$$ \\int cot^{-1}(u)du = u\\,cot^{-1}(u)+\\frac{1}{2}ln \\left |1+u^2 \\right |+C,\\;\\; \\forall u\\in \\mathbb{R} $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ \\int csc^{-1}(u)\\mathrm{d}u = u\\,csc^{-1}(u)+ln \\left | u \\left ( 1+\\sqrt{1-u^{-2}}\\right )\\right |+C, \\;\\;|u|\\geq 1 $$`}</DisplayEquation>,
+  ],
+  [""],
+  [
+    <DisplayEquation>{`$$ \\int tan^{-1}(u)\\mathrm{d}u = u\\,tan^{-1}(u)-\\frac{1}{2}ln \\left |1+u^2 \\right |+C,\\;\\; \\forall u\\in \\mathbb{R} $$`}</DisplayEquation>,
+  ],
+  [
+    <DisplayEquation>{`$$ \\int cot^{-1}(u)\\mathrm{d}u = u\\,cot^{-1}(u)+\\frac{1}{2}ln \\left |1+u^2 \\right |+C,\\;\\; \\forall u\\in \\mathbb{R} $$`}</DisplayEquation>,
   ],
 ];
 
@@ -60,8 +60,8 @@ const entries_table = [
     <DisplayEquation>{`$$ \\color{${sunsetYellow}}{v} = \\color{${sunsetYellow}}{x} $$`}</DisplayEquation>,
   ],
   [
-    <DisplayEquation>{`$$ \\color{${sunsetMagenta}}{u'} = \\color{${sunsetMagenta}}{\\frac{dx}{1+x^2}} $$`}</DisplayEquation>,
-    <DisplayEquation>{`$$ \\color{${sunsetYellow}}{v'} = \\color{${sunsetYellow}}{dx} $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ \\color{${sunsetMagenta}}{u'} = \\color{${sunsetMagenta}}{\\frac{\\mathrm{d}x}{1+x^2}} $$`}</DisplayEquation>,
+    <DisplayEquation>{`$$ \\color{${sunsetYellow}}{v'} = \\color{${sunsetYellow}}{\\mathrm{d}x} $$`}</DisplayEquation>,
   ],
 ];
 
@@ -96,7 +96,7 @@ const Component = () => (
       <Typography variant="h6" width="100%">
         Derivation
       </Typography>
-      <DisplayEquation>{`$$\\int tan^{-1}(x)dx $$`}</DisplayEquation>
+      <DisplayEquation>{`$$\\int tan^{-1}(x)\\mathrm{d}x $$`}</DisplayEquation>
       <CustomTypography>
         To fing the integral of the inverse tangent, we need to use{" "}
         <CustomLink href="/Integrals/IntegrationByParts">
@@ -109,8 +109,9 @@ const Component = () => (
         To match the Integration by Parts form, we are left with very little
         choice but to define{" "}
         {`$ \\color{${sunsetMagenta}}{u} = \\color{${sunsetMagenta}}{tan^{-1}(x)} $`}{" "}
-        and {`$ \\color{${sunsetYellow}}{v'} = \\color{${sunsetYellow}}{dx} $`}.
-        Completing the table, using{" "}
+        and{" "}
+        {`$ \\color{${sunsetYellow}}{v'} = \\color{${sunsetYellow}}{\\mathrm{d}x} $`}
+        . Completing the table, using{" "}
         <CustomLink href="/Derivatives/InverseTrigonometricDerivatives">
           Inverse Trigonometric Derivatives
         </CustomLink>{" "}
@@ -127,30 +128,32 @@ const Component = () => (
       >
         <CustomTable entries={entries_table} />
       </div>
-      <DisplayEquation>{`$$ \\int {\\color{${sunsetMagenta}}{tan^{-1}(x)}\\,\\color{${sunsetYellow}}{dx}} = {\\color{${sunsetMagenta}}{tan^{-1}(x)}\\,\\color{${sunsetYellow}}{x}}-\\int {\\color{${sunsetYellow}}{x}\\,\\color{${sunsetMagenta}}{\\frac{dx}{1+x^2}}} $$`}</DisplayEquation>
+      <DisplayEquation>{`$$ \\int {\\color{${sunsetMagenta}}{tan^{-1}(x)}\\,\\color{${sunsetYellow}}{\\mathrm{d}x}} = {\\color{${sunsetMagenta}}{tan^{-1}(x)}\\,\\color{${sunsetYellow}}{x}}-\\int {\\color{${sunsetYellow}}{x}\\,\\color{${sunsetMagenta}}{\\frac{\\mathrm{d}x}{1+x^2}}} $$`}</DisplayEquation>
       <CustomTypography>
-        To solve the rightmost integral, {`$\\int{\\frac{x\\,dx}{1+x^2}}$`}, use{" "}
-        {`$ \\int \\frac{du}{u} = ln|u|+C $`} (
-        <CustomLink href="/Integrals/Duu">
-          Integral of {`$ \\frac{du}{u}$`}
+        To solve the rightmost integral,{" "}
+        {`$\\int{\\frac{x\\,\\mathrm{d}x}{1+x^2}}$`}, use{" "}
+        {`$ \\int \\frac{\\mathrm{d}u}{u} = ln|u|+C $`} (
+        <CustomLink href="/Integrals/\\mathrm{d}uu">
+          Integral of {`$ \\frac{\\mathrm{d}u}{u}$`}
         </CustomLink>
         ). If you set{" "}
         {`$ \\color{${sunsetOrange}}{u} = \\color{${sunsetOrange}}{1+x^2} $`},
         then you will get{" "}
-        {`$ \\color{${lightPink}}{du} = \\color{${lightPink}}{2x\\,dx} $`}. To
-        get {`$ \\color{${lightPink}}{du} $`} in the numerator, use the{" "}
+        {`$ \\color{${lightPink}}{\\mathrm{d}u} = \\color{${lightPink}}{2x\\,\\mathrm{d}x} $`}
+        . To get {`$ \\color{${lightPink}}{\\mathrm{d}u} $`} in the numerator,
+        use the{" "}
         <CustomLink href="/Integrals/ConstantMultipleRule">
           Constant Multiple Rule
         </CustomLink>
         .
       </CustomTypography>
-      <DisplayEquation>{`$$ \\frac{1}{2}\\,2\\int{\\frac{x\\,dx}{1+x^2}}$$`}</DisplayEquation>
-      <DisplayEquation>{`$$ \\frac{1}{2}\\int{\\frac{\\color{${lightPink}}{2x\\,dx}}{\\color{${sunsetOrange}}{1+x^2}}}$$`}</DisplayEquation>
+      <DisplayEquation>{`$$ \\frac{1}{2}\\,2\\int{\\frac{x\\,\\mathrm{d}x}{1+x^2}}$$`}</DisplayEquation>
+      <DisplayEquation>{`$$ \\frac{1}{2}\\int{\\frac{\\color{${lightPink}}{2x\\,\\mathrm{d}x}}{\\color{${sunsetOrange}}{1+x^2}}}$$`}</DisplayEquation>
       <DisplayEquation>{`$$ \\frac{1}{2} ln \\left | {\\color{${sunsetOrange}}{1+x^2}} \\right |+ C$$`}</DisplayEquation>
       <CustomTypography>
         Putting all of this together gives us the result:
       </CustomTypography>
-      <DisplayEquation>{`$$ \\int{tan^{-1}(x)dx} = x\\,tan^{-1}(x) - \\frac{1}{2}ln \\left | 1+x^2 \\right | + C $$`}</DisplayEquation>
+      <DisplayEquation>{`$$ \\int{tan^{-1}(x)\\mathrm{d}x} = x\\,tan^{-1}(x) - \\frac{1}{2}ln \\left | 1+x^2 \\right | + C $$`}</DisplayEquation>
     </SectionCard>
     <SideNoteCard>
       The other inverse trig integrals follow pretty much the same pattern,
