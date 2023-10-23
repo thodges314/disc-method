@@ -34,9 +34,12 @@ const Component = () => (
         Example
       </Typography>
       <CustomTypography>
-        Suppose that we wanted to find the derivative of {`$ y = sin^{-1}(x)$`}.
-        That means that {`$x = sin(y)$`}. From this information, we can draw the
-        following triangle if we assume a hypotenuse of 1:
+        Suppose that we wanted to find{" "}
+        <CustomLink href="/Derivatives/InverseTrigonometricDerivatives">
+          the derivative of {`$ y = sin^{-1}(x)$`}
+        </CustomLink>
+        . That means that {`$x = sin(y)$`}. From this information, we can draw
+        the following triangle if we assume a hypotenuse of 1:
       </CustomTypography>
       <div
         style={{
