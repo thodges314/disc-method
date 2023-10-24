@@ -1,0 +1,25 @@
+.grid-lines line {
+  stroke: #93c8c4;
+  stroke-width: 0.25px;
+}
+
+.axis .domain {
+  stroke: #93c8c4;
+}
+
+.axis text {
+  fill: #93c8c4;
+  font-size: 1.5em;
+  fill-opacity: 1;
+}
+
+.axis line {
+  stroke: #93c8c4;
+}
+
+.medium-sunset-yellow-path {
+  stroke: #ffd319;
+  stroke-width: 1.5px;
+  fill-opacity: 0.8;
+  fill: #2c2e3b;
+}

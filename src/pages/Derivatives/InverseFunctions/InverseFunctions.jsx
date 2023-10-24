@@ -4,7 +4,6 @@ import SideNoteCard from "components/interface/SideNoteCard";
 import CustomTypography from "components/interface/CustomTypography";
 import DisplayEquation from "components/interface/DisplayEquation";
 import Typography from "@mui/material/Typography";
-import CustomTable from "components/interface/CustomTable";
 import CustomLink from "components/interface/CustomLink";
 
 import {
@@ -14,6 +13,8 @@ import {
   synthCyberPaleBlue,
 } from "interactivity/resources/constants/colors";
 import { hexToRgba } from "utils/utils";
+
+import LabeledRightTriangleGraph from "interactivity/d3Graphs/LabeledRightTriangleGraph";
 
 const sunsetMagenta = hexToRgba(synthSunsetMagenta, 1);
 const sunsetYellow = hexToRgba(synthSunsetYellow, 1);
@@ -49,13 +50,21 @@ const Component = () => (
           alignItems: "center",
         }}
       >
-        <div>image here</div>
-        <CustomTypography>
-          If {`$sin(y)=x$`}, then, by the right-triange definition of trig
-          functions, {`$sin(y) = \\frac{opposite}{hypotenuse}=\\frac{x}{1}$`}.
-          After filling these two values in, we can use the Pythagorean Theorem
-          to find {`$\\sqrt{1-x^2}$`} for the remaining leg.
-        </CustomTypography>
+        <div style={{ padding: "20px" }}>
+          <LabeledRightTriangleGraph />
+        </div>
+        <div>
+          <CustomTypography>To find the missing leg:</CustomTypography>
+          <CustomTypography>
+            Draw a diagram of a right triangle, and label one angle (not the
+            right angle) '{`$y$`}.' If {`$sin(y)=x$`}, then, by the
+            right-triangle definition of trig functions,{" "}
+            {`$sin(y) = \\frac{opposite}{hypotenuse}=\\frac{x}{1}$`}. Label the
+            opposite leg from y, and the hypotenuse, {`$x$`} and {`$1$`}{" "}
+            accordingly. Then use the Pythagorean Theorem to find{" "}
+            {`$\\sqrt{1-x^2}$`} for the remaining leg.
+          </CustomTypography>
+        </div>
       </div>
       <CustomTypography>
         We define{" "}
@@ -81,8 +90,8 @@ const Component = () => (
       <CustomLink href="/Derivatives/InverseTrigonometricDerivatives">
         Inverse Trigonometric Derivatives
       </CustomLink>
-      , which all can be found with a similar pattern of drawing and labeling a
-      right triangle and applying this Inverse Function format.
+      , which all can be found by drawing and labeling a right triangle and
+      applying this Inverse Function format.
     </SectionCard>
   </>
 );
