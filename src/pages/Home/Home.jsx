@@ -99,6 +99,11 @@ const finishedPages = [
     </CustomLink>,
   ],
   [
+    <CustomLink href="/Derivatives/InverseFunctions">
+      Derivatives - Inverse Functions
+    </CustomLink>,
+  ],
+  [
     <CustomLink href="/Integrals/SumOrDifferenceRule">
       Integrals - Sum or Difference Rule
     </CustomLink>,
