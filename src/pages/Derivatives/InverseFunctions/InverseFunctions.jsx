@@ -84,14 +84,28 @@ const Component = () => (
         {`$\\left ( cos(y)=\\tfrac{adjacent}{hypotenuse} =\\tfrac{\\sqrt{1-x^2}}{1} \\right )$`}
         .
       </CustomTypography>
+      <CustomTypography>
+        The domain can be discovered by considering{" "}
+        <CustomLink href="/PreCalculus/TrigonometricIdentities">
+          Properties of Trigonometric Functions
+        </CustomLink>
+        , or by noticing that any value outside of {`$ (-1,1) $`} will result in
+        taking the square root of a negative value.
+      </CustomTypography>
     </SectionCard>
     <SectionCard>
-      You can practice this pattern by finding functions for other{" "}
-      <CustomLink href="/Derivatives/InverseTrigonometricDerivatives">
-        Inverse Trigonometric Derivatives
-      </CustomLink>
-      , which all can be found by drawing and labeling a right triangle and
-      applying this Inverse Function format.
+      <CustomTypography>
+        You can practice this pattern by finding functions for other{" "}
+        <CustomLink href="/Derivatives/InverseTrigonometricDerivatives">
+          Inverse Trigonometric Derivatives
+        </CustomLink>
+        , which all can be found by drawing and labeling a right triangle and
+        applying this Inverse Function format.
+      </CustomTypography>
+      {/* <CustomTypography>
+        For the absolute values of {`$u$`} in the denominator of{" "}
+        {`$ \\tfrac{\\mathrm{d}}{\\mathrm{d}x}sec^{-1}(u) $`}
+      </CustomTypography> */}
     </SectionCard>
   </>
 );
