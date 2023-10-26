@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import ControlsCard, { ControlsRow } from "components/interface/ControlsCard";
 import CustomSlider from "components/interface/CustomSlider";
 import CanvasCard from "components/interface/CanvasCard";
+import DisplayEquation from "components/interface/DisplayEquation";
 import { hexToRgba } from "utils/utils";
 import { marksArray } from "../utilities";
 import {
@@ -50,6 +51,217 @@ const numbersRadius = [];
 for (let i = 0; i <= 24; i++) {
   numbersRadius.push((i * Math.PI) / 13);
 }
+
+const marks = [
+  {
+    value: 0,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>{"$$0$$"}</DisplayEquation>
+    ),
+  },
+  {
+    value: Math.PI / 24,
+  },
+  {
+    value: (2 * Math.PI) / 24,
+  },
+  {
+    value: (3 * Math.PI) / 24,
+  },
+  {
+    value: (4 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{\\pi}{6}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (5 * Math.PI) / 24,
+  },
+  {
+    value: (6 * Math.PI) / 24,
+  },
+  {
+    value: (7 * Math.PI) / 24,
+  },
+  {
+    value: (8 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{\\pi}{3}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (9 * Math.PI) / 24,
+  },
+  {
+    value: (10 * Math.PI) / 24,
+  },
+  {
+    value: (11 * Math.PI) / 24,
+  },
+  {
+    value: (12 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{\\pi}{2}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (13 * Math.PI) / 24,
+  },
+  {
+    value: (14 * Math.PI) / 24,
+  },
+  {
+    value: (15 * Math.PI) / 24,
+  },
+  {
+    value: (16 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{2\\pi}{3}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (17 * Math.PI) / 24,
+  },
+  {
+    value: (18 * Math.PI) / 24,
+  },
+  {
+    value: (19 * Math.PI) / 24,
+  },
+  {
+    value: (20 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{5\\pi}{6}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (21 * Math.PI) / 24,
+  },
+  {
+    value: (22 * Math.PI) / 24,
+  },
+  {
+    value: (23 * Math.PI) / 24,
+  },
+  {
+    value: (24 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>{"$$\\pi$$"}</DisplayEquation>
+    ),
+  },
+  {
+    value: (25 * Math.PI) / 24,
+  },
+  {
+    value: (26 * Math.PI) / 24,
+  },
+  {
+    value: (27 * Math.PI) / 24,
+  },
+  {
+    value: (28 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{7\\pi}{6}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (29 * Math.PI) / 24,
+  },
+  {
+    value: (30 * Math.PI) / 24,
+  },
+  {
+    value: (31 * Math.PI) / 24,
+  },
+  {
+    value: (32 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{4\\pi}{3}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (33 * Math.PI) / 24,
+  },
+  {
+    value: (34 * Math.PI) / 24,
+  },
+  {
+    value: (35 * Math.PI) / 24,
+  },
+  {
+    value: (36 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{3\\pi}{2}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (37 * Math.PI) / 24,
+  },
+  {
+    value: (38 * Math.PI) / 24,
+  },
+  {
+    value: (39 * Math.PI) / 24,
+  },
+  {
+    value: (40 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{5\\pi}{3}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (41 * Math.PI) / 24,
+  },
+  {
+    value: (42 * Math.PI) / 24,
+  },
+  {
+    value: (43 * Math.PI) / 24,
+  },
+  {
+    value: (44 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$\\frac{11\\pi}{6}$$"}
+      </DisplayEquation>
+    ),
+  },
+  {
+    value: (45 * Math.PI) / 24,
+  },
+  {
+    value: (46 * Math.PI) / 24,
+  },
+  {
+    value: (47 * Math.PI) / 24,
+  },
+  {
+    value: (48 * Math.PI) / 24,
+    label: (
+      <DisplayEquation style={{ marginTop: -18 }}>
+        {"$$2\\pi$$"}
+      </DisplayEquation>
+    ),
+  },
+];
 
 const HandKCircleGraph = () => {
   const chartRef = useRef(null);
@@ -441,6 +653,7 @@ const HandKCircleGraph = () => {
                   step={Math.PI / 24}
                   defaultValue={STARTING_ANGLE}
                   size="small"
+                  marks={marks}
                 />
               </div>
             </ControlsRow>
